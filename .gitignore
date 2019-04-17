@@ -1,0 +1,9 @@
+*pyc
+*/*pyc
+*/*/*pyc
+*/*/*/*pyc
+*DS_store
+*/*DS_store
+*/*/*DS_store
+*/*/*/*DS_store
+plotting/plots/*
