@@ -30,22 +30,22 @@ p = NTuplePlotter()
 # p.add_data_dir(dy_local.name, dy_local.path, 40000)
 
 vbf = p.add_signal("VBF", ROOT.kViolet)
-vbf.get_dir(VBF_2017_powheg_Apr15.name, VBF_2017_powheg_Apr15.path, VBF_2017_powheg_Apr15.xSec)
+vbf.get_file(VBF_2017_powheg_Apr15.name, VBF_2017_powheg_Apr15.path+"/tuple_1.root", VBF_2017_powheg_Apr15.xSec)
 
 ggh = p.add_signal("ggH", ROOT.kRed)
-ggh.get_dir(ggH_2017_powheg_Apr15.name, ggH_2017_powheg_Apr15.path, ggH_2017_powheg_Apr15.xSec)
+ggh.get_file(ggH_2017_powheg_Apr15.name, ggH_2017_powheg_Apr15.path+"/tuple_1.root", ggH_2017_powheg_Apr15.xSec)
 
 ttst = p.add_source("t#bar{t} + Single top", ROOT.kYellow)
-ttst.get_dir(tt_ll_POW_2017_Apr15.name, tt_ll_POW_2017_Apr15.path, tt_ll_POW_2017_Apr15.xSec)
+ttst.get_file(tt_ll_POW_2017_Apr15.name, tt_ll_POW_2017_Apr15.path+"/tuple_1.root", tt_ll_POW_2017_Apr15.xSec)
 
 dy = p.add_source("Drell-Yan", ROOT.kOrange-3)
-dy.get_dir(ZJets_aMC_2017_hiStat_Apr15.name, ZJets_aMC_2017_hiStat_Apr15.path, ZJets_aMC_2017_hiStat_Apr15.xSec)
+dy.get_file(ZJets_aMC_2017_hiStat_Apr15.name, ZJets_aMC_2017_hiStat_Apr15.path+"/tuple_1.root", ZJets_aMC_2017_hiStat_Apr15.xSec)
 
 p.add_data_dir(SingleMu2017B_Apr15.name, SingleMu2017B_Apr15.path, SingleMu2017B_Apr15.lumi)   
-p.add_data_dir(SingleMu2017C_Apr15.name, SingleMu2017C_Apr15.path, SingleMu2017C_Apr15.lumi) 
-p.add_data_dir(SingleMu2017D_Apr15.name, SingleMu2017D_Apr15.path, SingleMu2017D_Apr15.lumi) 
-p.add_data_dir(SingleMu2017E_Apr15.name, SingleMu2017E_Apr15.path, SingleMu2017E_Apr15.lumi) 
-p.add_data_dir(SingleMu2017F_Apr15.name, SingleMu2017F_Apr15.path, SingleMu2017F_Apr15.lumi)    
+# p.add_data_dir(SingleMu2017C_Apr15.name, SingleMu2017C_Apr15.path, SingleMu2017C_Apr15.lumi) 
+# p.add_data_dir(SingleMu2017D_Apr15.name, SingleMu2017D_Apr15.path, SingleMu2017D_Apr15.lumi) 
+# p.add_data_dir(SingleMu2017E_Apr15.name, SingleMu2017E_Apr15.path, SingleMu2017E_Apr15.lumi) 
+# p.add_data_dir(SingleMu2017F_Apr15.name, SingleMu2017F_Apr15.path, SingleMu2017F_Apr15.lumi)    
 
 
 
