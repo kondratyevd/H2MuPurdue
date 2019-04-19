@@ -516,46 +516,50 @@ class NTuplePlotter(object):
                     if var.isMultiDim:
                         for j in range(var.itemsAdded):
                             var_name_multi = "%s[%i]"%(var.name, j)
-                            dummy = ROOT.TCanvas("dummmy_%s_%s"%(self.name, var_name_multi),"dummy_%s_%s"%(self.name, var_name_multi),100,100)
-                            dummy.cd()
-                            dummy.SetBatch(ROOT.kTRUE)
-                            hist_name = self.name+"_"+var_name_multi
-                            
-                            self.new_hist = ROOT.TH1D(hist_name, self.name, var.nBins, var.min, var.max)
-                            self.new_hist.Sumw2()
-            
-                            selection = self.framework.selection
-                    
-                            if "mass_res" in var_name_multi:
-                                selection = "(%s)&(%s)"%(self.framework.selection, self.framework.ebe_calib())  
 
-                            tree.Draw(var_name_multi+">>"+hist_name, "(%s)*(%s)"%(selection, weights))
-            
-                            hist_dict[var_name_multi].Add(self.new_hist, self.lumi_wgt)
-                            self.framework.style.apply(mcHist = hist_dict[var_name_multi], color = self.source.color, isSignal = self.source.isSignal)
-                            dummy.Close()
+                            if "mass_res" in var_name_multi:
+                                self.new_hist = self.framework.ebe_calib(self.name+"_"+var_name_multi, self.name, var.nBins, var.xmin, var.xmax)
+                                self.new_hist.Sumw2()
+                                hist_dict[var_name_multi].Add(self.new_hist, self.lumi_wgt)
+                                self.framework.style.apply(mcHist = hist_dict[var_name_multi], color = self.source.color, isSignal = self.source.isSignal)
+                            else:
+                                dummy = ROOT.TCanvas("dummmy_%s_%s"%(self.name, var_name_multi),"dummy_%s_%s"%(self.name, var_name_multi),100,100)
+                                dummy.cd()
+                                dummy.SetBatch(ROOT.kTRUE)
+                                hist_name = self.name+"_"+var_name_multi
+                                
+                                self.new_hist = ROOT.TH1D(hist_name, self.name, var.nBins, var.min, var.max)
+                                self.new_hist.Sumw2()
+                
+                                tree.Draw(var_name_multi+">>"+hist_name, "(%s)*(%s)"%(self.framework.selection, weights))
+                
+                                hist_dict[var_name_multi].Add(self.new_hist, self.lumi_wgt)
+                                self.framework.style.apply(mcHist = hist_dict[var_name_multi], color = self.source.color, isSignal = self.source.isSignal)
+                                dummy.Close()
+
                             print self.new_hist.GetSumOfWeights()
                             print "            Variable: %15s        Integral = %f"%(var_name_multi, self.new_hist.GetSumOfWeights()*self.lumi_wgt)
 
                     else:
-                        dummy = ROOT.TCanvas("dummmy_%s_%s"%(self.name, var.name),"dummy_%s_%s"%(self.name, var.name),100,100)
-                        dummy.cd()
-                        dummy.SetBatch(ROOT.kTRUE)
-                        hist_name = self.name+"_"+var.name
-                        
-                        self.new_hist = ROOT.TH1D(hist_name, self.name, var.nBins, var.min, var.max)
-                        self.new_hist.Sumw2()
-    
-                        selection = self.framework.selection
-                
                         if "mass_res" in var.name:
-                            selection = "(%s)&(%s)"%(self.framework.selection, self.framework.ebe_calib())  
+                            self.new_hist = self.framework.ebe_calib(self.name+"_"+var.name, self.name, var.nBins, var.xmin, var.xmax)
+                            self.new_hist.Sumw2()
+                            hist_dict[var_name_multi].Add(self.new_hist, self.lumi_wgt)
+                            self.framework.style.apply(mcHist = hist_dict[var_name_multi], color = self.source.color, isSignal = self.source.isSignal)
+                        else:
+                            dummy = ROOT.TCanvas("dummmy_%s_%s"%(self.name, var.name),"dummy_%s_%s"%(self.name, var.name),100,100)
+                            dummy.cd()
+                            dummy.SetBatch(ROOT.kTRUE)
+                            hist_name = self.name+"_"+var.name
+                            
+                            self.new_hist = ROOT.TH1D(hist_name, self.name, var.nBins, var.min, var.max)
+                            self.new_hist.Sumw2()
 
-                        tree.Draw(var.name+">>"+hist_name, "(%s)*(%s)"%(selection, weights))
-    
-                        hist_dict[var.name].Add(self.new_hist, self.lumi_wgt)
-                        self.framework.style.apply(mcHist = hist_dict[var.name], color = self.source.color, isSignal = self.source.isSignal)
-                        dummy.Close()
+                            tree.Draw(var.name+">>"+hist_name, "(%s)*(%s)"%(self.framework.selection, weights))
+        
+                            hist_dict[var.name].Add(self.new_hist, self.lumi_wgt)
+                            self.framework.style.apply(mcHist = hist_dict[var.name], color = self.source.color, isSignal = self.source.isSignal)
+                            dummy.Close()
                         print self.new_hist.GetSumOfWeights()
                         print "            Variable: %15s        Integral = %f"%(var.name, self.new_hist.GetSumOfWeights()*self.lumi_wgt)
                 print "        "+"-"*70
@@ -652,7 +656,7 @@ class NTuplePlotter(object):
             pad.SetBottomMargin(0.25)
             pad.Update()
 
-    def ebe_calib(self):
+    def ebe_calib(self, new_hist_name, smp_name, nBins, xmin, xmax):
 
         pt_bins = {
                    "pt_bin1": "(muons.pt[0]>30)&(muons.pt[0]<50)",
@@ -711,11 +715,19 @@ class NTuplePlotter(object):
 
         result = "0"
 
+        calib_hists = {}
+
+        new_hist = ROOT.TH1D(new_hist_name, smp_name, nBins, min, max)
+
         for eta_bin_key, eta_bin_cut in eta_bins.iteritems():
             for pt_bin_key, pt_bin_cut in pt_bins.iteritems():
                 name = "%s_%s"%(pt_bin_key, eta_bin_key)
                 cut = "(%s)&(%s)"%(pt_bin_cut, eta_bin_cut)
-                result = result + "+%f*(%s)"%(factors[name], cut)
+                hist_name = "hist_"+name
+                calib_hists[name] = ROOT.TH1D(hist_name, hist_name, nBins, min, max)
+                calib_hists[name].Sumw2()
+                tree.Draw("(%s)*%f>>%s"%(var_name,factors[name],hist_name), "(%s)*(%s)*(%s)"%(self.selection, weights, cut))
+                new_hist.Add(calib_hists[name])
 
-        return "(%s)"%result
+        return new_hist
 
