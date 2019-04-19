@@ -527,7 +527,7 @@ class NTuplePlotter(object):
                             selection = self.framework.selection
                     
                             if "mass_res" in var_name_multi:
-                                selection = "(%s)&(%s)"%(self.framework.selection, self.ebe_calib)  
+                                selection = "(%s)&(%s)"%(self.framework.selection, self.framework.ebe_calib)  
 
                             tree.Draw(var_name_multi+">>"+hist_name, "(%s)*(%s)"%(selection, weights))
             
@@ -549,7 +549,7 @@ class NTuplePlotter(object):
                         selection = self.framework.selection
                 
                         if "mass_res" in var.name:
-                            selection = "(%s)&(%s)"%(self.framework.selection, self.ebe_calib)  
+                            selection = "(%s)&(%s)"%(self.framework.selection, self.framework.ebe_calib)  
 
                         tree.Draw(var.name+">>"+hist_name, "(%s)*(%s)"%(selection, weights))
     
