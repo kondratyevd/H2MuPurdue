@@ -30,25 +30,27 @@ p = NTuplePlotter()
 # p.add_data_dir(dy_local.name, dy_local.path, 40000)
 
 vbf = p.add_signal("VBF", ROOT.kViolet)
-vbf.get_file(VBF_2017_powheg_Apr15.name, VBF_2017_powheg_Apr15.path+"/tuple_*.root", VBF_2017_powheg_Apr15.xSec)
+vbf.get_file(VBF_2017_powheg_Apr19.name, VBF_2017_powheg_Apr19.path+"/tuple_*.root", VBF_2017_powheg_Apr19.xSec)
 
 ggh = p.add_signal("ggH", ROOT.kRed)
-ggh.get_file(ggH_2017_powheg_Apr15.name, ggH_2017_powheg_Apr15.path+"/tuple_*.root", ggH_2017_powheg_Apr15.xSec)
+ggh.get_file(ggH_2017_powheg_Apr19.name, ggH_2017_powheg_Apr19.path+"/tuple_*.root", ggH_2017_powheg_Apr19.xSec)
 
 ttst = p.add_source("t#bar{t} + Single top", ROOT.kYellow)
-ttst.get_file(tt_ll_POW_2017_Apr15.name, tt_ll_POW_2017_Apr15.path+"/tuple_*.root", tt_ll_POW_2017_Apr15.xSec)
+ttst.get_file(tt_ll_POW_2017_Apr19.name, tt_ll_POW_2017_Apr19.path+"/tuple_*.root", tt_ll_POW_2017_Apr19.xSec)
 
 dy = p.add_source("Drell-Yan", ROOT.kOrange-3)
-dy.get_file(ZJets_aMC_2017_hiStat_Apr15.name, ZJets_aMC_2017_hiStat_Apr15.path+"/tuple_*.root", ZJets_aMC_2017_hiStat_Apr15.xSec)
+dy.get_file(ZJets_aMC_2017_hiStat_Apr19.name, ZJets_aMC_2017_hiStat_Apr19.path+"/tuple_*.root", ZJets_aMC_2017_hiStat_Apr19.xSec)
 
-p.add_data_dir(SingleMu2017B_Apr15.name, SingleMu2017B_Apr15.path, SingleMu2017B_Apr15.lumi)   
-p.add_data_dir(SingleMu2017C_Apr15.name, SingleMu2017C_Apr15.path, SingleMu2017C_Apr15.lumi) 
-p.add_data_dir(SingleMu2017D_Apr15.name, SingleMu2017D_Apr15.path, SingleMu2017D_Apr15.lumi) 
-p.add_data_dir(SingleMu2017E_Apr15.name, SingleMu2017E_Apr15.path, SingleMu2017E_Apr15.lumi) 
-p.add_data_dir(SingleMu2017F_Apr15.name, SingleMu2017F_Apr15.path, SingleMu2017F_Apr15.lumi)    
+p.add_data_dir(SingleMu2017B_Apr19.name, SingleMu2017B_Apr19.path, SingleMu2017B_Apr19.lumi)   
+# p.add_data_dir(SingleMu2017C_Apr15.name, SingleMu2017C_Apr15.path, SingleMu2017C_Apr15.lumi) 
+# p.add_data_dir(SingleMu2017D_Apr15.name, SingleMu2017D_Apr15.path, SingleMu2017D_Apr15.lumi) 
+# p.add_data_dir(SingleMu2017E_Apr15.name, SingleMu2017E_Apr15.path, SingleMu2017E_Apr15.lumi) 
+# p.add_data_dir(SingleMu2017F_Apr15.name, SingleMu2017F_Apr15.path, SingleMu2017F_Apr15.lumi)    
 
 
-p.add_variable("muPairs.mass_res", 1)
+# p.add_variable("muPairs.mass_res", 1)
+p.add_variable("muPairs.phiCS", 1)
+p.add_variable("muPairs.cosThetaCS", 1)
 # p.add_variable("muPairs.mass_Roch", 1)
 # p.add_variable("nJets", 1)
 
