@@ -48,9 +48,9 @@ p.add_data_dir(SingleMu2017B_Apr15.name, SingleMu2017B_Apr15.path, SingleMu2017B
 # p.add_data_dir(SingleMu2017F_Apr15.name, SingleMu2017F_Apr15.path, SingleMu2017F_Apr15.lumi)    
 
 
-
-p.add_variable("muPairs.mass_Roch", 1)
-p.add_variable("nJets", 1)
+p.add_variable("muPairs.mass_res", 1)
+# p.add_variable("muPairs.mass_Roch", 1)
+# p.add_variable("nJets", 1)
 
 p.set_out_dir(args.output_path)
 selection = "(nMuons>1)&(nMuPairs>0)&(muPairs.mass_Roch>110)&(muPairs.mass_Roch<150)&(muons.pt_Roch[0]>30)&(muons.pt_Roch[1]>20)&(muons.isHltMatched[0][2] || muons.isHltMatched[0][3] || (muons.pt_Roch[1]>30 & muons.isHltMatched[1][2]) || (muons.pt_Roch[1]>30 & muons.isHltMatched[1][3])  )"

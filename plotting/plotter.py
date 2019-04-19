@@ -100,17 +100,17 @@ class NTuplePlotter(object):
 
     def set_out_dir(self, path):
         self.out_dir = path
-        try:
-            os.makedirs(path)
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                raise
+        # try:
+        #     os.makedirs(path)
+        # except OSError as e:
+        #     if e.errno != errno.EEXIST:
+        #         raise
 
-        try:
-            os.makedirs(path+"root/")
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                raise    
+        # try:
+        #     os.makedirs(path+"root/")
+        # except OSError as e:
+        #     if e.errno != errno.EEXIST:
+        #         raise    
 
     def set_lumi(self, lumi):
         self.lumi = lumi
@@ -152,11 +152,14 @@ class NTuplePlotter(object):
                         hist_name = "Data_"+var_name_multi+"_"+smp[0]
                         new_hist = ROOT.TH1D(hist_name, self.data_title, var.nBins, var.min, var.max)
                         new_hist.Sumw2()
+
+                        selection = self.selection                           
+
                         if "mass_Roch" in var_name_multi:
-                            tree.Draw(var_name_multi+">>"+hist_name, "(%s)&(muPairs.mass_Roch<120 || muPairs.mass_Roch>130)"%self.selection)
+                            selection = "(%s)&(muPairs.mass_Roch<120 || muPairs.mass_Roch>130)"%self.selection
         
-                        else:
-                            tree.Draw(var_name_multi+">>"+hist_name, self.selection)
+                        tree.Draw(var_name_multi+">>"+hist_name, selection)
+
                         self.data_hist_dict[var_name_multi].Add(new_hist, 1)    # fill histograms
                         print "            Variable: %15s        Integral = %f"%(var_name_multi, new_hist.GetSumOfWeights())
                 else:
@@ -165,11 +168,13 @@ class NTuplePlotter(object):
                     hist_name = "Data_"+var.name+"_"+smp[0]
                     new_hist = ROOT.TH1D(hist_name, self.data_title, var.nBins, var.min, var.max)
                     new_hist.Sumw2()
+
+                    selection = self.selection 
+
                     if "mass_Roch" in var.name:
-                        tree.Draw(var.name+">>"+hist_name, "(%s)&(muPairs.mass_Roch<120 || muPairs.mass_Roch>130)"%self.selection)
+                        selection = "(%s)&(muPairs.mass_Roch<120 || muPairs.mass_Roch>130)"%self.selection
     
-                    else:
-                        tree.Draw(var.name+">>"+hist_name, self.selection)
+                    tree.Draw(var.name+">>"+hist_name, selection)
                     self.data_hist_dict[var.name].Add(new_hist, 1)    # fill histograms
                     print "            Variable: %15s        Integral = %f"%(var.name, new_hist.GetSumOfWeights())
 
@@ -519,7 +524,12 @@ class NTuplePlotter(object):
                             self.new_hist = ROOT.TH1D(hist_name, self.name, var.nBins, var.min, var.max)
                             self.new_hist.Sumw2()
             
-                            tree.Draw(var_name_multi+">>"+hist_name, "(%s)*(%s)"%(self.framework.selection, weights))
+                            selection = self.framework.selection
+                    
+                            if "mass_res" in var_name_multi:
+                                selection = "(%s)&(%s)"%(self.framework.selection, self.ebe_calib)  
+
+                            tree.Draw(var_name_multi+">>"+hist_name, "(%s)*(%s)"%(selection, weights))
             
                             hist_dict[var_name_multi].Add(self.new_hist, self.lumi_wgt)
                             self.framework.style.apply(mcHist = hist_dict[var_name_multi], color = self.source.color, isSignal = self.source.isSignal)
@@ -536,7 +546,12 @@ class NTuplePlotter(object):
                         self.new_hist = ROOT.TH1D(hist_name, self.name, var.nBins, var.min, var.max)
                         self.new_hist.Sumw2()
     
-                        tree.Draw(var.name+">>"+hist_name, "(%s)*(%s)"%(self.framework.selection, weights))
+                        selection = self.framework.selection
+                
+                        if "mass_res" in var.name:
+                            selection = "(%s)&(%s)"%(self.framework.selection, self.ebe_calib)  
+
+                        tree.Draw(var.name+">>"+hist_name, "(%s)*(%s)"%(selection, weights))
     
                         hist_dict[var.name].Add(self.new_hist, self.lumi_wgt)
                         self.framework.style.apply(mcHist = hist_dict[var.name], color = self.source.color, isSignal = self.source.isSignal)
@@ -636,3 +651,71 @@ class NTuplePlotter(object):
             pad.SetTopMargin(0)
             pad.SetBottomMargin(0.25)
             pad.Update()
+
+    def ebe_calib(self):
+
+        pt_bins = {
+                   "pt_bin1": "(muons.pt[0]>30)&(muons.pt[0]<50)",
+                   "pt_bin2": "(muons.pt[0]>50)"
+                   }
+
+        B1 = "(abs(muons.eta[0])<0.9)"
+        B2 = "(abs(muons.eta[1])<0.9)"
+        O1 = "(abs(muons.eta[0])>0.9)&(abs(muons.eta[0])<1.9)"
+        O2 = "(abs(muons.eta[1])>0.9)&(abs(muons.eta[1])<1.9)"
+        E1 = "(abs(muons.eta[0])>1.9)"
+        E2 = "(abs(muons.eta[1])>1.9)"
+
+        BB = "%s&%s"%(B1, B2)
+        BO = "%s&%s"%(B1, O2)
+        BE = "%s&%s"%(B1, E2)
+
+        OB = "%s&%s"%(O1, B2)
+        OO = "%s&%s"%(O1, O2)
+        OE = "%s&%s"%(O1, E2)
+
+        EB = "%s&%s"%(E1, B2)
+        EO = "%s&%s"%(E1, O2)
+        EE = "%s&%s"%(E1, E2)
+
+        eta_bins = { "BB": BB,
+                     "BO": BO,
+                     "BE": BE,
+                     "OB": OB,
+                     "OO": OO,
+                     "OE": OE,
+                     "EB": EB,
+                     "EO": EO,
+                     "EE": EE
+                     }
+
+        # These factors are calculated from fit of Z-peak in 2017 data and DY
+        factors = {'pt_bin2_EB': 1.0013319478357219,
+                 'pt_bin1_OO': 1.0023693878056639,
+                 'pt_bin1_BO': 1.0218129532550582,
+                 'pt_bin2_EE': 0.9765938713567794,
+                 'pt_bin1_BB': 1.0323464800005375,
+                 'pt_bin2_EO': 1.0018350428217986,
+                 'pt_bin1_BE': 1.0082951486706067,
+                 'pt_bin1_EO': 0.9978525407560304,
+                 'pt_bin1_OE': 0.9965500080239412,
+                 'pt_bin2_BE': 1.0003701332423942,
+                 'pt_bin2_OO': 1.0137635235189486,
+                 'pt_bin2_BB': 1.034563610596542,
+                 'pt_bin2_BO': 0.9934484561232999,
+                 'pt_bin2_OE': 0.9922489708563557,
+                 'pt_bin1_EE': 0.9969964864616038,
+                 'pt_bin1_OB': 1.0265579651723569,
+                 'pt_bin1_EB': 0.9892302833112607,
+                 'pt_bin2_OB': 0.9931856900102433}
+
+        result = "0"
+
+        for eta_bin_key, eta_bin_cut in eta_bins.iteritems():
+            for pt_bin_key, pt_bin_cut in pt_bins.iteritems():
+                name = "%s_%s"%(pt_bin_key, eta_bin_key)
+                cut = "(%s)&(%s)"%(pt_bin_cut, eta_bin_cut)
+                result = result + "+%f*(%s)"%(factors[name], cut)
+
+        return "(%s)"%result
+
