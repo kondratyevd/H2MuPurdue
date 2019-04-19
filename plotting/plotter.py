@@ -518,7 +518,7 @@ class NTuplePlotter(object):
                             var_name_multi = "%s[%i]"%(var.name, j)
 
                             if "mass_res" in var_name_multi:
-                                self.new_hist = self.framework.ebe_calib(self.name+"_"+var_name_multi, self.name, var.nBins, var.xmin, var.xmax)
+                                self.new_hist = self.framework.ebe_calib(self.name+"_"+var_name_multi, self.name, var.nBins, var.min, var.max)
                                 self.new_hist.Sumw2()
                                 hist_dict[var_name_multi].Add(self.new_hist, self.lumi_wgt)
                                 self.framework.style.apply(mcHist = hist_dict[var_name_multi], color = self.source.color, isSignal = self.source.isSignal)
@@ -542,7 +542,7 @@ class NTuplePlotter(object):
 
                     else:
                         if "mass_res" in var.name:
-                            self.new_hist = self.framework.ebe_calib(self.name+"_"+var.name, self.name, var.nBins, var.xmin, var.xmax)
+                            self.new_hist = self.framework.ebe_calib(self.name+"_"+var.name, self.name, var.nBins, var.min, var.max)
                             self.new_hist.Sumw2()
                             hist_dict[var_name_multi].Add(self.new_hist, self.lumi_wgt)
                             self.framework.style.apply(mcHist = hist_dict[var_name_multi], color = self.source.color, isSignal = self.source.isSignal)
