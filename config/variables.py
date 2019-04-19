@@ -29,6 +29,8 @@ variables.append(Variable("muPairs.mass"    ,   "mass"              ,"Dimuon mas
 variables.append(Variable("muPairs.mass_Roch",  "mass"              ,"Dimuon mass",         100, 50, 200,   "GeV",      'F', True,      "nMuPairs"  ,   0   , False ))
 
 variables.append(Variable("muPairs.mass_res",   "mass_res"          ,"Ev-by-ev resolution", 100, 0, 5,      "GeV",      'F', True,      "nMuPairs"  ,   0   , False ))
+variables.append(Variable("muPairs.cosThetaCS"  ,   "cosThetaCS"    ,"cosThetaCS",          100, -1, 1,      "",        'F', True,      "nMuPairs"  ,   -5  , False ))
+variables.append(Variable("muPairs.phiCS"   ,   "phiCS"             ,"phiCS",               100, -3.2, 3.2,  "",        'F', True,      "nMuPairs"  ,   -1  , False ))
 
 variables.append(Variable("muons.pt"        ,   "pt"                ,"Muon p_{T}",          100, 0, 200,    "GeV",      'F', True,      "nMuons"    ,   0   , False ))
 
