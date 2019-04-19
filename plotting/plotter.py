@@ -717,14 +717,14 @@ class NTuplePlotter(object):
 
         calib_hists = {}
 
-        new_hist = ROOT.TH1D(new_hist_name, smp_name, nBins, min, max)
+        new_hist = ROOT.TH1D(new_hist_name, smp_name, nBins, xmin, xmax)
 
         for eta_bin_key, eta_bin_cut in eta_bins.iteritems():
             for pt_bin_key, pt_bin_cut in pt_bins.iteritems():
                 name = "%s_%s"%(pt_bin_key, eta_bin_key)
                 cut = "(%s)&(%s)"%(pt_bin_cut, eta_bin_cut)
                 hist_name = "hist_"+name
-                calib_hists[name] = ROOT.TH1D(hist_name, hist_name, nBins, min, max)
+                calib_hists[name] = ROOT.TH1D(hist_name, hist_name, nBins, xmin, xmax)
                 calib_hists[name].Sumw2()
                 tree.Draw("(%s)*%f>>%s"%(var_name,factors[name],hist_name), "(%s)*(%s)*(%s)"%(self.selection, weights, cut))
                 new_hist.Add(calib_hists[name])
