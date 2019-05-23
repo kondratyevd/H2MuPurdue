@@ -54,19 +54,19 @@ class Framework(object):
         self.ebe_weights = False
 
     class File(object):
-        def __init__(self, source, name, path, xSec, isDir, isData=False, repeat=1):
+        def __init__(self, source, name, path, xSec, isDir, hasMetadata, isData=False, repeat=1):
             self.source = source
             self.name = name
             self.path = path
             self.xSec = xSec
             self.isDir = isDir
+            self.isData = isData
             self.nEvt = 1
             self.nOriginalWeighted = 1
             self.weight = 1
             self.weight_over_lumi = 1
-            self.isData = isData
-            if not isData:
-                self.get_original_nEvts()
+            if hasMetadata:
+                self.weight, self.weight_over_lumi = self.get_original_nEvts()
             self.category = ''  
             self.repeat=repeat                  
         
@@ -74,11 +74,7 @@ class Framework(object):
             ROOT.gROOT.SetBatch(1)
             dummy = ROOT.TCanvas("dummmy","dummy",100,100)
             metadata = ROOT.TChain(self.source.metadataPath)
-            if self.isDir:
-                metadata.Add(self.path+"/*.root")       
-            else:
-                metadata.Add(self.path)
-            print "metadata: ", metadata.GetEntries(), " entries"
+            metadata.Add(self.path)
             metadata.Draw("originalNumEvents>>nEvt_"+self.name)
             metadata.Draw("sumEventWeights>>eweights_"+self.name)
             nEvtHist = ROOT.gDirectory.Get("nEvt_"+self.name) 
@@ -86,10 +82,11 @@ class Framework(object):
             sumEventWeightsHist = ROOT.gDirectory.Get("eweights_"+self.name) 
             self.nOriginalWeighted = sumEventWeightsHist.GetEntries()*sumEventWeightsHist.GetMean()
             if self.source.lumi:
-                self.weight = self.xSec*self.source.lumi / self.nOriginalWeighted
+                weight = self.xSec*self.source.lumi / self.nOriginalWeighted
             else:
-                self.weight = self.xSec*40000 / self.nOriginalWeighted
-            self.weight_over_lumi = self.xSec / self.nOriginalWeighted
+                weight = self.xSec*40000 / self.nOriginalWeighted
+            weight_over_lumi = self.xSec / self.nOriginalWeighted
+            return weight, weight_over_lumi
 
 
     def prepare_dirs(self):
@@ -118,24 +115,24 @@ class Framework(object):
 
  # # # # # # # # # # # # # # Inputs for TMVA # # # # # # # # # # # # # #
 
-    def add_signal_file(self, name, path, xSec):
+    def add_signal_file(self, name, path, xSec, hasMetadata):
         print "Adding signal file %s with xSec=%f.."%(name, xSec)
-        self.file_list_s.append(self.File(self, name, path, xSec, False))
+        self.file_list_s.append(self.File(self, name, path, xSec, False, hasMetadata))
         self.info_file.write("Signal:       %s\n"%path)
 
-    def add_background_file(self, name, path, xSec):
+    def add_background_file(self, name, path, xSec, hasMetadata):
         print "Adding background file %s with xSec=%f.."%(name, xSec)
-        self.file_list_b.append(self.File(self, name, path, xSec, False))
+        self.file_list_b.append(self.File(self, name, path, xSec, False, hasMetadata))
         self.info_file.write("Background:   %s\n"%path)
 
-    def add_signal_dir(self, name, path, xSec):
+    def add_signal_dir(self, name, path, xSec, hasMetadata):
         print "Adding signal directory %s with xSec=%f.."%(path, xSec)
-        self.dir_list_s.append(self.File(self, name, path, xSec, True))
+        self.dir_list_s.append(self.File(self, name, path, xSec, True, hasMetadata))
         self.info_file.write("Signal dir:       %s\n"%path)
 
-    def add_background_dir(self, name, path, xSec):
+    def add_background_dir(self, name, path, xSec, hasMetadata):
         print "Adding background directory %s with xSec=%f.."%(path, xSec)
-        self.dir_list_b.append(self.File(self, name, path, xSec, True))
+        self.dir_list_b.append(self.File(self, name, path, xSec, True, hasMetadata))
         self.info_file.write("Bkg dir:      %s\n"%path)
 
 
@@ -147,17 +144,19 @@ class Framework(object):
         else:
             self.bkg_categories.append(name)
 
-    def add_dir_to_category(self, name, path, xSec, category, isDir=True, repeat=1):
+    def add_dir_to_category(self, name, path, xSec, category, hasMetadata, repeat=1):
         if category in self.signal_categories+self.bkg_categories: 
-            print "Adding directory %s with xSec=%f as %s"%(path, xSec, category)
-            print "Events will be repeated %i times."%repeat
-            file = self.File(self, name, path, xSec, isDir, isData=False, repeat=repeat)
-            file.category = category
-            self.files.append(file)
+            for filename in os.listdir(path):
+                if filename.endswith(".root"): 
+                    print "Adding file %s from directory %s with xSec=%f as %s"%(filename, path, xSec, category)
+                    print "Events will be repeated %i times."%repeat
+                    file = self.File(self, name, path+filename, xSec, False, hasMetadata, isData=False, repeat=repeat)
+                    file.category = category
+                    self.files.append(file)
             
     def add_data(self, name, path, lumi):
         print "Adding %s with lumi = %f"%(path, lumi)
-        file = self.File(self, name, path, 1, True, isData=True)
+        file = self.File(self, name, path, 1, True, False, isData=True)
         file.category = "Data"
         self.data_files.append(file)
         self.lumi += lumi
