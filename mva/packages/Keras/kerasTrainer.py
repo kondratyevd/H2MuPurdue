@@ -306,7 +306,7 @@ class KerasTrainer(object):
                 weight_over_lumi["Data"][0] = 1
                 if self.framework.multiclass:
                     DY_prediction["Data"][0]    = row["pred_%s_%s"%(self.framework.dy_label, method_name)]
-                    ttbar_prediction["Data"][0] = row["pred_%s_%s"%(self.framework.tt_label, method_name)]
+                    ttbar_prediction["Data"][0] = row["pred_%s_%s"%(self.framework.top_label, method_name)]
                     ggH_prediction["Data"][0]   = row["pred_%s_%s"%(self.framework.ggh_label, method_name)] 
                     VBF_prediction["Data"][0]   = row["pred_%s_%s"%(self.framework.vbf_label, method_name)] 
                 else:
@@ -337,7 +337,7 @@ class KerasTrainer(object):
 
                         if self.framework.multiclass:
                             DY_prediction[category][0]    = row["pred_%s_%s"%(self.framework.dy_label, method_name)]
-                            ttbar_prediction[category][0] = row["pred_%s_%s"%(self.framework.tt_label, method_name)]
+                            ttbar_prediction[category][0] = row["pred_%s_%s"%(self.framework.top_label, method_name)]
                             ggH_prediction[category][0]   = row["pred_%s_%s"%(self.framework.ggh_label, method_name)] 
                             VBF_prediction[category][0]   = row["pred_%s_%s"%(self.framework.vbf_label, method_name)] 
                         else:
