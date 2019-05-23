@@ -76,6 +76,7 @@ c.add_variable("nbjets")
 c.add_spectator('hmass')
 c.add_spectator('weight')
 c.add_spectator("njets")
+c.add_spectator("nbjets")
 
 c.weigh_by_event(True)
 
