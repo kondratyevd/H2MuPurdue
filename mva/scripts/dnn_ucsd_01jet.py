@@ -11,8 +11,8 @@ args = parser.parse_args()
 
 
 c = Framework(outPath=args.output_path)
-c.label = "dnn_ucsd_2jet_bveto"
-comment = "DNN UCSD 2jet bveto"  
+c.label = "dnn_ucsd_01jet"
+comment = "DNN UCSD 01jet"
                 # change this line for each run
 c.add_comment(comment)
 print comment
@@ -21,7 +21,7 @@ treePath = 'tree'
 
 c.set_tree_path(treePath)
 
-c.set_year("ucsd_2jet_bveto")
+c.set_year("ucsd_01jet")
 c.massWindow = [120,130]
 c.multiclass = True
 c.dy_label = "DY"
@@ -57,7 +57,6 @@ c.add_file_to_category(ucsd_top_2018.name, ucsd_top_2018.path, ucsd_top_2018.xSe
 ##########################################################
 
 
-
 ###  ------   Raffaele's variables   ------ ###
 c.add_variable("hmmpt") 
 c.add_variable("hmmrap")
@@ -81,7 +80,6 @@ c.add_variable("dphijj")
 c.add_spectator('hmass')
 c.add_spectator('weight')
 c.add_spectator("nbjets")
-
 c.weigh_by_event(True)
 
 c.add_package("Keras")
