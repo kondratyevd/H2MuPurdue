@@ -153,6 +153,14 @@ class Framework(object):
                     file = self.File(self, name, path+filename, xSec, False, hasMetadata, isData=False, repeat=repeat)
                     file.category = category
                     self.files.append(file)
+
+    def add_file_to_category(self, name, path, xSec, category, hasMetadata, repeat=1):
+        if category in self.signal_categories+self.bkg_categories: 
+            print "Adding file %s with xSec=%f as %s"%(path, xSec, category)
+            print "Events will be repeated %i times."%repeat
+            file = self.File(self, name, path, xSec, False, hasMetadata, isData=False, repeat=repeat)
+            file.category = category
+            self.files.append(file)
             
     def add_data(self, name, path, lumi):
         print "Adding %s with lumi = %f"%(path, lumi)
@@ -193,7 +201,7 @@ class Framework(object):
     def set_year(self, year):
         self.year = year
 
-    def add_variable(self, name, nObj):
+    def add_variable(self, name, nObj=1):
         if name not in [v.name for v in variables]:
             sys.exit("\n\nERROR: Variable %s not found in the list.\n"%(name))
         else:
@@ -211,7 +219,7 @@ class Framework(object):
         print "Adding more variables: "
         print more_var_list
 
-    def add_spectator(self, name, nObj):
+    def add_spectator(self, name, nObj=1):
         if name not in [v.name for v in variables]:
             sys.exit("\n\nERROR: Variable %s not found in the list. \n"%(name))
         else:
@@ -223,7 +231,7 @@ class Framework(object):
                     self.nVar = self.nVar + nObj
                     self.spectator_list.append(var)
 
-    def add_data_spectator(self, name, nObj):
+    def add_data_spectator(self, name, nObj=1):
         if name not in [v.name for v in variables]:
             sys.exit("\n\nERROR: Variable %s not found in the list.\n"%(name))
         else:

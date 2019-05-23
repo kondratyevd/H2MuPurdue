@@ -49,8 +49,9 @@ p.add_data_dir(dy_local.name, dy_local.path, 40000)
 
 
 
-p.add_variable("muPairs.mass_Roch", 1)
-p.add_variable("nJets", 1)
+# p.add_variable("muPairs.mass_Roch", 1)
+p.add_variable("muPairs.mass_res", 1)
+# p.add_variable("nJets", 1)
 
 p.set_out_dir(args.output_path)
 selection = "(nMuons>1)&(nMuPairs>0)&(muPairs.mass_Roch>110)&(muPairs.mass_Roch<150)&(muons.pt_Roch[0]>30)&(muons.pt_Roch[1]>20)&(muons.isHltMatched[0][2] || muons.isHltMatched[0][3] || (muons.pt_Roch[1]>30 & muons.isHltMatched[1][2]) || (muons.pt_Roch[1]>30 & muons.isHltMatched[1][3])  )"
@@ -59,7 +60,6 @@ p.add_selection(selection)
 
 p.add_wgt_sf("(IsoMu_SF_3 * MuID_SF_3 * MuIso_SF_3)*(PU_wgt*GEN_wgt)")
 p.setLogY() 
-
 
 p.plot_stack()
 #================================================
