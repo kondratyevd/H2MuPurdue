@@ -17,6 +17,40 @@ dy_local = SmpNtuple("ZJets_aMC", "ZJets_aMC", "/Users/dmitrykondratyev/Document
 tt_local = SmpNtuple("tt_ll_POW", "tt_ll_POW", "/Users/dmitrykondratyev/Documents/HiggsToMuMu/test_files/tt/", False, True, 85.656, 1)
 
 
+# UCSD files with trained BDTs
+# Don't care about cross sections here because the event weights are already in the trees
+
+ucsd_path = "/mnt/hadoop/store/user/dkondrat/UCSD_files/"
+
+ucsd_ggh_2016 = SmpNtuple("ggH_2016","ggH 2016", ucsd_path+"/2016/"+"tree_ggH.root", False, False, 1, 1)
+ucsd_ggh_2017 = SmpNtuple("ggH_2017","ggH 2017", ucsd_path+"/2017/"+"tree_ggH.root", False, False, 1, 1)
+ucsd_ggh_2018 = SmpNtuple("ggH_2018","ggH 2018", ucsd_path+"/2018/"+"tree_ggH.root", False, False, 1, 1)
+
+ucsd_vbf_2016 = SmpNtuple("VBF_2016","VBF 2016", ucsd_path+"/2016/"+"tree_VBF.root", False, False, 1, 1)
+ucsd_vbf_2017 = SmpNtuple("VBF_2017","VBF 2017", ucsd_path+"/2017/"+"tree_VBF.root", False, False, 1, 1)
+ucsd_vbf_2018 = SmpNtuple("VBF_2018","VBF 2018", ucsd_path+"/2018/"+"tree_VBF.root", False, False, 1, 1)
+
+ucsd_vh_2016 = SmpNtuple("VH_2016","VH 2016", ucsd_path+"/2016/"+"tree_VH.root", False, False, 1, 1)
+ucsd_vh_2017 = SmpNtuple("VH_2017","VH 2017", ucsd_path+"/2017/"+"tree_VH.root", False, False, 1, 1)
+ucsd_vh_2018 = SmpNtuple("VH_2018","VH 2018", ucsd_path+"/2018/"+"tree_VH.root", False, False, 1, 1)
+
+ucsd_tth_2016 = SmpNtuple("ttH_2016","ttH 2016", ucsd_path+"/2016/"+"tree_ttH.root", False, False, 1, 1)
+ucsd_tth_2017 = SmpNtuple("ttH_2017","ttH 2017", ucsd_path+"/2017/"+"tree_ttH.root", False, False, 1, 1)
+ucsd_tth_2018 = SmpNtuple("ttH_2018","ttH 2018", ucsd_path+"/2018/"+"tree_ttH.root", False, False, 1, 1)
+
+ucsd_dy_2016 = SmpNtuple("DY_2016","DY 2016", ucsd_path+"/2016/"+"tree_DY.root", False, False, 1, 1)
+ucsd_dy_2017 = SmpNtuple("DY_2017","DY 2017", ucsd_path+"/2017/"+"tree_DY.root", False, False, 1, 1)
+ucsd_dy_2018 = SmpNtuple("DY_2018","DY 2018", ucsd_path+"/2018/"+"tree_DY.root", False, False, 1, 1)
+
+ucsd_top_2016 = SmpNtuple("top_2016","top 2016", ucsd_path+"/2016/"+"tree_top.root", False, False, 1, 1)
+ucsd_top_2017 = SmpNtuple("top_2017","top 2017", ucsd_path+"/2017/"+"tree_top.root", False, False, 1, 1)
+ucsd_top_2018 = SmpNtuple("top_2018","top 2018", ucsd_path+"/2018/"+"tree_top.root", False, False, 1, 1)
+
+ucsd_vv_2016 = SmpNtuple("VV_2016","VV 2016", ucsd_path+"/2016/"+"tree_VV.root", False, False, 1, 1)
+ucsd_vv_2017 = SmpNtuple("VV_2017","VV 2017", ucsd_path+"/2017/"+"tree_VV.root", False, False, 1, 1)
+ucsd_vv_2018 = SmpNtuple("VV_2018","VV 2018", ucsd_path+"/2018/"+"tree_VV.root", False, False, 1, 1)
+
+
 # April 6, 2019 production: most of variables present, except angles in CS frame
 
 ggH_2017_powheg_Apr6 = SmpNtuple("H2Mu_gg","H2Mu_gg 2017 powheg", "/mnt/hadoop/store/user/dkondrat/GluGluHToMuMu_M-125_TuneCP5_PSweights_13TeV_powheg_pythia8/H2Mu_gg_powheg/190406_001015/0000/", False, True, 0.009618  ,1 )

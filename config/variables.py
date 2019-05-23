@@ -68,3 +68,33 @@ variables.append(Variable("MuIso_SF_3"      ,   "MuIso_SF_3"            ,"MuIso_
 variables.append(Variable("IsoMu_SF_4"      ,   "IsoMu_SF_4"            ,"IsoMu_SF_4",     100, -1000, 1000,"",         'F', False,     "nMuons"    ,   0   , False ))
 variables.append(Variable("MuID_SF_4"       ,   "MuID_SF_4"             ,"MuID_SF_4",      100, -1000, 1000,"",         'F', False,     "nMuons"    ,   0   , False ))
 variables.append(Variable("MuIso_SF_4"      ,   "MuIso_SF_4"            ,"MuIso_SF_4",     100, -1000, 1000,"",         'F', False,     "nMuons"    ,   0   , False ))
+
+
+#### Variables in UCSD ntuples ####
+
+variables.append(Variable("hmmpt"   ,   "hmmpt"         ,"Dimuon p_{T}",       100, 0, 100, "GeV",      'F', False,         "hmmpt" ,   0   , False ))
+variables.append(Variable("hmmrap"  ,   "hmmrap"        ,"Dimuon #eta",        100, 0, 100, "",         'F', False,         "hmmpt" ,   0   , False ))
+variables.append(Variable("hmass"   ,   "hmass"         ,"Dimuon mass",        100, 0, 100, "GeV",      'F', False,         "hmmpt" ,   0   , False ))
+variables.append(Variable("hmerr"   ,   "hmerr"         ,"hmerr",              100, 0, 100, "",         'F', False,         "hmmpt" ,   0   , False ))
+variables.append(Variable("hmmthetacs", "hmmthetacs"    ,"hmmthetacs",         100, 0, 100, "",         'F', False,         "hmmpt" ,   0   , False ))
+variables.append(Variable("hmmphics",   "hmmphics"      ,"hmmphics",           100, 0, 100, "",         'F', False,         "hmmpt" ,   0   , False ))
+variables.append(Variable("m1ptOverMass",   "m1ptOverMass"  ,"m1ptOverMass",   100, 0, 100, "",         'F', False,         "hmmpt" ,   0   , False ))
+variables.append(Variable("m2ptOverMass",   "m2ptOverMass"  ,"m2ptOverMass",   100, 0, 100, "",         'F', False,         "hmmpt",    0   , False ))
+variables.append(Variable("m1eta",          "m1eta"         ,"m1eta",          100, 0, 100, "",         'F', False,         "hmmpt" ,   0   , False ))
+variables.append(Variable("m2eta",          "m2eta"         ,"m2eta",          100, 0, 100, "",         'F', False,         "hmmpt",    0   , False ))
+variables.append(Variable("j1pt",           "j1pt"          ,"j1pt",           100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
+variables.append(Variable("j2pt",           "j2pt"          ,"j2pt",           100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
+variables.append(Variable("j3pt",           "j3pt"          ,"j3pt",           100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
+variables.append(Variable("j1eta",          "j1eta"         ,"j1eta",          100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
+variables.append(Variable("j2eta",          "j2eta"         ,"j2eta",          100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
+variables.append(Variable("j3eta",          "j3eta"         ,"j3eta",          100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
+variables.append(Variable("detajj",         "detajj"        ,"detajj",         100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
+variables.append(Variable("mjj",            "mjj"           ,"mjj",            100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
+variables.append(Variable("dphijj",         "dphijj"        ,"dphijj",         100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
+variables.append(Variable("nbjets",         "nbjets"        ,"nbjets",         100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
+variables.append(Variable("njets",          "njets"         ,"njets",          100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
+variables.append(Variable("zepen",          "zepen"         ,"zepen",          100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
+variables.append(Variable("drmj",           "drmj"          ,"drmj",           100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
+variables.append(Variable("met",            "met"           ,"met",            100, 0, 100, "",         'F', False,         "met"   ,   0   , False ))
+variables.append(Variable("weight",         "weight"            ,"weight",     100, 0, 100, "",         'F', False,         "hmmpt" ,   0   , False ))
+    

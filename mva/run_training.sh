@@ -12,6 +12,10 @@ case $1 in
 		python $FRAMEWORK_PATH/mva/scripts/test_dnn_local.py --out_path $OUTPUT_DIR
 		;;
 
+	0)
+		echo 'Running option 1'
+		python $FRAMEWORK_PATH/mva/scripts/test_hammer.py --out_path $OUTPUT_DIR
+		;;
 
 	*)
 		echo 'Wrong option ' $1;;		
