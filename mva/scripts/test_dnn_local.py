@@ -36,23 +36,23 @@ c.vbf_label = "H2Mu_VBF"
 
 
 c.add_category(c.ggh_label, True)
-c.add_dir_to_category(ggh_local.name, ggh_local.path, ggh_local.xSec, c.ggh_label)
+c.add_dir_to_category(ggh_local.name, ggh_local.path, ggh_local.xSec, c.ggh_label, True)
 
 c.add_category(c.vbf_label, True)
-c.add_dir_to_category(vbf_local.name, vbf_local.path, vbf_local.xSec, c.vbf_label)
+c.add_dir_to_category(vbf_local.name, vbf_local.path, vbf_local.xSec, c.vbf_label, True)
 
 c.add_category(c.dy_label, False)
-c.add_dir_to_category(dy_local.name, dy_local.path, dy_local.xSec, c.dy_label)
+c.add_dir_to_category(dy_local.name, dy_local.path, dy_local.xSec, c.dy_label, True)
 
 c.add_category(c.tt_label, False)
-c.add_dir_to_category(tt_local.name, tt_local.path, tt_local.xSec, c.tt_label)
+c.add_dir_to_category(tt_local.name, tt_local.path, tt_local.xSec, c.tt_label, True)
 
 
 
-c.add_signal_dir(ggh_local.name, ggh_local.path, ggh_local.xSec)
-c.add_signal_dir(vbf_local.name, vbf_local.path, vbf_local.xSec)
-c.add_background_dir(dy_local.name, dy_local.path, dy_local.xSec)
-c.add_background_dir(tt_local.name, tt_local.path, tt_local.xSec)
+# c.add_signal_dir(ggh_local.name, ggh_local.path, ggh_local.xSec, True)
+# c.add_signal_dir(vbf_local.name, vbf_local.path, vbf_local.xSec, True)
+# c.add_background_dir(dy_local.name, dy_local.path, dy_local.xSec, True)
+# c.add_background_dir(tt_local.name, tt_local.path, tt_local.xSec, True)
 ##########################################################
 
 
@@ -80,14 +80,14 @@ c.add_variable("jetPairs.dPhi",             1)
 
 
 c.add_data_spectator('muons.pt',            2)
-c.add_data_spectator('muPairs.mass',        1)
+c.add_data_spectator('muPairs.mass_Roch',   1)
 c.add_data_spectator('muPairs.phi',         1)
 c.add_data_spectator('muons.isMediumID',    2)
 c.add_data_spectator('jets.phi',            2)
 c.add_data_spectator('nJets',               1)
 
 c.add_spectator('muons.pt',                 2)
-c.add_spectator('muPairs.mass',             1)
+c.add_spectator('muPairs.mass_Roch',        1)
 c.add_spectator('muPairs.phi',              1)
 c.add_spectator('muons.isMediumID',         2)
 c.add_spectator('jets.phi',                 2)
@@ -102,11 +102,11 @@ c.add_spectator('MuIso_SF_3',               1)
 
 c.weigh_by_event(True)
 
-# c.add_package("Keras")
-# c.add_method("model_50_D2_25_D2_25_D2") # Dropout 0.2
+c.add_package("Keras")
+c.add_method("model_50_D2_25_D2_25_D2") # Dropout 0.2
 
-c.add_package("TMVA")
-c.add_method("BDTG_UF_v1")
+# c.add_package("TMVA")
+# c.add_method("BDTG_UF_v1")
 
 
 
