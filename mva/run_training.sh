@@ -5,7 +5,7 @@ RunID="Run_"$timestamp
 echo "RunID = "$RunID
 OUTPUT_DIR=$MVA_OUTPUT_PATH$RunID/
 echo "Creating output directory "$OUTPUT_DIR
-mkdir $OUTPUT_DIR
+mkdir -p $OUTPUT_DIR
 case $1 in
 	0)
 		echo 'Running option 0'
