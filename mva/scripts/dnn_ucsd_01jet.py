@@ -11,8 +11,8 @@ args = parser.parse_args()
 
 
 c = Framework(outPath=args.output_path)
-c.label = "dnn_ucsd_01jet"
-comment = "DNN UCSD 01jet"
+c.label = "dnn_ucsd_2jet_bveto"
+comment = "DNN UCSD 2jet bveto"  
                 # change this line for each run
 c.add_comment(comment)
 print comment
@@ -21,7 +21,7 @@ treePath = 'tree'
 
 c.set_tree_path(treePath)
 
-c.set_year("ucsd_01jet")
+c.set_year("ucsd_2jet_bveto")
 c.massWindow = [120,130]
 c.multiclass = True
 c.dy_label = "DY"
@@ -68,14 +68,18 @@ c.add_variable("m1ptOverMass")
 c.add_variable("m2ptOverMass")
 c.add_variable('m1eta')
 c.add_variable('m2eta')
+c.add_variable("njets")
+c.add_variable("zepen")
 c.add_variable("j1pt")
+c.add_variable("j2pt")
 c.add_variable("j1eta")
-c.add_variable("nbjets")
+c.add_variable("mjj")
+c.add_variable("detajj")
+c.add_variable("dphijj")
 ###############################################
 
 c.add_spectator('hmass')
 c.add_spectator('weight')
-c.add_spectator("njets")
 c.add_spectator("nbjets")
 
 c.weigh_by_event(True)
