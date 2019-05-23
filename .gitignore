@@ -8,3 +8,7 @@
 */*/*/*DS_store
 plotting/plots/*
 resolution/plots/*
+lib/*.d
+lib/*.so
+lin/*pcm
+
