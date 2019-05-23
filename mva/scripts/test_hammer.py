@@ -25,7 +25,7 @@ c.set_year("inclusive_ucsd")
 c.massWindow = [120,130]
 c.multiclass = True
 c.dy_label = "DY"
-c.tt_label = "ttbar"
+c.top_label = "ttbar"
 c.ggh_label = "ggH"
 c.vbf_label = "VBF"
 
