@@ -102,7 +102,7 @@ class KerasTrainer(object):
                         SF = single_file_df['IsoMu_SF_3'] * single_file_df['MuID_SF_3'] * single_file_df['MuIso_SF_3']
                         mc_weight = SF * single_file_df['GEN_wgt'] * single_file_df['PU_wgt']
                         single_file_df['weight'] = file.weight * mc_weight
-                    elif "ucsd_inclusive" in self.framework.year:
+                    elif "ucsd" in self.framework.year:
                         mc_weight = single_file_df['weight']
                     else:
                         mc_weight = single_file_df['GEN_wgt'] * single_file_df['PU_wgt']
