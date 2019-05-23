@@ -57,6 +57,7 @@ c.add_file_to_category(ucsd_top_2018.name, ucsd_top_2018.path, ucsd_top_2018.xSe
 ##########################################################
 
 
+
 ###  ------   Raffaele's variables   ------ ###
 c.add_variable("hmmpt") 
 c.add_variable("hmmrap")
@@ -67,19 +68,15 @@ c.add_variable("m1ptOverMass")
 c.add_variable("m2ptOverMass")
 c.add_variable('m1eta')
 c.add_variable('m2eta')
-c.add_variable("njets")
-c.add_variable("zepen")
 c.add_variable("j1pt")
-c.add_variable("j2pt")
 c.add_variable("j1eta")
-c.add_variable("mjj")
-c.add_variable("detajj")
-c.add_variable("dphijj")
+# c.add_variable("nbjets")
 ###############################################
 
 c.add_spectator('hmass')
 c.add_spectator('weight')
-c.add_spectator("nbjets")
+c.add_spectator("njets")
+
 c.weigh_by_event(True)
 
 c.add_package("Keras")
