@@ -102,7 +102,7 @@ class KerasTrainer(object):
                         SF = single_file_df['IsoMu_SF_3'] * single_file_df['MuID_SF_3'] * single_file_df['MuIso_SF_3']
                         mc_weight = SF * single_file_df['GEN_wgt'] * single_file_df['PU_wgt']
                         single_file_df['weight'] = file.weight * mc_weight
-                    elif "inclusive_ucsd" in self.framework.year:
+                    elif "ucsd_inclusive" in self.framework.year:
                         mc_weight = single_file_df['weight']
                     else:
                         mc_weight = single_file_df['GEN_wgt'] * single_file_df['PU_wgt']
@@ -381,9 +381,20 @@ class KerasTrainer(object):
 
     def apply_cuts(self, df, year):
 
-        if "ucsd" in year:
+        if "ucsd_inclusive" in year:
             mass = df["hmass"]
             flag = (mass>110)&(mass<150)
+            return df.loc[flag]
+        if "ucsd_01jet" in year:
+            mass = df["hmass"]
+            njets = df["njets"]
+            flag = (mass>110)&(mass<150)&(njets<2)
+            return df.loc[flag]
+        if "ucsd_2jet_bveto" in year:
+            mass = df["hmass"]
+            njets = df["njets"]
+            nbjets = df["nbjets"]
+            flag = (mass>110)&(mass<150)&(njets>=2)&(nbjets==0)
             return df.loc[flag]
 
         muon1_pt    = df['muons.pt[0]']
@@ -399,34 +410,7 @@ class KerasTrainer(object):
                 (muon1_ID>0)&
                 (muon2_ID>0)&
                 (muon1_pt>26)&
-                (muon2_pt>20))
-
-        if "2016-noJets" in year:
-            flag =  ((muPair_mass>110)&
-                (muPair_mass<150)&
-                (muon1_ID>0)&
-                (muon2_ID>0)&
-                (muon1_pt>26)&
-                (muon2_pt>20)&
-                (nJets==0)) 
-
-        if "2016-1jet" in year:
-            flag =  ((muPair_mass>110)&
-                (muPair_mass<150)&
-                (muon1_ID>0)&
-                (muon2_ID>0)&
-                (muon1_pt>26)&
-                (muon2_pt>20)&
-                (nJets==1))   
-
-        if "2016-2orMoreJets" in year:
-            flag =  ((muPair_mass>110)&
-                (muPair_mass<150)&
-                (muon1_ID>0)&
-                (muon2_ID>0)&
-                (muon1_pt>26)&
-                (muon2_pt>20)&
-                (nJets>1))            
+                (muon2_pt>20))    
 
         elif year is "2017":
             flag =  ((muPair_mass>110)&
