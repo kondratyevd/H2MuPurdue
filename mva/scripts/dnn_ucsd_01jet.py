@@ -70,7 +70,7 @@ c.add_variable('m1eta')
 c.add_variable('m2eta')
 c.add_variable("j1pt")
 c.add_variable("j1eta")
-# c.add_variable("nbjets")
+c.add_variable("nbjets")
 ###############################################
 
 c.add_spectator('hmass')
