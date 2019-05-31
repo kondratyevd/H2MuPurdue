@@ -3,6 +3,7 @@ from keras.layers import Dense, Activation, Input, Dropout, Concatenate, Lambda,
 from keras.regularizers import l2
 from keras.optimizers import SGD
 import os, sys
+import tensorflow as tf
 sys.path.append( os.path.dirname( os.path.dirname( os.path.abspath(__file__) ) ) )
 # from locations import *
 
@@ -1224,11 +1225,11 @@ def GetListOfModels(trainer):
         output_dimensions = list(range(len(output.get_shape())))
 
         # scale preds so that the class probas of each sample sum to 1
-        output /= tf.reduce_sum(output, axis, True)
+        output /= tf.reduce_sum(output, -1, True)
         # manual computation of crossentropy
         _epsilon = _to_tensor(epsilon(), output.dtype.base_dtype)
         output = tf.clip_by_value(output, _epsilon, 1. - _epsilon)
-        return - tf.reduce_sum(target * tf.log(output), axis)
+        return - tf.reduce_sum(target * tf.log(output), -1)
 
 
     model_resweights = model_init('model_resweights', input_dim, 2048, 100, [categorical_crossentropy_resweights], 'adam')
