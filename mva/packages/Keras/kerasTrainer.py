@@ -181,6 +181,9 @@ class KerasTrainer(object):
 
             training_data = self.apply_training_cuts(self.df_train_scaled)
 
+            if 'resweights' in obj.name:
+                self.labels = ['hmerr']+self.labels
+
             history = obj.model.fit(            
                                     training_data[self.labels].values,
                                     training_data[self.truth_labels].values,

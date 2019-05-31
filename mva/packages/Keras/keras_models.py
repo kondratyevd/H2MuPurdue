@@ -1213,4 +1213,40 @@ def GetListOfModels(trainer):
 	list_of_models.append(model_50_D2_25_D2_kldiv_binary_wgtd_1)
 
 
+
+
+
+	def categorical_crossentropy_resweights(y_in, x_in):
+
+		target = y_in[:,1:1+n_categories] # truth: order of categories like in category_labels
+		output = x_in[:,1:1+n_categories] # prediction
+
+	    output_dimensions = list(range(len(output.get_shape())))
+
+	    # scale preds so that the class probas of each sample sum to 1
+	    output /= tf.reduce_sum(output, axis, True)
+	    # manual computation of crossentropy
+	    _epsilon = _to_tensor(epsilon(), output.dtype.base_dtype)
+	    output = tf.clip_by_value(output, _epsilon, 1. - _epsilon)
+	    return - tf.reduce_sum(target * tf.log(output), axis)
+
+
+	model_resweights = model_init('model_resweights', input_dim, 2048, 100, [categorical_crossentropy_resweights], 'adam')
+	x = Dense(50, name = model_resweights.name+'_layer_1', activation='relu')(model_resweights.inputs)
+	x = Dropout(0.2)(x)
+	x = Dense(25, name = model_resweights.name+'_layer_2', activation='relu')(x)
+	x = Dropout(0.2)(x)
+	out1 = Dense(n_categories , name = model_resweights.name+'_output',  activation='softmax')(x)
+	
+	lambdaLayer = Lambda(lambda x: 0*x, name='lambda')(model_resweights.inputs)
+	def slicer(x):
+	    return x[:,0:1]    
+	lambdaLayer = Lambda(slicer)(lambdaLayer)
+
+	model_resweights.outputs = Concatenate()([lambdaLayer, out1]) # order is important
+
+	list_of_models.append(model_resweights)
+
+
+
 	return list_of_models

@@ -33,6 +33,12 @@ case $1 in
 		echo 'Running option 2.2: DNN 2jet bveto'
 		python $FRAMEWORK_PATH/mva/scripts/dnn_ucsd_2jet_bveto.py --out_path $OUTPUT_DIR
 		;;
+
+	3)
+		echo 'Running option 3: DNN w/ resolution weights'
+		python $FRAMEWORK_PATH/mva/scripts/dnn_resweights.py --out_path $OUTPUT_DIR
+		;;
+
 	*)
 		echo 'Wrong option ' $1		
 		echo "Deleting output dir... (test run)"
