@@ -1221,7 +1221,8 @@ def GetListOfModels(trainer):
 
     def categorical_crossentropy_resweights(y_in, x_in):
 
-        target = y_in[:,1:1+n_categories] # truth: order of categories like in category_labels
+        target = y_in
+        # target = y_in[:,1:1+n_categories] # truth: order of categories like in category_labels
         output = x_in[:,1:1+n_categories] # prediction
 
         output_dimensions = list(range(len(output.get_shape())))
