@@ -183,6 +183,7 @@ class KerasTrainer(object):
 
             if 'resweights' in obj.name:
                 self.labels = ['hmerr']+self.labels
+                print self.labels
 
             history = obj.model.fit(            
                                     training_data[self.labels].values,
