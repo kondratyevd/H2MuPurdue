@@ -4,6 +4,7 @@ from keras.regularizers import l2
 from keras.optimizers import SGD
 import os, sys
 import tensorflow as tf
+from .common import epsilon
 sys.path.append( os.path.dirname( os.path.dirname( os.path.abspath(__file__) ) ) )
 # from locations import *
 
@@ -1227,7 +1228,7 @@ def GetListOfModels(trainer):
         # scale preds so that the class probas of each sample sum to 1
         output /= tf.reduce_sum(output, -1, True)
         # manual computation of crossentropy
-        _epsilon = _to_tensor(epsilon(), output.dtype.base_dtype)
+        _epsilon = tf.convert_to_tensor(epsilon(), output.dtype.base_dtype)
         output = tf.clip_by_value(output, _epsilon, 1. - _epsilon)
         return - tf.reduce_sum(target * tf.log(output), -1)
 
