@@ -1235,14 +1235,14 @@ def GetListOfModels(trainer):
         return - tf.reduce_sum(target * tf.log(output), -1)
 
 
-    model_50_D2_25_D2_25_D2 = model_init('model_50_D2_25_D2_25_D2', input_dim, 2048, 100, [categorical_crossentropy_resweights], 'adam')
-    x = Dense(50, name = model_50_D2_25_D2_25_D2.name+'_layer_1', activation='relu')(model_50_D2_25_D2_25_D2.inputs)
+    model_resweights = model_init('model_resweights', input_dim, 2048, 100, [categorical_crossentropy_resweights], 'adam')
+    x = Dense(50, name = model_resweights.name+'_layer_1', activation='relu')(model_resweights.inputs)
     x = Dropout(0.2)(x)
-    x = Dense(25, name = model_50_D2_25_D2_25_D2.name+'_layer_2', activation='relu')(x)
+    x = Dense(25, name = model_resweights.name+'_layer_2', activation='relu')(x)
     x = Dropout(0.2)(x)
-    x = Dense(25, name = model_50_D2_25_D2_25_D2.name+'_layer_3', activation='relu')(x)
+    x = Dense(25, name = model_resweights.name+'_layer_3', activation='relu')(x)
     x = Dropout(0.2)(x)
-    model_50_D2_25_D2_25_D2.outputs = Dense(output_dim+1, name = model_50_D2_25_D2_25_D2.name+'_output',  activation='softmax')(x)
+    model_resweights.outputs = Dense(output_dim+1, name = model_resweights.name+'_output',  activation='softmax')(x)
 
     # model_resweights = model_init('model_resweights', input_dim, 2048, 100, [categorical_crossentropy_resweights], 'adam')
     # x = Dense(50, name = model_resweights.name+'_layer_1', activation='relu')(model_resweights.inputs)
