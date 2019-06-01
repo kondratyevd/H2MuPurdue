@@ -1242,7 +1242,7 @@ def GetListOfModels(trainer):
     x = Dropout(0.2)(x)
     x = Dense(25, name = model_resweights.name+'_layer_3', activation='relu')(x)
     x = Dropout(0.2)(x)
-    model_resweights.outputs = Dense(output_dim+1, name = model_resweights.name+'_output',  activation='softmax')(x)
+    model_resweights.outputs = Dense(output_dim, name = model_resweights.name+'_output',  activation='softmax')(x)
 
     # model_resweights = model_init('model_resweights', input_dim, 2048, 100, [categorical_crossentropy_resweights], 'adam')
     # x = Dense(50, name = model_resweights.name+'_layer_1', activation='relu')(model_resweights.inputs)
