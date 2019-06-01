@@ -1221,9 +1221,9 @@ def GetListOfModels(trainer):
 
     def categorical_crossentropy_resweights(y_in, x_in):
 
-        target = y_in
-        # target = y_in[:,1:1+n_categories] # truth: order of categories like in category_labels
-        output = x_in[:,1:1+n_categories] # prediction
+        target = y_in[:,1:1+n_categories] # truth: order of categories like in category_labels
+        output = x_in
+        # output = x_in[:,1:1+n_categories] # prediction
 
         output_dimensions = list(range(len(output.get_shape())))
 
@@ -1235,19 +1235,28 @@ def GetListOfModels(trainer):
         return - tf.reduce_sum(target * tf.log(output), -1)
 
 
-    model_resweights = model_init('model_resweights', input_dim+1, 2048, 100, [categorical_crossentropy_resweights], 'adam')
-    x = Dense(50, name = model_resweights.name+'_layer_1', activation='relu')(model_resweights.inputs)
+    model_50_D2_25_D2_25_D2 = model_init('model_50_D2_25_D2_25_D2', input_dim, 2048, 100, [categorical_crossentropy_resweights], 'adam')
+    x = Dense(50, name = model_50_D2_25_D2_25_D2.name+'_layer_1', activation='relu')(model_50_D2_25_D2_25_D2.inputs)
     x = Dropout(0.2)(x)
-    x = Dense(25, name = model_resweights.name+'_layer_2', activation='relu')(x)
+    x = Dense(25, name = model_50_D2_25_D2_25_D2.name+'_layer_2', activation='relu')(x)
     x = Dropout(0.2)(x)
-    out1 = Dense(n_categories , name = model_resweights.name+'_output',  activation='softmax')(x)
-    
-    lambdaLayer = Lambda(lambda x: 0*x, name='lambda')(model_resweights.inputs)
-    def slicer(x):
-        return x[:,0:1]    
-    lambdaLayer = Lambda(slicer)(lambdaLayer)
+    x = Dense(25, name = model_50_D2_25_D2_25_D2.name+'_layer_3', activation='relu')(x)
+    x = Dropout(0.2)(x)
+    model_50_D2_25_D2_25_D2.outputs = Dense(output_dim+1, name = model_50_D2_25_D2_25_D2.name+'_output',  activation='softmax')(x)
 
-    model_resweights.outputs = Concatenate()([lambdaLayer, out1]) # order is important
+    # model_resweights = model_init('model_resweights', input_dim, 2048, 100, [categorical_crossentropy_resweights], 'adam')
+    # x = Dense(50, name = model_resweights.name+'_layer_1', activation='relu')(model_resweights.inputs)
+    # x = Dropout(0.2)(x)
+    # x = Dense(25, name = model_resweights.name+'_layer_2', activation='relu')(x)
+    # x = Dropout(0.2)(x)
+    # out1 = Dense(n_categories , name = model_resweights.name+'_output',  activation='softmax')(x)
+    
+    # lambdaLayer = Lambda(lambda x: 0*x, name='lambda')(model_resweights.inputs)
+    # def slicer(x):
+    #     return x[:,0:1]    
+    # lambdaLayer = Lambda(slicer)(lambdaLayer)
+
+    # model_resweights.outputs = Concatenate()([lambdaLayer, out1]) # order is important
 
     list_of_models.append(model_resweights)
 

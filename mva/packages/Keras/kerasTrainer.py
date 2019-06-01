@@ -182,7 +182,7 @@ class KerasTrainer(object):
             training_data = self.apply_training_cuts(self.df_train_scaled)
 
             if 'resweights' in obj.name:
-                self.labels = ['hmerr']+self.labels
+                self.truth_labels = ['hmerr']+self.truth_labels
                 # print self.labels
 
             history = obj.model.fit(            
@@ -202,14 +202,10 @@ class KerasTrainer(object):
     
             obj.model.save(self.package.dirs['modelDir']+obj.name+'_trained.h5')
 
-            if 'resweights' in obj.name:
-                train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=["hmerr"]+["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.df_train_scaled.index)
-                test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=["hmerr"]+["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.df_test_scaled.index)
-            else:
-                train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.df_train_scaled.index)
-                test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.df_test_scaled.index)
-                if self.framework.data_files:
-                    data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.data_scaled.index)
+            train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.df_train_scaled.index)
+            test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.df_test_scaled.index)
+            if self.framework.data_files:
+                data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.data_scaled.index)
 
             self.df_train_scaled = pandas.concat([self.df_train_scaled, train_prediction], axis=1)
             self.df_test_scaled = pandas.concat([self.df_test_scaled, test_prediction], axis=1)
