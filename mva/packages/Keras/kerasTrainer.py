@@ -182,10 +182,10 @@ class KerasTrainer(object):
             training_data = self.apply_training_cuts(self.df_train_scaled)
 
             if 'resweights' in obj.name:
-                training_data[['hmerr']] /= training_data[['hmerr']].max()
-                self.df_train_scaled[['hmerr']] /= self.df_train_scaled[['hmerr']].max()
-                self.df_test_scaled[['hmerr']]  /= self.df_test_scaled[['hmerr']].max() 
-                self.data_scaled[['hmerr']]     /= self.data_scaled[['hmerr']].max()    
+                training_data =  rescale_to_01(training_data , ['hmerr'])
+                self.df_train_scaled = rescale_to_01(self.df_train_scaled , ['hmerr'])
+                self.df_test_scaled = rescale_to_01( self.df_test_scaled , ['hmerr'])
+                self.data_scaled = rescale_to_01( self.data_scaled, ['hmerr'])
                 self.train_labels = ['hmerr']+self.truth_labels
                 # print self.labels
 
@@ -226,7 +226,9 @@ class KerasTrainer(object):
             self.plot_history(history.history, obj.name)
 
 
-
+    def rescale_to_01(df, columns):
+        df[columns] = (df[columns]-df[columns].min())/(df[columns].max()-df[columns].min())
+        return df
 
     def scale(self, train, test, data, labels):
         df_train = train.loc[:,labels]
