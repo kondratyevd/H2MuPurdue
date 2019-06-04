@@ -182,10 +182,10 @@ class KerasTrainer(object):
             training_data = self.apply_training_cuts(self.df_train_scaled)
 
             if 'resweights' in obj.name:
-                training_data =  rescale_to_01(training_data , ['hmerr'])
-                self.df_train_scaled = rescale_to_01(self.df_train_scaled , ['hmerr'])
-                self.df_test_scaled = rescale_to_01( self.df_test_scaled , ['hmerr'])
-                self.data_scaled = rescale_to_01( self.data_scaled, ['hmerr'])
+                training_data =  self.rescale_to_01(training_data , ['hmerr'])
+                self.df_train_scaled = self.rescale_to_01(self.df_train_scaled , ['hmerr'])
+                self.df_test_scaled = self.rescale_to_01( self.df_test_scaled , ['hmerr'])
+                self.data_scaled = self.rescale_to_01( self.data_scaled, ['hmerr'])
                 self.train_labels = ['hmerr']+self.truth_labels
                 # print self.labels
 
