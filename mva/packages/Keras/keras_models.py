@@ -1233,7 +1233,7 @@ def GetListOfModels(trainer):
         _epsilon = tf.convert_to_tensor(keras.backend.epsilon(), output.dtype.base_dtype)
         output = tf.clip_by_value(output, _epsilon, 1. - _epsilon)
 
-        return - tf.reduce_sum(K.dot(resweight,target) * tf.log(output), -1)
+        return - tf.reduce_sum(target * tf.log(output), -1)
 
 
     model_resweights = model_init('model_resweights', input_dim, 2048, 100, [categorical_crossentropy_resweights], 'adam')
