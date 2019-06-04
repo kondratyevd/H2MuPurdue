@@ -226,7 +226,7 @@ class KerasTrainer(object):
             self.plot_history(history.history, obj.name)
 
 
-    def rescale_to_01(df, columns):
+    def rescale_to_01(self, df, columns):
         df[columns] = (df[columns]-df[columns].min())/(df[columns].max()-df[columns].min())
         return df
 
