@@ -23,8 +23,10 @@ class model_init(object):
 
     def CompileModel(self, modelDir):
         self.model = Model(inputs=self.inputs, outputs=self.outputs)
-        self.model.compile(loss=self.loss,                                  # This may be transferred into input parameters in the future
-                      optimizer=self.optimizer, metrics=['accuracy', ])                 # if we need to optimize any of these parameters
+        # self.model.compile(loss=self.loss,                                  # This may be transferred into input parameters in the future
+        #               optimizer=self.optimizer, metrics=['accuracy', ])                 # if we need to optimize any of these parameters
+        self.model.compile(loss=self.loss,                                
+                      optimizer=self.optimizer, metrics=[significanceLossInvert(trainer.expectedS, trainer.expectedB)]) 
         self.model.save(modelDir+self.name+'_init.h5')
         self.model.summary()    
 
