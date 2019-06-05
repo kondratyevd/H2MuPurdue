@@ -1268,8 +1268,8 @@ def GetListOfModels(trainer):
             return (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
 
         return sigLossInvert
-# significanceLossInvert(trainer.expectedS, trainer.expectedB)
-    model_sigloss = model_init('model_sigloss', input_dim, 2048, 100, 'binary_crossentropy', 'adam')
+
+    model_sigloss = model_init('model_sigloss', input_dim, 2048, 100, [significanceLossInvert(trainer.expectedS, trainer.expectedB)], 'adam')
     x = Dense(50, name = model_sigloss.name+'_layer_1', activation='relu')(model_sigloss.inputs)
     x = Dropout(0.2)(x)
     x = Dense(25, name = model_sigloss.name+'_layer_2', activation='relu')(x)
