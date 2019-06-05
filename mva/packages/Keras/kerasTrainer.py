@@ -121,6 +121,12 @@ class KerasTrainer(object):
         self.labels = list(self.df.drop(['weight', 'weight_over_lumi']+self.spect_labels+self.category_labels, axis=1))
         self.df.reset_index(inplace=True, drop=True)
 
+        if not self.framework.multiclass:
+            self.expectedS = self.df[self.df['signal']>0,['weight']].sum()
+            self.expectedB = self.df[self.df['background']>0,['weight']].sum()
+            print "Expected signal = ", self.expectedS
+            print "Expected background = ", self.expectedB
+
         # print self.df["muPairs.mass_Roch[0]"]
         # self.df = self.apply_cuts(self.df, self.framework.year)
         # print self.df["muPairs.mass_Roch[0]"]

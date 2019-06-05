@@ -39,6 +39,11 @@ case $1 in
 		python $FRAMEWORK_PATH/mva/scripts/dnn_resweights.py --out_path $OUTPUT_DIR
 		;;
 
+	4)
+		echo 'Running option 4: binary DNN '
+		python $FRAMEWORK_PATH/mva/scripts/dnn_binary.py --out_path $OUTPUT_DIR
+		;;
+
 	*)
 		echo 'Wrong option ' $1		
 		echo "Deleting output dir... (test run)"
