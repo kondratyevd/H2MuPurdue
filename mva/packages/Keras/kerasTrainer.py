@@ -193,14 +193,14 @@ class KerasTrainer(object):
                     training_data[category] = training_data[category]*training_data['hmerr']
                 # print self.labels
 
-            # elif 'sigloss' in obj.name:
-            #     self.train_labels = 'signal'
+            elif 'sigloss' in obj.name:
+                self.train_labels = 'signal'
             else:
                 self.train_labels = self.truth_labels
 
             history = obj.model.fit(            
                                     training_data[self.labels].values,
-                                    training_data[self.train_labels].values,
+                                    training_data.loc[self.train_labels].values,
                                     # training_data[self.truth_labels].values,
                                     epochs=obj.epochs, 
                                     batch_size=obj.batchSize, 
