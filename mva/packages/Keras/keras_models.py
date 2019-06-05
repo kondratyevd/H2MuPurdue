@@ -27,7 +27,7 @@ class model_init(object):
         # self.model.compile(loss=self.loss,                                  # This may be transferred into input parameters in the future
         #               optimizer=self.optimizer, metrics=['accuracy', ])                 # if we need to optimize any of these parameters
         self.model.compile(loss=self.loss,                                  # This may be transferred into input parameters in the future
-                      optimizer=self.optimizer, metrics=self.additionalMetrics)                 # if we need to optimize any of these parameters
+                      optimizer=self.optimizer, metrics=["accuracy"]+self.additionalMetrics)                 # if we need to optimize any of these parameters
         self.model.save(modelDir+self.name+'_init.h5')
         self.model.summary()    
 
@@ -1278,7 +1278,7 @@ def GetListOfModels(trainer):
     x = Dropout(0.2)(x)
     x = Dense(25, name = model_sigloss.name+'_layer_3', activation='relu')(x)
     x = Dropout(0.2)(x)
-    model_sigloss.outputs = Dense(1, name = model_sigloss.name+'_output',  activation='softmax')(x)
+    model_sigloss.outputs = Dense(1, name = model_sigloss.name+'_output',  activation='sigmoid')(x)
 
     model_sigloss.additionalMetrics.append(significanceLossInvert(trainer.expectedS, trainer.expectedB))
 
