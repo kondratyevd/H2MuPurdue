@@ -194,7 +194,7 @@ class KerasTrainer(object):
                 # print self.labels
 
             elif 'sigloss' in obj.name:
-                self.train_labels = ['signal']
+                self.train_labels = 'signal'
             else:
                 self.train_labels = self.truth_labels
 
