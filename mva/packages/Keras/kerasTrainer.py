@@ -200,7 +200,7 @@ class KerasTrainer(object):
 
             history = obj.model.fit(            
                                     training_data[self.labels].values,
-                                    training_data.loc[self.train_labels].values,
+                                    training_data[self.train_labels].values,
                                     # training_data[self.truth_labels].values,
                                     epochs=obj.epochs, 
                                     batch_size=obj.batchSize, 
