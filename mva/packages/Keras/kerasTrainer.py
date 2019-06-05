@@ -216,10 +216,10 @@ class KerasTrainer(object):
     
             obj.model.save(self.package.dirs['modelDir']+obj.name+'_trained.h5')
 
-            train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.df_train_scaled.index)
-            test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.df_test_scaled.index)
+            train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_train_scaled.index)
+            test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_test_scaled.index)
             if self.framework.data_files:
-                data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.truth_labels], index=self.data_scaled.index)
+                data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.data_scaled.index)
 
             self.df_train_scaled = pandas.concat([self.df_train_scaled, train_prediction], axis=1)
             self.df_test_scaled = pandas.concat([self.df_test_scaled, test_prediction], axis=1)
@@ -327,7 +327,7 @@ class KerasTrainer(object):
                     VBF_prediction["Data"][0]   = row["pred_%s_%s"%(self.framework.vbf_label, method_name)] 
                 else:
                     sig_prediction["Data"][0]   = row["pred_%s_%s"%(self.framework.sig_label, method_name)]
-                    bkg_prediction["Data"][0]   = row["pred_%s_%s"%(self.framework.bkg_label, method_name)]
+                    # bkg_prediction["Data"][0]   = row["pred_%s_%s"%(self.framework.bkg_label, method_name)]
                 nJets["Data"][0]            = row["nJets"] 
                 mu1_eta["Data"][0]          = row["muons.eta[0]"]
                 mu2_eta["Data"][0]          = row["muons.eta[1]"]
@@ -358,7 +358,7 @@ class KerasTrainer(object):
                             VBF_prediction[category][0]   = row["pred_%s_%s"%(self.framework.vbf_label, method_name)] 
                         else:
                             sig_prediction[category][0]   = row["pred_%s_%s"%(self.framework.sig_label, method_name)]
-                            bkg_prediction[category][0]   = row["pred_%s_%s"%(self.framework.bkg_label, method_name)]  
+                            # bkg_prediction[category][0]   = row["pred_%s_%s"%(self.framework.bkg_label, method_name)]  
                         trees[category].Fill() 
 
         for category in category_list:
