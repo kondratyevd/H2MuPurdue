@@ -1251,25 +1251,38 @@ def GetListOfModels(trainer):
 
 
 
-    def significanceLossInvert(expectedSignal,expectedBkgd):
-        # code from https://github.com/aelwood/hepML
-        '''Define a loss function that calculates the significance based on fixed
-        expected signal and expected background yields for a given batch size'''
+    # def significanceLossInvert(expectedSignal,expectedBkgd):
+    #     # code from https://github.com/aelwood/hepML
+    #     '''Define a loss function that calculates the significance based on fixed
+    #     expected signal and expected background yields for a given batch size'''
 
-        def sigLossInvert(y_true,y_pred):
-            #Continuous version:
+    #     def sigLossInvert(y_true,y_pred):
+    #         #Continuous version:
+    #         expectedSignal = 100
+    #         expectedBkgd = 1000
+    #         signalWeight=expectedSignal/K.sum(y_true)
+    #         bkgdWeight=expectedBkgd/K.sum(1-y_true)
 
-            signalWeight=expectedSignal/K.sum(y_true)
-            bkgdWeight=expectedBkgd/K.sum(1-y_true)
+    #         s = signalWeight*K.sum(y_pred*y_true)
+    #         b = bkgdWeight*K.sum(y_pred*(1-y_true))
 
-            s = signalWeight*K.sum(y_pred*y_true)
-            b = bkgdWeight*K.sum(y_pred*(1-y_true))
+    #         return (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
 
-            return (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
+    #     return sigLossInvert
 
-        return sigLossInvert
+    def sigLossInvert(y_true,y_pred):
+        #Continuous version:
+        expectedSignal = 100
+        expectedBkgd = 1000
+        signalWeight=expectedSignal/K.sum(y_true)
+        bkgdWeight=expectedBkgd/K.sum(1-y_true)
 
-    model_sigloss = model_init('model_sigloss', input_dim, 2048, 100, [significanceLossInvert(trainer.expectedS, trainer.expectedB)], 'adam')
+        s = signalWeight*K.sum(y_pred*y_true)
+        b = bkgdWeight*K.sum(y_pred*(1-y_true))
+
+        return (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
+
+    model_sigloss = model_init('model_sigloss', input_dim, 2048, 100, [sigLossInvert], 'adam')
     x = Dense(50, name = model_sigloss.name+'_layer_1', activation='relu')(model_sigloss.inputs)
     x = Dropout(0.2)(x)
     x = Dense(25, name = model_sigloss.name+'_layer_2', activation='relu')(x)
