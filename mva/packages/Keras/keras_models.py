@@ -1261,24 +1261,24 @@ def GetListOfModels(trainer):
 
         def sigLossInvert(y_true,y_pred):
             #Continuous version:
-            signalWeight=expectedSignal/tf.reduce_sum(y_true[:, 0:1])
-            bkgdWeight=expectedBkgd/tf.reduce_sum(1-y_true[:, 0:1])
+            signalWeight=expectedSignal/tf.reduce_sum(y_true)
+            bkgdWeight=expectedBkgd/tf.reduce_sum(1-y_true)
 
-            s = signalWeight*tf.reduce_sum(y_pred[:, 0:1]*y_true[:, 0:1])
-            b = bkgdWeight*tf.reduce_sum(y_pred[:, 0:1]*(1-y_true[:, 0:1]))
+            s = signalWeight*tf.reduce_sum(y_pred*y_true)
+            b = bkgdWeight*tf.reduce_sum(y_pred*(1-y_true))
 
             return (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
 
         return sigLossInvert
 
-    model_sigloss = model_init('model_sigloss', input_dim, 2048, 100, [significanceLossInvert(trainer.expectedS, trainer.expectedB)], 'adam')
+    model_sigloss = model_init('model_sigloss', input_dim, 2048, 100, ['binary_crossentropy'], 'adam')
     x = Dense(50, name = model_sigloss.name+'_layer_1', activation='relu')(model_sigloss.inputs)
     x = Dropout(0.2)(x)
     x = Dense(25, name = model_sigloss.name+'_layer_2', activation='relu')(x)
     x = Dropout(0.2)(x)
     x = Dense(25, name = model_sigloss.name+'_layer_3', activation='relu')(x)
     x = Dropout(0.2)(x)
-    model_sigloss.outputs = Dense(output_dim, name = model_sigloss.name+'_output',  activation='softmax')(x)
+    model_sigloss.outputs = Dense(1, name = model_sigloss.name+'_output',  activation='softmax')(x)
 
     model_sigloss.additionalMetrics.append(significanceLossInvert(trainer.expectedS, trainer.expectedB))
 
