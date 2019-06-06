@@ -1267,18 +1267,17 @@ def GetListOfModels(trainer):
             b = bkgdWeight*K.sum(y_pred*(1-y_true))
 
             result = (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
-            result_ = tf.convert_to_tensor(result[0])
-            return result_
+            return tf.convert_to_tensor(result[0])
 
         return sigLossInvert
 
-    model_sigloss = model_init('model_sigloss', input_dim, 4096, 30, [significanceLossInvert(trainer.expectedS, trainer.expectedB)], 'adam')
+    model_sigloss = model_init('model_sigloss', input_dim, 4096, 100, [significanceLossInvert(trainer.expectedS, trainer.expectedB)], 'adam')
     x = Dense(50, name = model_sigloss.name+'_layer_1', activation='relu')(model_sigloss.inputs)
     x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss.name+'_layer_2', activation='relu')(x)
-    # x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss.name+'_layer_3', activation='relu')(x)
-    # x = Dropout(0.2)(x)
+    x = Dense(25, name = model_sigloss.name+'_layer_2', activation='relu')(x)
+    x = Dropout(0.2)(x)
+    x = Dense(25, name = model_sigloss.name+'_layer_3', activation='relu')(x)
+    x = Dropout(0.2)(x)
     model_sigloss.outputs = Dense(1, name = model_sigloss.name+'_output',  activation='sigmoid')(x)
 
     list_of_models.append(model_sigloss)
