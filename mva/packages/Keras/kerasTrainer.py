@@ -216,10 +216,16 @@ class KerasTrainer(object):
     
             obj.model.save(self.package.dirs['modelDir']+obj.name+'_trained.h5')
 
-            train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_train_scaled.index)
-            test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_test_scaled.index)
-            if self.framework.data_files:
-                data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.data_scaled.index)
+            if "sigloss" in obj.name:
+                train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=['pred_signal'], index=self.df_train_scaled.index)
+                test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=['pred_signal'], index=self.df_test_scaled.index)
+                if self.framework.data_files:
+                    data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=['pred_signal'], index=self.data_scaled.index)
+            else:
+                train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_train_scaled.index)
+                test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_test_scaled.index)
+                if self.framework.data_files:
+                    data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.data_scaled.index)
 
             self.df_train_scaled = pandas.concat([self.df_train_scaled, train_prediction], axis=1)
             self.df_test_scaled = pandas.concat([self.df_test_scaled, test_prediction], axis=1)
