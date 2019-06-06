@@ -199,7 +199,7 @@ class KerasTrainer(object):
                 self.train_labels = self.truth_labels
 
             history = obj.model.fit(            
-                                    training_data[self.labels].values,
+                                    numpy.array(training_data[self.labels].values),
                                     numpy.array(training_data[self.train_labels].values),
                                     # training_data[self.truth_labels].values,
                                     epochs=obj.epochs, 
