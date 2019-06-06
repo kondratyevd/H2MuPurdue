@@ -1260,11 +1260,11 @@ def GetListOfModels(trainer):
 
         def sigLossInvert(y_true,y_pred):
             #Continuous version:
-            signalWeight=expectedSignal/tf.reduce_sum(y_true)
-            bkgdWeight=expectedBkgd/tf.reduce_sum(1-y_true)
+            signalWeight=expectedSignal/K.sum(y_true)
+            bkgdWeight=expectedBkgd/K.sum(1-y_true)
 
-            s = signalWeight*tf.reduce_sum(y_pred*y_true)
-            b = bkgdWeight*tf.reduce_sum(y_pred*(1-y_true))
+            s = signalWeight*K.sum(y_pred*y_true)
+            b = bkgdWeight*K.sum(y_pred*(1-y_true))
 
             return (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
 
