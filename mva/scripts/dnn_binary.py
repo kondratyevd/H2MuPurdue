@@ -78,7 +78,8 @@ c.add_spectator('weight')
 c.weigh_by_event(True)
 
 c.add_package("Keras")
-c.add_method("model_sigloss") # Dropout 0.2
+# c.add_method("model_sigloss") # Dropout 0.2
+c.add_method("model_sigloss_asimov") # Dropout 0.2
 
 c.train_methods()
 
