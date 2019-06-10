@@ -44,7 +44,7 @@ case $1 in
 		python $FRAMEWORK_PATH/mva/scripts/dnn_binary.py --out_path $OUTPUT_DIR
 		;;
 
-	4)
+	5)
 		echo 'Running option 5: binary DNN w/ asimov significance'
 		python $FRAMEWORK_PATH/mva/scripts/dnn_binary_asimov.py --out_path $OUTPUT_DIR
 		;;
