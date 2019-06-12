@@ -1284,13 +1284,46 @@ def GetListOfModels(trainer):
 
 
 
-
-    def asimovSignificanceLossInvert(expectedSignal,expectedBkgd,systematic):
+    def asimovSignificanceLossInvert(expectedSignal,expectedBkgd,ematic):
         '''Define a loss function that calculates the significance based on fixed
         expected signal and expected background yields for a given batch size'''
 
 
         def asimovSigLossInvert(y_true,y_pred):
+            #Continuous version:
+
+            signalWeight=expectedSignal/K.sum(y_true)
+            bkgdWeight=expectedBkgd/K.sum(1-y_true)
+
+            s = signalWeight*K.sum(y_pred*y_true)
+            b = bkgdWeight*K.sum(y_pred*(1-y_true))
+
+            log1 = (s+b)/b+K.epsilon()
+
+            result = 1./(2*((s+b)*K.log(log1[0])-s)) #Add the epsilon to avoid dividing by 0
+            return tf.convert_to_tensor(result[0])
+
+        return asimovSigLossInvert
+
+    model_sigloss_asimov = model_init('model_sigloss_asimov', input_dim, 4096, 30, [asimovSignificanceLossSystInvert(trainer.expectedS, trainer.expectedB, 0)], 'adam')
+    x = Dense(50, name = model_sigloss_asimov.name+'_layer_1', activation='relu')(model_sigloss_asimov.inputs)
+    x = Dropout(0.2)(x)
+    # x = Dense(25, name = model_sigloss_asimov.name+'_layer_2', activation='relu')(x)
+    # x = Dropout(0.2)(x)
+    # x = Dense(25, name = model_sigloss_asimov.name+'_layer_3', activation='relu')(x)
+    # x = Dropout(0.2)(x)
+    model_sigloss_asimov.outputs = Dense(1, name = model_sigloss_asimov.name+'_output',  activation='sigmoid')(x)
+
+    list_of_models.append(model_sigloss_asimov)
+
+
+
+    def asimovSignificanceLossSystInvert(expectedSignal,expectedBkgd,systematic):
+        '''Define a loss function that calculates the significance based on fixed
+        expected signal and expected background yields for a given batch size'''
+
+
+        def asimovSigLossSystInvert(y_true,y_pred):
             #Continuous version:
 
             signalWeight=expectedSignal/K.sum(y_true)
@@ -1306,18 +1339,18 @@ def GetListOfModels(trainer):
             result = 1./(2*((s+b)*K.log(log1[0])-b*b*K.log(log2[0])/(sigB*sigB+K.epsilon()))) #Add the epsilon to avoid dividing by 0
             return tf.convert_to_tensor(result[0])
 
-        return asimovSigLossInvert
+        return asimovSigLossSystInvert
 
-    model_sigloss_asimov = model_init('model_sigloss_asimov', input_dim, 4096, 30, [asimovSignificanceLossInvert(trainer.expectedS, trainer.expectedB, 0)], 'adam')
-    x = Dense(50, name = model_sigloss_asimov.name+'_layer_1', activation='relu')(model_sigloss_asimov.inputs)
+    model_sigloss_asimov_syst = model_init('model_sigloss_asimov_syst', input_dim, 4096, 30, [asimovSignificanceLossSystInvert(trainer.expectedS, trainer.expectedB, 0)], 'adam')
+    x = Dense(50, name = model_sigloss_asimov_syst.name+'_layer_1', activation='relu')(model_sigloss_asimov_syst.inputs)
     x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss_asimov.name+'_layer_2', activation='relu')(x)
+    # x = Dense(25, name = model_sigloss_asimov_syst.name+'_layer_2', activation='relu')(x)
     # x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss_asimov.name+'_layer_3', activation='relu')(x)
+    # x = Dense(25, name = model_sigloss_asimov_syst.name+'_layer_3', activation='relu')(x)
     # x = Dropout(0.2)(x)
-    model_sigloss_asimov.outputs = Dense(1, name = model_sigloss_asimov.name+'_output',  activation='sigmoid')(x)
+    model_sigloss_asimov_syst.outputs = Dense(1, name = model_sigloss_asimov_syst.name+'_output',  activation='sigmoid')(x)
 
-    list_of_models.append(model_sigloss_asimov)
+    list_of_models.append(model_sigloss_asimov_syst)
 
 
     return list_of_models
