@@ -1300,9 +1300,10 @@ def GetListOfModels(trainer):
             b = bkgdWeight*K.sum(y_pred*(1-y_true))
             sigB=systematic*b
 
-            log1 = (s+b)*(b+sigB*sigB)
-            result = 2*((s+b)*K.log(log1[0]))
-            # result = 1./(2*((s+b)*K.log((s+b)*(b+sigB*sigB)/(b*b+(s+b)*sigB*sigB+K.epsilon())+K.epsilon())-b*b*K.log(1+sigB*sigB*s/(b*(b+sigB*sigB)+K.epsilon()))/(sigB*sigB+K.epsilon()))) #Add the epsilon to avoid dividing by 0
+            log1 = (s+b)*(b+sigB*sigB)/(b*b+(s+b)*sigB*sigB+K.epsilon())+K.epsilon()
+            log2 = 1+sigB*sigB*s/(b*(b+sigB*sigB)+K.epsilon()
+
+            result = 1./(2*((s+b)*K.log(log1[0])-b*b*K.log(log2[0]))/(sigB*sigB+K.epsilon()))) #Add the epsilon to avoid dividing by 0
             return tf.convert_to_tensor(result[0])
 
         return asimovSigLossInvert
