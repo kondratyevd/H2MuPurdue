@@ -1306,13 +1306,13 @@ def GetListOfModels(trainer):
         return asimovSigLossInvert
 
     model_sigloss_asimov = model_init('model_sigloss_asimov', input_dim, 4096, 30, [asimovSignificanceLossInvert(trainer.expectedS, trainer.expectedB, 0)], 'adam')
-    x = Dense(50, name = model_sigloss_asimov.name+'_layer_1', activation='relu')(model_sigloss_asimov.inputs)
+    x = Dense(50, name = model_sigloss_asimov.name+'_layer_1', activation='relu', kernel_regularizer=l2(0.003))(model_sigloss_asimov.inputs)
     x = Dropout(0.2)(x)
     # x = Dense(25, name = model_sigloss_asimov.name+'_layer_2', activation='relu')(x)
     # x = Dropout(0.2)(x)
     # x = Dense(25, name = model_sigloss_asimov.name+'_layer_3', activation='relu')(x)
     # x = Dropout(0.2)(x)
-    model_sigloss_asimov.outputs = Dense(1, name = model_sigloss_asimov.name+'_output',  activation='sigmoid')(x)
+    model_sigloss_asimov.outputs = Dense(1, name = model_sigloss_asimov.name+'_output',  activation='sigmoid', kernel_regularizer=l2(0.003))(x)
 
     list_of_models.append(model_sigloss_asimov)
 
