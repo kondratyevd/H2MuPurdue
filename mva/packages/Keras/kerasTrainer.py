@@ -27,6 +27,8 @@ class KerasTrainer(object):
         self.spect_labels = []
         self.mass_bin_labels = []
         self.category_labels = self.framework.signal_categories+self.framework.bkg_categories
+        self.expected_counts = []
+        self.signal_mask = []
         self.mass_histograms = []
         self.bkg_histogram = []
         self.mass_histograms_th1d = {}
@@ -121,7 +123,15 @@ class KerasTrainer(object):
         self.labels = list(self.df.drop(['weight', 'weight_over_lumi']+self.spect_labels+self.category_labels, axis=1))
         self.df.reset_index(inplace=True, drop=True)
 
-        if not self.framework.multiclass:
+        if self.framework.multiclass:
+            for lbl in self.category_labels:
+                self.expected_counts.append(self.df.loc[self.df[lbl]>0,['weight']].sum())
+                print "Expected %s = %f"%(lbl, self.expected_counts[lbl])
+                if lbl in self.framework.signal_categories:
+                    self.signal_mask.append(1)
+                else:
+                    self.signal_mask.append(0)
+        else:
             self.expectedS = self.df.loc[self.df['signal']>0,['weight']].sum()
             self.expectedB = self.df.loc[self.df['background']>0,['weight']].sum()
             print "Expected signal = ", self.expectedS

@@ -49,6 +49,11 @@ case $1 in
 		python $FRAMEWORK_PATH/mva/scripts/dnn_binary_asimov.py --out_path $OUTPUT_DIR
 		;;
 
+	6)
+		echo 'Running option 6: 4-class DNN w/ sigloss'
+		python $FRAMEWORK_PATH/mva/scripts/dnn_sigloss_multi.py --out_path $OUTPUT_DIR
+		;;
+
 	*)
 		echo 'Wrong option ' $1		
 		echo "Deleting output dir... (test run)"
