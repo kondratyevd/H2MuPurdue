@@ -126,7 +126,7 @@ class KerasTrainer(object):
         if self.framework.multiclass:
             for lbl in self.category_labels:
                 self.expected_counts.append(self.df.loc[self.df[lbl]>0,['weight']].sum())
-                print "Expected %s = %f"%(lbl, self.expected_counts[lbl])
+                print "Expected %s = %f"%(lbl, self.df.loc[self.df[lbl]>0,['weight']].sum())
                 if lbl in self.framework.signal_categories:
                     self.signal_mask.append(1)
                 else:
