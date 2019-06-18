@@ -175,14 +175,6 @@ class KerasTrainer(object):
                     raise
 
 
-            obj.CompileModel(self.package.dirs['modelDir'])
-            # early_stopping = EarlyStopping(monitor='val_loss', patience=10)
-            # tensorboard = TensorBoard(log_dir=self.package.dirs['logDir']+obj.name)
-            # model_checkpoint = ModelCheckpoint(self.package.dirs['modelDir']+obj.name+'_trained_lwstValLoss.h5', monitor='val_loss', 
-   #                                       verbose=0, save_best_only=True, 
-   #                                       save_weights_only=False, mode='auto', 
-   #                                       period=1)
-
             training_data = self.apply_training_cuts(self.df_train_scaled)
 
             if self.framework.multiclass:
@@ -199,7 +191,6 @@ class KerasTrainer(object):
                 print "Expected signal = ", self.expectedS
                 print "Expected background = ", self.expectedB
 
-
             if 'resweights' in obj.name:
                 self.train_labels = self.truth_labels
                 for category in self.category_labels:
@@ -210,6 +201,15 @@ class KerasTrainer(object):
                 self.train_labels = 'signal'
             else:
                 self.train_labels = self.truth_labels
+
+            obj.CompileModel(self.package.dirs['modelDir'])
+            # early_stopping = EarlyStopping(monitor='val_loss', patience=10)
+            # tensorboard = TensorBoard(log_dir=self.package.dirs['logDir']+obj.name)
+            # model_checkpoint = ModelCheckpoint(self.package.dirs['modelDir']+obj.name+'_trained_lwstValLoss.h5', monitor='val_loss', 
+   #                                       verbose=0, save_best_only=True, 
+   #                                       save_weights_only=False, mode='auto', 
+   #                                       period=1)
+
 
             history = obj.model.fit(            
                                     training_data[self.labels].values,
