@@ -28,6 +28,8 @@ class KerasTrainer(object):
         self.mass_bin_labels = []
         self.category_labels = self.framework.signal_categories+self.framework.bkg_categories
         self.expected_counts = []
+        self.expectedS = 0
+        self.expectedB = 0
         self.signal_mask = []
         self.mass_histograms = []
         self.bkg_histogram = []
