@@ -204,7 +204,7 @@ class KerasTrainer(object):
                     training_data[category] = training_data[category]*training_data['hmerr']
                 # print self.labels
 
-            elif 'sigloss' in obj.name:
+            elif ('sigloss' in obj.name) and (not self.framework.multiclass):
                 self.train_labels = 'signal'
             else:
                 self.train_labels = self.truth_labels
@@ -227,7 +227,7 @@ class KerasTrainer(object):
     
             obj.model.save(self.package.dirs['modelDir']+obj.name+'_trained.h5')
 
-            if "sigloss" in obj.name:
+            if ("sigloss" in obj.name) and (not self.framework.multiclass):
                 train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.df_train_scaled.index)
                 test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.df_test_scaled.index)
                 if self.framework.data_files:
