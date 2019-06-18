@@ -201,7 +201,7 @@ class KerasTrainer(object):
                 self.train_labels = 'signal'
             else:
                 self.train_labels = self.truth_labels
-
+            print "Training labels: ", self.train_labels
             obj.CompileModel(self.package.dirs['modelDir'])
             # early_stopping = EarlyStopping(monitor='val_loss', patience=10)
             # tensorboard = TensorBoard(log_dir=self.package.dirs['logDir']+obj.name)
