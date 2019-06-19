@@ -30,7 +30,7 @@ class KerasTrainer(object):
         self.expected_counts = [1,1,1,1]
         self.expectedS = 1
         self.expectedB = 1
-        self.signal_mask = []
+        self.signal_mask = [0,0,0,0]
         self.mass_histograms = []
         self.bkg_histogram = []
         self.mass_histograms_th1d = {}
@@ -201,6 +201,7 @@ class KerasTrainer(object):
 
             if self.framework.multiclass:
                 self.expected_counts = []
+                self.signal_mask = []
                 for lbl in self.category_labels:
                     self.expected_counts.append(training_data.loc[training_data[lbl]>0,['weight']].sum())
                     print "Expected %s = %f"%(lbl, training_data.loc[training_data[lbl]>0,['weight']].sum())
