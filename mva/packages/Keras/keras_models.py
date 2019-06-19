@@ -1390,4 +1390,4 @@ def GetListOfModels(trainer):
     # list_of_models.append(model_sigloss_asimov_syst)
 
 
-    # return list_of_models
+    return list_of_models
