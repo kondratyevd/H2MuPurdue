@@ -220,7 +220,8 @@ class KerasTrainer(object):
                 for category in self.category_labels:
                     training_data[category] = training_data[category]*training_data['hmerr']
                 # print self.labels
-
+            elif 'multi' in obj.name:
+                self.train_labels = self.truth_labels                
             elif 'sigloss' in obj.name:
                 self.train_labels = 'signal'
             else:
