@@ -1306,13 +1306,13 @@ def GetListOfModels(trainer):
         return sigLossMultiInvert
 
     model_sigloss_multi = model_init('model_sigloss_multi', input_dim, 4096, 10, [significanceLossMultiInvert(trainer.expected_counts, trainer.signal_mask)], 'adam')
-    x = Dense(50, name = model_sigloss_multi.name+'_layer_1', activation='relu', kernel_regularizer=l2(0.003))(model_sigloss_multi.inputs)
+    x = Dense(50, name = model_sigloss_multi.name+'_layer_1', activation='relu')(model_sigloss_multi.inputs)
     x = Dropout(0.2)(x)
     # x = Dense(25, name = model_sigloss_multi.name+'_layer_2', activation='relu')(x)
     # x = Dropout(0.2)(x)
     # x = Dense(25, name = model_sigloss_multi.name+'_layer_3', activation='relu')(x)
     # x = Dropout(0.2)(x)
-    model_sigloss_multi.outputs = Dense(1, name = model_sigloss_multi.name+'_output',  activation='sigmoid', kernel_regularizer=l2(0.003))(x)
+    model_sigloss_multi.outputs = Dense(1, name = model_sigloss_multi.name+'_output',  activation='sigmoid')(x)
 
     list_of_models.append(model_sigloss_multi)
 
