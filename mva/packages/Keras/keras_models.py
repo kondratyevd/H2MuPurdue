@@ -1292,7 +1292,7 @@ def GetListOfModels(trainer):
         def sigLossMultiInvert(y_true,y_pred):
             s = 0
             b = 0
-            test = K.sum(y_true[:, 0])
+            test = expected_counts[0]/K.sum(y_true[:, 0])*K.sum(y_pred*y_true[:, 0])
             # for i in range(len(expected_counts)):
             #     if signal_mask[i]:      #signal
             #         s = s + expected_counts[i]/K.sum(y_true[:, i])*K.sum(y_pred*y_true[:, i])
@@ -1302,7 +1302,7 @@ def GetListOfModels(trainer):
 
             # result = (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
             # return tf.convert_to_tensor(result[0])
-            return test
+            return tf.convert_to_tensor(test[0])
 
         return sigLossMultiInvert
 
