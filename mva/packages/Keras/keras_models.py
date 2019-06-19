@@ -1285,109 +1285,109 @@ def GetListOfModels(trainer):
 
 
 
-    def significanceLossMultiInvert(expected_counts,signal_mask):
-        '''Define a loss function that calculates the significance based on fixed
-        expected signal and expected background yields for a given batch size'''
+    # def significanceLossMultiInvert(expected_counts,signal_mask):
+    #     '''Define a loss function that calculates the significance based on fixed
+    #     expected signal and expected background yields for a given batch size'''
 
-        def sigLossMultiInvert(y_true,y_pred):
-            s = 0
-            b = 0
+    #     def sigLossMultiInvert(y_true,y_pred):
+    #         s = 0
+    #         b = 0
 
-            for i in range(len(expected_counts)):
-                if signal_mask[i]:      #signal
-                    s = s + expected_counts[i]/K.sum(y_true[:, i])*K.sum(y_pred*y_true[:, i])
-                else:                   # background
-                    b = b + expected_counts[i]/K.sum(y_true[:, i])*K.sum(y_pred*y_true[:, i])
+    #         for i in range(len(expected_counts)):
+    #             if signal_mask[i]:      #signal
+    #                 s = s + expected_counts[i]/K.sum(y_true[:, i])*K.sum(y_pred*y_true[:, i])
+    #             else:                   # background
+    #                 b = b + expected_counts[i]/K.sum(y_true[:, i])*K.sum(y_pred*y_true[:, i])
 
 
-            result = (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
-            return tf.convert_to_tensor(result[0])
+    #         result = (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
+    #         return tf.convert_to_tensor(result[0])
 
-        return sigLossMultiInvert
+    #     return sigLossMultiInvert
 
-    model_sigloss_multi = model_init('model_sigloss_multi', input_dim, 4096, 10, [significanceLossMultiInvert(trainer.expected_counts, trainer.signal_mask)], 'adam')
-    x = Dense(50, name = model_sigloss_multi.name+'_layer_1', activation='relu', kernel_regularizer=l2(0.003))(model_sigloss_multi.inputs)
-    x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss_multi.name+'_layer_2', activation='relu')(x)
+    # model_sigloss_multi = model_init('model_sigloss_multi', input_dim, 4096, 10, [significanceLossMultiInvert(trainer.expected_counts, trainer.signal_mask)], 'adam')
+    # x = Dense(50, name = model_sigloss_multi.name+'_layer_1', activation='relu', kernel_regularizer=l2(0.003))(model_sigloss_multi.inputs)
     # x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss_multi.name+'_layer_3', activation='relu')(x)
+    # # x = Dense(25, name = model_sigloss_multi.name+'_layer_2', activation='relu')(x)
+    # # x = Dropout(0.2)(x)
+    # # x = Dense(25, name = model_sigloss_multi.name+'_layer_3', activation='relu')(x)
+    # # x = Dropout(0.2)(x)
+    # model_sigloss_multi.outputs = Dense(1, name = model_sigloss_multi.name+'_output',  activation='sigmoid', kernel_regularizer=l2(0.003))(x)
+
+    # list_of_models.append(model_sigloss_multi)
+
+
+
+
+
+
+    # def asimovSignificanceLossInvert(expectedSignal,expectedBkgd,ematic):
+    #     '''Define a loss function that calculates the significance based on fixed
+    #     expected signal and expected background yields for a given batch size'''
+
+
+    #     def asimovSigLossInvert(y_true,y_pred):
+    #         #Continuous version:
+
+    #         signalWeight=expectedSignal/K.sum(y_true)
+    #         bkgdWeight=expectedBkgd/K.sum(1-y_true)
+
+    #         s = signalWeight*K.sum(y_pred*y_true)
+    #         b = bkgdWeight*K.sum(y_pred*(1-y_true))
+
+    #         log1 = (s+b)/b+K.epsilon()
+
+    #         result = 1./(2*((s+b)*K.log(log1[0])-s)) #Add the epsilon to avoid dividing by 0
+    #         return tf.convert_to_tensor(result[0])
+
+    #     return asimovSigLossInvert
+
+    # model_sigloss_asimov = model_init('model_sigloss_asimov', input_dim, 4096, 30, [asimovSignificanceLossInvert(trainer.expectedS, trainer.expectedB, 0)], 'adam')
+    # x = Dense(50, name = model_sigloss_asimov.name+'_layer_1', activation='relu', kernel_regularizer=l2(0.0009))(model_sigloss_asimov.inputs)
     # x = Dropout(0.2)(x)
-    model_sigloss_multi.outputs = Dense(1, name = model_sigloss_multi.name+'_output',  activation='sigmoid', kernel_regularizer=l2(0.003))(x)
+    # # x = Dense(25, name = model_sigloss_asimov.name+'_layer_2', activation='relu')(x)
+    # # x = Dropout(0.2)(x)
+    # # x = Dense(25, name = model_sigloss_asimov.name+'_layer_3', activation='relu')(x)
+    # # x = Dropout(0.2)(x)
+    # model_sigloss_asimov.outputs = Dense(1, name = model_sigloss_asimov.name+'_output',  activation='sigmoid', kernel_regularizer=l2(0.0009))(x)
 
-    list_of_models.append(model_sigloss_multi)
-
-
-
-
-
-
-    def asimovSignificanceLossInvert(expectedSignal,expectedBkgd,ematic):
-        '''Define a loss function that calculates the significance based on fixed
-        expected signal and expected background yields for a given batch size'''
+    # list_of_models.append(model_sigloss_asimov)
 
 
-        def asimovSigLossInvert(y_true,y_pred):
-            #Continuous version:
 
-            signalWeight=expectedSignal/K.sum(y_true)
-            bkgdWeight=expectedBkgd/K.sum(1-y_true)
+    # def asimovSignificanceLossSystInvert(expectedSignal,expectedBkgd,systematic):
+    #     '''Define a loss function that calculates the significance based on fixed
+    #     expected signal and expected background yields for a given batch size'''
 
-            s = signalWeight*K.sum(y_pred*y_true)
-            b = bkgdWeight*K.sum(y_pred*(1-y_true))
 
-            log1 = (s+b)/b+K.epsilon()
+    #     def asimovSigLossSystInvert(y_true,y_pred):
+    #         #Continuous version:
 
-            result = 1./(2*((s+b)*K.log(log1[0])-s)) #Add the epsilon to avoid dividing by 0
-            return tf.convert_to_tensor(result[0])
+    #         signalWeight=expectedSignal/K.sum(y_true)
+    #         bkgdWeight=expectedBkgd/K.sum(1-y_true)
 
-        return asimovSigLossInvert
+    #         s = signalWeight*K.sum(y_pred*y_true)
+    #         b = bkgdWeight*K.sum(y_pred*(1-y_true))
+    #         sigB=systematic*b
 
-    model_sigloss_asimov = model_init('model_sigloss_asimov', input_dim, 4096, 30, [asimovSignificanceLossInvert(trainer.expectedS, trainer.expectedB, 0)], 'adam')
-    x = Dense(50, name = model_sigloss_asimov.name+'_layer_1', activation='relu', kernel_regularizer=l2(0.0009))(model_sigloss_asimov.inputs)
-    x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss_asimov.name+'_layer_2', activation='relu')(x)
+    #         log1 = (s+b)*(b+sigB*sigB)/(b*b+(s+b)*sigB*sigB+K.epsilon())+K.epsilon()
+    #         log2 = 1+sigB*sigB*s/(b*(b+sigB*sigB)+K.epsilon())
+
+    #         result = 1./(2*((s+b)*K.log(log1[0])-b*b*K.log(log2[0])/(sigB*sigB+K.epsilon()))) #Add the epsilon to avoid dividing by 0
+    #         return tf.convert_to_tensor(result[0])
+
+    #     return asimovSigLossSystInvert
+
+    # model_sigloss_asimov_syst = model_init('model_sigloss_asimov_syst', input_dim, 4096, 30, [asimovSignificanceLossSystInvert(trainer.expectedS, trainer.expectedB, 0)], 'adam')
+    # x = Dense(50, name = model_sigloss_asimov_syst.name+'_layer_1', activation='relu')(model_sigloss_asimov_syst.inputs)
     # x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss_asimov.name+'_layer_3', activation='relu')(x)
-    # x = Dropout(0.2)(x)
-    model_sigloss_asimov.outputs = Dense(1, name = model_sigloss_asimov.name+'_output',  activation='sigmoid', kernel_regularizer=l2(0.0009))(x)
+    # # x = Dense(25, name = model_sigloss_asimov_syst.name+'_layer_2', activation='relu')(x)
+    # # x = Dropout(0.2)(x)
+    # # x = Dense(25, name = model_sigloss_asimov_syst.name+'_layer_3', activation='relu')(x)
+    # # x = Dropout(0.2)(x)
+    # model_sigloss_asimov_syst.outputs = Dense(1, name = model_sigloss_asimov_syst.name+'_output',  activation='sigmoid')(x)
 
-    list_of_models.append(model_sigloss_asimov)
-
-
-
-    def asimovSignificanceLossSystInvert(expectedSignal,expectedBkgd,systematic):
-        '''Define a loss function that calculates the significance based on fixed
-        expected signal and expected background yields for a given batch size'''
+    # list_of_models.append(model_sigloss_asimov_syst)
 
 
-        def asimovSigLossSystInvert(y_true,y_pred):
-            #Continuous version:
-
-            signalWeight=expectedSignal/K.sum(y_true)
-            bkgdWeight=expectedBkgd/K.sum(1-y_true)
-
-            s = signalWeight*K.sum(y_pred*y_true)
-            b = bkgdWeight*K.sum(y_pred*(1-y_true))
-            sigB=systematic*b
-
-            log1 = (s+b)*(b+sigB*sigB)/(b*b+(s+b)*sigB*sigB+K.epsilon())+K.epsilon()
-            log2 = 1+sigB*sigB*s/(b*(b+sigB*sigB)+K.epsilon())
-
-            result = 1./(2*((s+b)*K.log(log1[0])-b*b*K.log(log2[0])/(sigB*sigB+K.epsilon()))) #Add the epsilon to avoid dividing by 0
-            return tf.convert_to_tensor(result[0])
-
-        return asimovSigLossSystInvert
-
-    model_sigloss_asimov_syst = model_init('model_sigloss_asimov_syst', input_dim, 4096, 30, [asimovSignificanceLossSystInvert(trainer.expectedS, trainer.expectedB, 0)], 'adam')
-    x = Dense(50, name = model_sigloss_asimov_syst.name+'_layer_1', activation='relu')(model_sigloss_asimov_syst.inputs)
-    x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss_asimov_syst.name+'_layer_2', activation='relu')(x)
-    # x = Dropout(0.2)(x)
-    # x = Dense(25, name = model_sigloss_asimov_syst.name+'_layer_3', activation='relu')(x)
-    # x = Dropout(0.2)(x)
-    model_sigloss_asimov_syst.outputs = Dense(1, name = model_sigloss_asimov_syst.name+'_output',  activation='sigmoid')(x)
-
-    list_of_models.append(model_sigloss_asimov_syst)
-
-
-    return list_of_models
+    # return list_of_models
