@@ -28,8 +28,6 @@ class KerasTrainer(object):
         self.mass_bin_labels = []
         self.category_labels = self.framework.signal_categories+self.framework.bkg_categories
         self.expected_counts = []
-        self.expectedS = 0
-        self.expectedB = 0
         self.signal_mask = []
         self.mass_histograms = []
         self.bkg_histogram = []
@@ -125,6 +123,20 @@ class KerasTrainer(object):
         self.labels = list(self.df.drop(['weight', 'weight_over_lumi']+self.spect_labels+self.category_labels, axis=1))
         self.df.reset_index(inplace=True, drop=True)
 
+        if self.framework.multiclass:
+            for lbl in self.category_labels:
+                self.expected_counts.append(self.df.loc[self.df[lbl]>0,['weight']].sum())
+                print "Expected %s = %f"%(lbl, self.df.loc[self.df[lbl]>0,['weight']].sum())
+                if lbl in self.framework.signal_categories:
+                    self.signal_mask.append(1)
+                else:
+                    self.signal_mask.append(0)
+        else:
+            self.expectedS = self.df.loc[self.df['signal']>0,['weight']].sum()
+            self.expectedB = self.df.loc[self.df['background']>0,['weight']].sum()
+            print "Expected signal = ", self.expectedS
+            print "Expected background = ", self.expectedB
+
         # print self.df["muPairs.mass_Roch[0]"]
         # self.df = self.apply_cuts(self.df, self.framework.year)
         # print self.df["muPairs.mass_Roch[0]"]
@@ -175,23 +187,15 @@ class KerasTrainer(object):
                     raise
 
 
-            training_data = self.apply_training_cuts(self.df_train_scaled)
-
-            if self.framework.multiclass:
-                for lbl in self.category_labels:
-                    self.expected_counts.append(training_data.loc[training_data[lbl]>0,['weight']].sum())
-                    print "Expected %s = %f"%(lbl, training_data.loc[training_data[lbl]>0,['weight']].sum())
-                    if lbl in self.framework.signal_categories:
-                        self.signal_mask.append(1)
-                    else:
-                        self.signal_mask.append(0)
-            else:
-                self.expectedS = training_data.loc[training_data['signal']>0,['weight']].sum()
-                self.expectedB = training_data.loc[training_data['background']>0,['weight']].sum()
-                print "Expected signal = ", self.expectedS
-                print "Expected background = ", self.expectedB
-
             obj.CompileModel(self.package.dirs['modelDir'])
+            # early_stopping = EarlyStopping(monitor='val_loss', patience=10)
+            # tensorboard = TensorBoard(log_dir=self.package.dirs['logDir']+obj.name)
+            # model_checkpoint = ModelCheckpoint(self.package.dirs['modelDir']+obj.name+'_trained_lwstValLoss.h5', monitor='val_loss', 
+   #                                       verbose=0, save_best_only=True, 
+   #                                       save_weights_only=False, mode='auto', 
+   #                                       period=1)
+
+            training_data = self.apply_training_cuts(self.df_train_scaled)
 
             if 'resweights' in obj.name:
                 self.train_labels = self.truth_labels
@@ -199,13 +203,10 @@ class KerasTrainer(object):
                     training_data[category] = training_data[category]*training_data['hmerr']
                 # print self.labels
 
-            elif 'sigloss_multi' in obj.name:
-                self.train_labels = self.truth_labels
             elif 'sigloss' in obj.name:
                 self.train_labels = 'signal'
             else:
                 self.train_labels = self.truth_labels
-            print "Training labels: ", self.train_labels
 
             history = obj.model.fit(            
                                     training_data[self.labels].values,
