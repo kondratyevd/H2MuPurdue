@@ -30,7 +30,7 @@ class KerasTrainer(object):
         self.expected_counts = [1,1,1,1]
         self.expectedS = 1
         self.expectedB = 1
-        self.signal_mask = [0,0,0,0]
+        self.signal_mask = [1,1,1,1]
         self.mass_histograms = []
         self.bkg_histogram = []
         self.mass_histograms_th1d = {}
