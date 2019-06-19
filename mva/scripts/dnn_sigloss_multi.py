@@ -34,23 +34,23 @@ c.vbf_label = "VBF"
 
 c.add_category(c.ggh_label, True)
 c.add_file_to_category(ucsd_ggh_2016.name, ucsd_ggh_2016.path, ucsd_ggh_2016.xSec, c.ggh_label, False)
-c.add_file_to_category(ucsd_ggh_2017.name, ucsd_ggh_2017.path, ucsd_ggh_2017.xSec, c.ggh_label, False)
-c.add_file_to_category(ucsd_ggh_2018.name, ucsd_ggh_2018.path, ucsd_ggh_2018.xSec, c.ggh_label, False)
+# c.add_file_to_category(ucsd_ggh_2017.name, ucsd_ggh_2017.path, ucsd_ggh_2017.xSec, c.ggh_label, False)
+# c.add_file_to_category(ucsd_ggh_2018.name, ucsd_ggh_2018.path, ucsd_ggh_2018.xSec, c.ggh_label, False)
 
 c.add_category(c.vbf_label, True)
 c.add_file_to_category(ucsd_vbf_2016.name, ucsd_vbf_2016.path, ucsd_vbf_2016.xSec, c.vbf_label, False)
-c.add_file_to_category(ucsd_vbf_2017.name, ucsd_vbf_2017.path, ucsd_vbf_2017.xSec, c.vbf_label, False)
-c.add_file_to_category(ucsd_vbf_2018.name, ucsd_vbf_2018.path, ucsd_vbf_2018.xSec, c.vbf_label, False)
+# c.add_file_to_category(ucsd_vbf_2017.name, ucsd_vbf_2017.path, ucsd_vbf_2017.xSec, c.vbf_label, False)
+# c.add_file_to_category(ucsd_vbf_2018.name, ucsd_vbf_2018.path, ucsd_vbf_2018.xSec, c.vbf_label, False)
 
 c.add_category(c.dy_label, False)
 c.add_file_to_category(ucsd_dy_2016.name, ucsd_dy_2016.path, ucsd_dy_2016.xSec, c.dy_label, False)
-c.add_file_to_category(ucsd_dy_2017.name, ucsd_dy_2017.path, ucsd_dy_2017.xSec, c.dy_label, False)
-c.add_file_to_category(ucsd_dy_2018.name, ucsd_dy_2018.path, ucsd_dy_2018.xSec, c.dy_label, False)
+# c.add_file_to_category(ucsd_dy_2017.name, ucsd_dy_2017.path, ucsd_dy_2017.xSec, c.dy_label, False)
+# c.add_file_to_category(ucsd_dy_2018.name, ucsd_dy_2018.path, ucsd_dy_2018.xSec, c.dy_label, False)
 
 c.add_category(c.top_label, False)
 c.add_file_to_category(ucsd_top_2016.name, ucsd_top_2016.path, ucsd_top_2016.xSec, c.top_label, False)
-c.add_file_to_category(ucsd_top_2017.name, ucsd_top_2017.path, ucsd_top_2017.xSec, c.top_label, False)
-c.add_file_to_category(ucsd_top_2018.name, ucsd_top_2018.path, ucsd_top_2018.xSec, c.top_label, False)
+# c.add_file_to_category(ucsd_top_2017.name, ucsd_top_2017.path, ucsd_top_2017.xSec, c.top_label, False)
+# c.add_file_to_category(ucsd_top_2018.name, ucsd_top_2018.path, ucsd_top_2018.xSec, c.top_label, False)
 
 
 
