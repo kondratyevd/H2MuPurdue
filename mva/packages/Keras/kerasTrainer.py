@@ -176,14 +176,16 @@ class KerasTrainer(object):
                 print "Expected %s = %f"%(lbl, training_data.loc[training_data[lbl]>0,['weight']].sum())
                 if lbl in self.framework.signal_categories:
                     self.signal_mask.append(1)
+                    print lbl+" is signal"
                 else:
                     self.signal_mask.append(0)
+                    print lbl+" is background"
         else:
             self.expectedS = training_data.loc[training_data['signal']>0,['weight']].sum()
             self.expectedB = training_data.loc[training_data['background']>0,['weight']].sum()
             print "Expected signal = ", self.expectedS
             print "Expected background = ", self.expectedB
-        
+
         self.list_of_models = GetListOfModels(self)
         for obj in self.list_of_models:
             if obj.name not in self.framework.method_list:

@@ -1297,7 +1297,7 @@ def GetListOfModels(trainer):
                 if signal_mask[i]:      #signal
                     s = s + expected_counts[i]/K.sum(y_true[:, i])*K.sum(y_pred*y_true[:, i])
                 else:                   # background
-                    b = b + expected_counts[i]/K.sum(y_true[:, i])*K.sum(y_pred*(1-y_true[:, i]))
+                    b = b + expected_counts[i]/K.sum(y_true[:, i])*K.sum(y_pred*y_true[:, i])
 
 
             result = (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
