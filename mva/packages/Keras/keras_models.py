@@ -1302,7 +1302,7 @@ def GetListOfModels(trainer):
 
             result = (s+b)/(s*s+K.epsilon()) #Add the epsilon to avoid dividing by 0
             # return tf.convert_to_tensor(result[0])
-            return s
+            return tf.convert_to_tensor(s[0])
 
         return sigLossMultiInvert
 
