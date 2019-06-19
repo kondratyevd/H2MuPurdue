@@ -125,6 +125,20 @@ class KerasTrainer(object):
         self.labels = list(self.df.drop(['weight', 'weight_over_lumi']+self.spect_labels+self.category_labels, axis=1))
         self.df.reset_index(inplace=True, drop=True)
 
+        if self.framework.multiclass:
+            for lbl in self.category_labels:
+                self.expected_counts.append(self.df.loc[self.df[lbl]>0,['weight']].sum())
+                print "Expected %s = %f"%(lbl, self.df.loc[self.df[lbl]>0,['weight']].sum())
+                if lbl in self.framework.signal_categories:
+                    self.signal_mask.append(1)
+                else:
+                    self.signal_mask.append(0)
+        else:
+            self.expectedS = self.df.loc[self.df['signal']>0,['weight']].sum()
+            self.expectedB = self.df.loc[self.df['background']>0,['weight']].sum()
+            print "Expected signal = ", self.expectedS
+            print "Expected background = ", self.expectedB
+
         # print self.df["muPairs.mass_Roch[0]"]
         # self.df = self.apply_cuts(self.df, self.framework.year)
         # print self.df["muPairs.mass_Roch[0]"]
