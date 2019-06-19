@@ -165,6 +165,25 @@ class KerasTrainer(object):
 
     def train_models(self):
         self.df_train_scaled, self.df_test_scaled, self.data_scaled = self.scale(self.df_train, self.df_test, self.data, self.labels)
+
+        training_data = self.apply_training_cuts(self.df_train_scaled)
+
+        if self.framework.multiclass:
+            self.expected_counts = []
+            self.signal_mask = []
+            for lbl in self.category_labels:
+                self.expected_counts.append(training_data.loc[training_data[lbl]>0,['weight']].sum())
+                print "Expected %s = %f"%(lbl, training_data.loc[training_data[lbl]>0,['weight']].sum())
+                if lbl in self.framework.signal_categories:
+                    self.signal_mask.append(1)
+                else:
+                    self.signal_mask.append(0)
+        else:
+            self.expectedS = training_data.loc[training_data['signal']>0,['weight']].sum()
+            self.expectedB = training_data.loc[training_data['background']>0,['weight']].sum()
+            print "Expected signal = ", self.expectedS
+            print "Expected background = ", self.expectedB
+        
         self.list_of_models = GetListOfModels(self)
         for obj in self.list_of_models:
             if obj.name not in self.framework.method_list:
@@ -196,24 +215,6 @@ class KerasTrainer(object):
    #                                       verbose=0, save_best_only=True, 
    #                                       save_weights_only=False, mode='auto', 
    #                                       period=1)
-
-            training_data = self.apply_training_cuts(self.df_train_scaled)
-
-            if self.framework.multiclass:
-                self.expected_counts = []
-                self.signal_mask = []
-                for lbl in self.category_labels:
-                    self.expected_counts.append(training_data.loc[training_data[lbl]>0,['weight']].sum())
-                    print "Expected %s = %f"%(lbl, training_data.loc[training_data[lbl]>0,['weight']].sum())
-                    if lbl in self.framework.signal_categories:
-                        self.signal_mask.append(1)
-                    else:
-                        self.signal_mask.append(0)
-            else:
-                self.expectedS = training_data.loc[training_data['signal']>0,['weight']].sum()
-                self.expectedB = training_data.loc[training_data['background']>0,['weight']].sum()
-                print "Expected signal = ", self.expectedS
-                print "Expected background = ", self.expectedB
 
 
             if 'resweights' in obj.name:
