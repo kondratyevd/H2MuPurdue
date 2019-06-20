@@ -329,6 +329,9 @@ class KerasTrainer(object):
             if "ucsd" in self.framework.year:
                 trees[category].Branch("mass",               mass[category]            , "mass/F")
                 trees[category].Branch("weight",             weight[category]          , "weight/F")
+            elif "sigloss" in self.framework.year:
+                trees[category].Branch("mass",               mass[category]            , "mass/F")
+                trees[category].Branch("weight",             weight[category]          , "weight/F")
             else:                
                 trees[category].Branch("mass",               mass[category]            , "mass/F")
                 trees[category].Branch("max_abs_eta_mu",     max_abs_eta_mu[category]  , "max_abs_eta_mu/F")
@@ -338,7 +341,7 @@ class KerasTrainer(object):
                 trees[category].Branch("mu1_eta",     mu1_eta[category]  , "mu1_eta/F")
                 trees[category].Branch("mu2_eta",     mu2_eta[category]  , "mu2_eta/F")
                 trees[category].Branch("dimu_eta",     dimu_eta[category]  , "dimu_eta/F")
-            if self.framework.multiclass:
+            if self.framework.multiclass and not ("sigloss" in self.framework.year):
                 trees[category].Branch("DY_prediction",      DY_prediction[category]   , "DY_prediction/F")
                 trees[category].Branch("ttbar_prediction",   ttbar_prediction[category], "ttbar_prediction/F")
                 trees[category].Branch("ggH_prediction",     ggH_prediction[category]  , "ggH_prediction/F")
@@ -379,6 +382,10 @@ class KerasTrainer(object):
                             mass[category][0]             = row["hmass"]
                             weight[category][0]           = row["weight"]
                             weight_over_lumi[category][0] = row["weight_over_lumi"]
+                        elif "sigloss" in self.framework.year:
+                            mass[category][0]             = row["hmass"]
+                            weight[category][0]           = row["weight"]
+                            weight_over_lumi[category][0] = row["weight_over_lumi"]
                         else:
                             mass[category][0]             = row["muPairs.mass_Roch[0]"]
                             max_abs_eta_mu[category][0]   = row["max_abs_eta_mu"]
@@ -390,13 +397,13 @@ class KerasTrainer(object):
                             mu2_eta[category][0]          = row["muons.eta[1]"]
                             dimu_eta[category][0]         = row["muPairs.eta[0]"]
 
-                        # if self.framework.multiclass:
-                        #     DY_prediction[category][0]    = row["pred_%s_%s"%(self.framework.dy_label, method_name)]
-                        #     ttbar_prediction[category][0] = row["pred_%s_%s"%(self.framework.top_label, method_name)]
-                        #     ggH_prediction[category][0]   = row["pred_%s_%s"%(self.framework.ggh_label, method_name)] 
-                        #     VBF_prediction[category][0]   = row["pred_%s_%s"%(self.framework.vbf_label, method_name)] 
-                        # else:
-                        sig_prediction[category][0]   = row["pred_%s_%s"%(self.framework.sig_label, method_name)]
+                        if self.framework.multiclass and not ("sigloss" in self.framework.year):
+                            DY_prediction[category][0]    = row["pred_%s_%s"%(self.framework.dy_label, method_name)]
+                            ttbar_prediction[category][0] = row["pred_%s_%s"%(self.framework.top_label, method_name)]
+                            ggH_prediction[category][0]   = row["pred_%s_%s"%(self.framework.ggh_label, method_name)] 
+                            VBF_prediction[category][0]   = row["pred_%s_%s"%(self.framework.vbf_label, method_name)] 
+                        else:
+                            sig_prediction[category][0]   = row["pred_%s_%s"%(self.framework.sig_label, method_name)]
                             # bkg_prediction[category][0]   = row["pred_%s_%s"%(self.framework.bkg_label, method_name)]  
                         trees[category].Fill() 
 

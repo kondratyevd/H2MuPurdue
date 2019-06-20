@@ -21,7 +21,7 @@ treePath = 'tree'
 
 c.set_tree_path(treePath)
 
-c.set_year("ucsd_inclusive")
+c.set_year("sigloss_multi")
 c.massWindow = [120,130]
 c.multiclass = True
 c.dy_label = "DY"
