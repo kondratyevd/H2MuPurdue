@@ -254,12 +254,6 @@ class KerasTrainer(object):
                 test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.df_test_scaled.index)
                 if self.framework.data_files:
                     data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.data_scaled.index)
-            elif "sigloss_multi" in obj.name:
-                train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.df_train_scaled.index)
-                test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.df_test_scaled.index)
-                if self.framework.data_files:
-                    data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.data_scaled.index)
-
             else:
                 train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_train_scaled.index)
                 test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_test_scaled.index)
@@ -396,13 +390,13 @@ class KerasTrainer(object):
                             mu2_eta[category][0]          = row["muons.eta[1]"]
                             dimu_eta[category][0]         = row["muPairs.eta[0]"]
 
-                        if self.framework.multiclass:
-                            DY_prediction[category][0]    = row["pred_%s_%s"%(self.framework.dy_label, method_name)]
-                            ttbar_prediction[category][0] = row["pred_%s_%s"%(self.framework.top_label, method_name)]
-                            ggH_prediction[category][0]   = row["pred_%s_%s"%(self.framework.ggh_label, method_name)] 
-                            VBF_prediction[category][0]   = row["pred_%s_%s"%(self.framework.vbf_label, method_name)] 
-                        else:
-                            sig_prediction[category][0]   = row["pred_%s_%s"%(self.framework.sig_label, method_name)]
+                        # if self.framework.multiclass:
+                        #     DY_prediction[category][0]    = row["pred_%s_%s"%(self.framework.dy_label, method_name)]
+                        #     ttbar_prediction[category][0] = row["pred_%s_%s"%(self.framework.top_label, method_name)]
+                        #     ggH_prediction[category][0]   = row["pred_%s_%s"%(self.framework.ggh_label, method_name)] 
+                        #     VBF_prediction[category][0]   = row["pred_%s_%s"%(self.framework.vbf_label, method_name)] 
+                        # else:
+                        sig_prediction[category][0]   = row["pred_%s_%s"%(self.framework.sig_label, method_name)]
                             # bkg_prediction[category][0]   = row["pred_%s_%s"%(self.framework.bkg_label, method_name)]  
                         trees[category].Fill() 
 
