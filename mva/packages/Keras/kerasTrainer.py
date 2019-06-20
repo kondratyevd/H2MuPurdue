@@ -254,6 +254,12 @@ class KerasTrainer(object):
                 test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.df_test_scaled.index)
                 if self.framework.data_files:
                     data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.data_scaled.index)
+            elif "sigloss_multi" in obj.name:
+                train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.df_train_scaled.index)
+                test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.df_test_scaled.index)
+                if self.framework.data_files:
+                    data_prediction = pandas.DataFrame(data=obj.model.predict(self.data_scaled[self.labels].values), columns=['pred_sig_%s'%obj.name], index=self.data_scaled.index)
+
             else:
                 train_prediction = pandas.DataFrame(data=obj.model.predict(self.df_train_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_train_scaled.index)
                 test_prediction = pandas.DataFrame(data=obj.model.predict(self.df_test_scaled[self.labels].values), columns=["pred_%s_%s"%(n,obj.name) for n in self.train_labels], index=self.df_test_scaled.index)
