@@ -1273,13 +1273,13 @@ def GetListOfModels(trainer):
         return sigLossInvert
 
     model_sigloss = model_init('model_sigloss', input_dim, 4096, 30, [significanceLossInvert(trainer.expectedS, trainer.expectedB)], 'adam')
-    x = Dense(50, name = model_sigloss.name+'_layer_1', activation='relu', kernel_regularizer=l2(0.002))(model_sigloss.inputs)
+    x = Dense(50, name = model_sigloss.name+'_layer_1', activation='relu', kernel_regularizer=l2(0.001))(model_sigloss.inputs)
     x = Dropout(0.2)(x)
     # x = Dense(25, name = model_sigloss.name+'_layer_2', activation='relu')(x)
     # x = Dropout(0.2)(x)
     # x = Dense(25, name = model_sigloss.name+'_layer_3', activation='relu')(x)
     # x = Dropout(0.2)(x)
-    model_sigloss.outputs = Dense(1, name = model_sigloss.name+'_output',  activation='sigmoid', kernel_regularizer=l2(0.002))(x)
+    model_sigloss.outputs = Dense(1, name = model_sigloss.name+'_output',  activation='sigmoid', kernel_regularizer=l2(0.001))(x)
 
     list_of_models.append(model_sigloss)
 
