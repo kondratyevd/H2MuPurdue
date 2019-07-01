@@ -13,22 +13,6 @@ args = parser.parse_args()
 
 p = NTuplePlotter()
 
-
-# vbf = p.add_signal("VBF", ROOT.kViolet)
-# vbf.get_dir(vbf_local.name, vbf_local.path, vbf_local.xSec)
-
-# ggh = p.add_signal("ggH", ROOT.kRed)
-# ggh.get_dir(ggh_local.name, ggh_local.path, ggh_local.xSec)
-
-# ttst = p.add_source("t#bar{t} + Single top", ROOT.kYellow)
-# ttst.get_dir(tt_local.name, tt_local.path, tt_local.xSec)
-
-# dy = p.add_source("Drell-Yan", ROOT.kOrange-3)
-# dy.get_dir(dy_local.name, dy_local.path, dy_local.xSec)
-
-
-# p.add_data_dir(dy_local.name, dy_local.path, 40000)
-
 vbf = p.add_signal("VBF", ROOT.kViolet)
 vbf.get_file(VBF_2017_powheg_Apr19.name, VBF_2017_powheg_Apr19.path+"/tuple_*.root", VBF_2017_powheg_Apr19.xSec)
 
@@ -47,10 +31,10 @@ p.add_data_dir(SingleMu2017B_Apr19.name, SingleMu2017B_Apr19.path, SingleMu2017B
 # p.add_data_dir(SingleMu2017E_Apr15.name, SingleMu2017E_Apr15.path, SingleMu2017E_Apr15.lumi) 
 # p.add_data_dir(SingleMu2017F_Apr15.name, SingleMu2017F_Apr15.path, SingleMu2017F_Apr15.lumi)    
 
-
+p.add_variable("muPairs.mass", 1)
 # p.add_variable("muPairs.mass_res", 1)
-p.add_variable("muPairs.phiCS", 1)
-p.add_variable("muPairs.cosThetaCS", 1)
+# p.add_variable("muPairs.phiCS", 1)
+# p.add_variable("muPairs.cosThetaCS", 1)
 # p.add_variable("muPairs.mass_Roch", 1)
 # p.add_variable("nJets", 1)
 
