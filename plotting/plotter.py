@@ -53,7 +53,8 @@ class NTuplePlotter(object):
         self.has_data = True
         self.lumi = self.lumi + lumi
         self.data_title = "Data"
-        self.data_samples.append([title,path+"/*root"])
+        if "*" not in path:
+            self.data_samples.append([title,path+"/*root"])
         print "Data imported from "+path
 
     def add_source(self, name, color):
