@@ -547,7 +547,7 @@ class NTuplePlotter(object):
                                 self.framework.style.apply(mcHist = hist_dict[var_name_multi], color = self.source.color, isSignal = self.source.isSignal)
                                 dummy.Close()
 
-                            print self.new_hist.GetSumOfWeights()
+                            # print self.new_hist.GetSumOfWeights()
                             print "            Variable: %15s        Integral = %f"%(var_name_multi, self.new_hist.GetSumOfWeights()*self.lumi_wgt)
 
                     else:

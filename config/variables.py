@@ -108,7 +108,7 @@ variables.append(Variable("cosThetaCS", "cosThetaCS"    ,"cosThetaCS",         1
 variables.append(Variable("phiCS",      "phiCS"         ,"phiCS",              100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
 variables.append(Variable("pt1omll",    "pt1omll"       ,"pt1omll",            100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
 variables.append(Variable("pt2omll",    "pt2omll"       ,"pt2omll",            100, 0, 100, "",         'F', False,         "ptll",    0   , False ))
-variables.append(Variable("Muon_pt",   "Muon_pt"      ,"Muon_pt",              20, 180, 200, "",         'F', True,          "ptll" ,   0   , False ))
+variables.append(Variable("Muon_pt",   "Muon_pt"      ,"Muon_pt",              180, 20, 200, "",         'F', True,          "ptll" ,   0   , False ))
 variables.append(Variable("Muon_eta",   "Muon_eta"      ,"Muon_eta",           48, -2.4, 2.4, "",         'F', True,          "ptll" ,   0   , False ))
 variables.append(Variable("Jet_pt",     "Jet_pt"        ,"Jet_pt",             220, 30, 250, "",         'F', True,          "nJet" ,   0   , False ))
 variables.append(Variable("Jet_eta",    "Jet_eta"       ,"Jet_eta",            47, -4.7, 4.7, "",         'F', True,         "nJet" ,   0   , False ))
