@@ -88,7 +88,7 @@ variables.append(Variable("j3pt",           "j3pt"          ,"j3pt",           1
 variables.append(Variable("j1eta",          "j1eta"         ,"j1eta",          100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
 variables.append(Variable("j2eta",          "j2eta"         ,"j2eta",          100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
 variables.append(Variable("j3eta",          "j3eta"         ,"j3eta",          100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
-variables.append(Variable("detajj",         "detajj"        ,"detajj",         100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
+# variables.append(Variable("detajj",         "detajj"        ,"detajj",         100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
 variables.append(Variable("mjj",            "mjj"           ,"mjj",            100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
 variables.append(Variable("dphijj",         "dphijj"        ,"dphijj",         100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
 variables.append(Variable("nbjets",         "nbjets"        ,"nbjets",         100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
