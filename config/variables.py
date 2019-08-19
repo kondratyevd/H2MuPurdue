@@ -97,4 +97,31 @@ variables.append(Variable("zepen",          "zepen"         ,"zepen",          1
 variables.append(Variable("drmj",           "drmj"          ,"drmj",           100, 0, 100, "",         'F', False,         "njets" ,   0   , False ))
 variables.append(Variable("met",            "met"           ,"met",            100, 0, 100, "",         'F', False,         "met"   ,   0   , False ))
 variables.append(Variable("weight",         "weight"            ,"weight",     100, 0, 100, "",         'F', False,         "hmmpt" ,   0   , False ))
+
+#### Variables in Latinos ntuples ####
+
+variables.append(Variable("ptll"   ,    "ptll"          ,"Dimuon p_{T}",       100, 0, 100, "GeV",      'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("yll"  ,      "yll"           ,"Dimuon #eta",        100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("mll"   ,     "mll"           ,"Dimuon mass",        100, 0, 100, "GeV",      'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("mllErr"   ,  "mllErr"        ,"mllErr",             100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("cosThetaCS", "cosThetaCS"    ,"cosThetaCS",         100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("phiCS",      "phiCS"         ,"phiCS",              100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("pt1omll",    "pt1omll"       ,"pt1omll",            100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("pt2omll",    "pt2omll"       ,"pt2omll",            100, 0, 100, "",         'F', False,         "ptll",    0   , False ))
+variables.append(Variable("Muon_eta",   "Muon_eta"      ,"Muon_eta",           100, 0, 100, "",         'F', True,          "ptll" ,   0   , False ))
+variables.append(Variable("Jet_pt",     "Jet_pt"        ,"Jet_pt",             100, 0, 100, "",         'F', True,          "nJet" ,   0   , False ))
+variables.append(Variable("Jet_eta",    "Jet_eta"       ,"Jet_eta",            100, 0, 100, "",         'F', False,         "nJet" ,   0   , False ))
+variables.append(Variable("detajj",     "detajj"        ,"detajj",             100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
+variables.append(Variable("mjj",        "mjj"           ,"mjj",                100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
+# variables.append(Variable("dphijj",         "dphijj"        ,"dphijj",         100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
+# variables.append(Variable("nbjets",         "nbjets"        ,"nbjets",         100, 0, 100, "",         'F', False,         "nJet" ,   0   , False ))
+variables.append(Variable("nJet",       "nJet"          ,"nJet",               100, 0, 100, "",         'F', False,         "nJet" ,   0   , False ))
+variables.append(Variable("zeppjj",     "zeppjj"        ,"zeppjj",             100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
+variables.append(Variable("drmj",       "drmj"          ,"drmj",               100, 0, 100, "",         'F', False,         "nJet" ,   0   , False ))
+variables.append(Variable("MET_pt",     "MET_pt"        ,"MET_pt",             100, 0, 100, "",         'F', False,         "MET_pt"   ,   0   , False ))
+variables.append(Variable("XSWeight",   "XSWeight"      ,"XSWeight",           100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("SFweight",   "SFweight"      ,"SFweight",           100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("GenLepMatch","GenLepMatch"   ,"GenLepMatch",        100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("METFilter_MC","METFilter_MC" ,"METFilter_MC",       100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
+    
     
