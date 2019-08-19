@@ -28,7 +28,8 @@ ttst.get_file(latinos_top_2016.name, latinos_top_2016.path+"part0*", latinos_top
 dy = p.add_source("Drell-Yan", ROOT.kOrange-3)
 dy.get_file(latinos_dy_2016.name, latinos_dy_2016.path+"part0*", latinos_dy_2016.xSec)
 
-p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+"*part0*", latinos_data_2016.lumi)   
+# p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+"*part0*", latinos_data_2016.lumi)   
+p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+"*part0*", 1)   
   
 p.add_variable("mll", 1)
 # p.add_variable("Muon_eta", 2)
