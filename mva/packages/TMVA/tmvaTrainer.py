@@ -112,8 +112,10 @@ class TMVATrainer(object):
 								else:
 									event.push_back( var.replacement )	
 
-				
-				weight = tree.PU_wgt*tree.GEN_wgt*SF*file.xSec/file.nOriginalWeighted*40000 # I take lumi=40000 because it doesn't matter as it is applied to all samples
+				if "latinos" in self.framework.year:
+					weight = tree.XSweight*SF
+				else:
+					weight = tree.PU_wgt*tree.GEN_wgt*SF*file.xSec/file.nOriginalWeighted*40000 # I take lumi=40000 because it doesn't matter as it is applied to all samples
 
 				if self.framework.ebe_weights:
 					ebe_weight = tree.FindBranch("muPairs.mass_res").FindLeaf("mass_res").GetValue(0)
@@ -164,50 +166,60 @@ class TMVATrainer(object):
 		self.factory.EvaluateAllMethods()
 
 	def eventInfo(self, tree, year):
-		muon1_pt = tree.FindBranch("muons.pt").FindLeaf("pt").GetValue(0)
-		muon2_pt = tree.FindBranch("muons.pt").FindLeaf("pt").GetValue(1)
-		muon1_hlt2 = tree.FindBranch("muons.isHltMatched").FindLeaf("isHltMatched").GetValue(2)
-		muon1_hlt3 = tree.FindBranch("muons.isHltMatched").FindLeaf("isHltMatched").GetValue(3)
-		muon2_hlt2 = tree.FindBranch("muons.isHltMatched").FindLeaf("isHltMatched").GetValue(8)
-		muon2_hlt3 = tree.FindBranch("muons.isHltMatched").FindLeaf("isHltMatched").GetValue(9)
-		muon1_ID = tree.FindBranch("muons.isMediumID").FindLeaf("isMediumID").GetValue(0)
-		muon2_ID = tree.FindBranch("muons.isMediumID").FindLeaf("isMediumID").GetValue(1)
-		muPair_mass = tree.FindBranch("muPairs.mass_Roch").FindLeaf("mass_Roch").GetValue()
-		nMuons = tree.FindBranch("nMuons").FindLeaf("nMuons").GetValue()
-		nMuonPairs = tree.FindBranch("nMuPairs").FindLeaf("nMuPairs").GetValue()
 
-		if year is "2016":
+		if "latinos" in year:
+			muon1_pt = tree.FindBranch("Muon_pt").FindLeaf("Muon_pt").GetValue(0)
+			muon2_pt = tree.FindBranch("Muon_pt").FindLeaf("Muon_pt").GetValue(1)
+			muPair_mass = tree.mll
+			SF = tree.SFweight*tree.GenLepMatch*tree.METFilter_MC
+		
+		elif "ucsd" in year:
+			pass
+		else:
+			muon1_pt = tree.FindBranch("muons.pt").FindLeaf("pt").GetValue(0)
+			muon2_pt = tree.FindBranch("muons.pt").FindLeaf("pt").GetValue(1)
+			muon1_hlt2 = tree.FindBranch("muons.isHltMatched").FindLeaf("isHltMatched").GetValue(2)
+			muon1_hlt3 = tree.FindBranch("muons.isHltMatched").FindLeaf("isHltMatched").GetValue(3)
+			muon2_hlt2 = tree.FindBranch("muons.isHltMatched").FindLeaf("isHltMatched").GetValue(8)
+			muon2_hlt3 = tree.FindBranch("muons.isHltMatched").FindLeaf("isHltMatched").GetValue(9)
+			muon1_ID = tree.FindBranch("muons.isMediumID").FindLeaf("isMediumID").GetValue(0)
+			muon2_ID = tree.FindBranch("muons.isMediumID").FindLeaf("isMediumID").GetValue(1)
+			muPair_mass = tree.FindBranch("muPairs.mass_Roch").FindLeaf("mass_Roch").GetValue()
+			nMuons = tree.FindBranch("nMuons").FindLeaf("nMuons").GetValue()
+			nMuonPairs = tree.FindBranch("nMuPairs").FindLeaf("nMuPairs").GetValue()
 
-			flag = 			((muPair_mass>self.framework.massWindow[0])&
-							(muPair_mass<self.framework.massWindow[1])&
-							(muon1_ID>0)&
-							(muon2_ID>0)&
-							(muon1_pt>20)&
-							(muon2_pt>20)&
-							(
-								( muon1_pt > 26 & (muon1_hlt2>0 or muon1_hlt3>0) ) 
-							or
-								( muon2_pt > 26 & (muon2_hlt2>0 or muon2_hlt3>0) )
-							))
-			SF = (0.5*(tree.IsoMu_SF_3 + tree.IsoMu_SF_4)*0.5*(tree.MuID_SF_3 + tree.MuID_SF_4)*0.5*(tree.MuIso_SF_3 + tree.MuIso_SF_4))
+			if year is "2016":
+
+				flag = 			((muPair_mass>self.framework.massWindow[0])&
+								(muPair_mass<self.framework.massWindow[1])&
+								(muon1_ID>0)&
+								(muon2_ID>0)&
+								(muon1_pt>20)&
+								(muon2_pt>20)&
+								(
+									( muon1_pt > 26 & (muon1_hlt2>0 or muon1_hlt3>0) ) 
+								or
+									( muon2_pt > 26 & (muon2_hlt2>0 or muon2_hlt3>0) )
+								))
+				SF = (0.5*(tree.IsoMu_SF_3 + tree.IsoMu_SF_4)*0.5*(tree.MuID_SF_3 + tree.MuID_SF_4)*0.5*(tree.MuIso_SF_3 + tree.MuIso_SF_4))
 
 
-		elif year is "2017":
+			elif year is "2017":
 
-			flag = 			((muPair_mass>self.framework.massWindow[0])&
-							(muPair_mass<self.framework.massWindow[1])&
-							(muon1_ID>0)&
-							(muon2_ID>0)&
-							(muon1_pt>30)&
-							(muon2_pt>20)
-							# &
-							# (
-							# 	( muon1_pt > 30 & (muon1_hlt2>0 or muon1_hlt3>0) ) 
-							# or
-							# 	( muon2_pt > 30 & (muon2_hlt2>0 or muon2_hlt3>0) )
-							# )
-							)
-			SF = (tree.IsoMu_SF_3 * tree.MuID_SF_3 * tree.MuIso_SF_3 ) 
+				flag = 			((muPair_mass>self.framework.massWindow[0])&
+								(muPair_mass<self.framework.massWindow[1])&
+								(muon1_ID>0)&
+								(muon2_ID>0)&
+								(muon1_pt>30)&
+								(muon2_pt>20)
+								# &
+								# (
+								# 	( muon1_pt > 30 & (muon1_hlt2>0 or muon1_hlt3>0) ) 
+								# or
+								# 	( muon2_pt > 30 & (muon2_hlt2>0 or muon2_hlt3>0) )
+								# )
+								)
+				SF = (tree.IsoMu_SF_3 * tree.MuID_SF_3 * tree.MuIso_SF_3 ) 
 
 		return flag, SF
 

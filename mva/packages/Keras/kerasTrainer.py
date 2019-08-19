@@ -108,6 +108,8 @@ class KerasTrainer(object):
                         single_file_df['weight'] = file.weight * mc_weight
                     elif "ucsd" in self.framework.year:
                         mc_weight = single_file_df['weight']
+                    elif "latinos" in self.framework.year:
+                        mc_weight = single_file_df['XSWeight']*single_file_df['SFweight']*single_file_df['GenLepMatch']*single_file_df['METFilter_MC']
                     else:
                         mc_weight = single_file_df['GEN_wgt'] * single_file_df['PU_wgt']
                         single_file_df['weight'] = file.weight * mc_weight
@@ -332,6 +334,9 @@ class KerasTrainer(object):
             elif "sigloss" in self.framework.year:
                 trees[category].Branch("mass",               mass[category]            , "mass/F")
                 trees[category].Branch("weight",             weight[category]          , "weight/F")
+            elif "latinos" in self.framework.year:
+                trees[category].Branch("mass",               mass[category]            , "mass/F")
+                trees[category].Branch("weight",             weight[category]          , "weight/F")
             else:                
                 trees[category].Branch("mass",               mass[category]            , "mass/F")
                 trees[category].Branch("max_abs_eta_mu",     max_abs_eta_mu[category]  , "max_abs_eta_mu/F")
@@ -386,6 +391,10 @@ class KerasTrainer(object):
                             mass[category][0]             = row["hmass"]
                             weight[category][0]           = row["weight"]
                             weight_over_lumi[category][0] = row["weight_over_lumi"]
+                        elif "latinos" in self.framework.year:
+                            mass[category][0]             = row["mll"]
+                            weight[category][0]           = row["weight"]
+                            weight_over_lumi[category][0] = row["weight_over_lumi"]                            
                         else:
                             mass[category][0]             = row["muPairs.mass_Roch[0]"]
                             max_abs_eta_mu[category][0]   = row["max_abs_eta_mu"]
@@ -434,7 +443,11 @@ class KerasTrainer(object):
 
         
     def add_columns(self, df):
-        if "ucsd" not in self.framework.year:
+        if "latinos" in self.framework.year:
+            pass
+        elif "ucsd" in self.framework.year:
+            pass
+        else:
             df["abs_eta_1"] = df["muons.eta[0]"].abs()
             df["abs_eta_2"] = df["muons.eta[1]"].abs()
             df["max_abs_eta_mu"] = df[["abs_eta_1", "abs_eta_2"]].max(axis=1)
@@ -442,7 +455,6 @@ class KerasTrainer(object):
         return df
 
     def apply_cuts(self, df, year):
-
         if "ucsd_inclusive" in year:
             mass = df["hmass"]
             flag = (mass>110)&(mass<150)
@@ -458,6 +470,13 @@ class KerasTrainer(object):
             nbjets = df["nbjets"]
             flag = (mass>110)&(mass<150)&(njets>=2)&(nbjets==0)
             return df.loc[flag]
+
+        if "latinos" in year:
+            mass = df["mll"]
+            njets = df["nJet"]
+            # nbjets = df["nbjets"]
+            flag = (mass>110)&(mass<150)
+            return df.loc[flag]            
 
         muon1_pt    = df['muons.pt[0]']
         muon2_pt    = df['muons.pt[1]']
@@ -487,6 +506,8 @@ class KerasTrainer(object):
     def apply_training_cuts(self, df):
         if "ucsd" in self.framework.year:
             muPair_mass = df['hmass']
+        elif "latinos" in self.framework.year:
+            muPair_mass = df['mll']
         else:  
             muPair_mass = df['muPairs.mass_Roch[0]']
         flag =  ((muPair_mass>self.framework.massWindow[0])&
