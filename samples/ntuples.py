@@ -17,6 +17,25 @@ dy_local = SmpNtuple("ZJets_aMC", "ZJets_aMC", "/Users/dmitrykondratyev/Document
 tt_local = SmpNtuple("tt_ll_POW", "tt_ll_POW", "/Users/dmitrykondratyev/Documents/HiggsToMuMu/test_files/tt/", False, True, 85.656, 1)
 
 
+# Latinos ntuples (need to fix paths)
+
+latinos_path = "/mnt/hadoop/store/group/local/hmm/ntuples/"
+
+mc2016_path = "/2016/MCl2loose2016hmm__MCCorr2016hmm__l2tightOR2016hmm/"
+data2016_path = "/2016/DATAl2loose2016hmm__l2tightOR2016hmm/"
+
+latinos_data_2016 = SmpNtuple("SingleMu_2016","SingleMu_2016", latinos_path+data2016_path, True, True, 1, 4793.961) # fix lumi
+
+latinos_ggh_2016 = SmpNtuple("ggH_2016","ggH 2016", latinos_path+mc2016_path+"*GluGluH*", False, False, 1, 1)
+latinos_vbf_2016 = SmpNtuple("VBF_2016","VBF 2016", latinos_path+mc2016_path+"*VBFH*", False, False, 1, 1)
+latinos_vh_2016 = SmpNtuple("VH_2016","VH 2016", latinos_path+mc2016_path+"*ZH_H*", False, False, 1, 1)
+latinos_tth_2016 = SmpNtuple("ttH_2016","ttH 2016", latinos_path+mc2016_path+"*ttH*", False, False, 1, 1)
+
+latinos_dy_2016 = SmpNtuple("DY_2016","DY 2016", latinos_path+mc2016_path+"*DYJetsToLL_M-105To160*", False, False, 1, 1)
+latinos_top_2016 = SmpNtuple("top_2016","top 2016", latinos_path+mc2016_path+"*TTJets_DiLept*", False, False, 1, 1)
+latinos_vv_2016 = SmpNtuple("VV_2016","VV 2016", latinos_path+mc2016_path+"*WZTo2L2Q*", False, False, 1, 1)
+
+
 # UCSD files with trained BDTs
 # Don't care about cross sections here because the event weights are already in the trees
 
