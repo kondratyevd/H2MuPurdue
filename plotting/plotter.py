@@ -17,6 +17,7 @@ class NTuplePlotter(object):
         print "#"*70
         self.out_dir = "plots/"
         self.tree_path = 'dimuons/tree'
+        self.has_metadata = True
         self.metadata_path = 'dimuons/metadata'
         self.selection = '1'
         self.jet_selection = '1'
@@ -139,9 +140,10 @@ class NTuplePlotter(object):
         print "Total lumi: %i /pb\n"%self.lumi 
 
         for smp in self.data_samples:
-            metadata = ROOT.TChain(self.metadata_path)
-            metadata.Add(smp[1])
-            nEvt = self.get_nEvts(metadata, "Data", weighted = False)
+            if self.has_metadata:
+                metadata = ROOT.TChain(self.metadata_path)
+                metadata.Add(smp[1])
+                nEvt = self.get_nEvts(metadata, "Data", weighted = False)
 
             for var in self.var_list:
                 if var.isMultiDim:
@@ -495,6 +497,7 @@ class NTuplePlotter(object):
                 self.weight = 1
                 self.nEvt = 1
                 self.nOriginalWeighted = 1
+                self.lumi_wgt = 1
                 tree = ROOT.TChain()
     
             def get_histos(self, weights, hist_dict): # get MC histograms
@@ -502,15 +505,19 @@ class NTuplePlotter(object):
 
                 tree = ROOT.TChain(self.framework.tree_path)
                 tree.Add(self.path)
-                metadata = ROOT.TChain(self.framework.metadata_path)
-                metadata.Add(self.path)
+                if self.framework.has_metadata:
+                    metadata = ROOT.TChain(self.framework.metadata_path)
+                    metadata.Add(self.path)
 
-                self.nOriginalWeighted = self.framework.get_nEvts(metadata, self.name, weighted = True)
-                self.lumi_wgt = self.xSec*self.framework.lumi/self.nOriginalWeighted
+                    self.nOriginalWeighted = self.framework.get_nEvts(metadata, self.name, weighted = True)
+                    self.lumi_wgt = self.xSec*self.framework.lumi/self.nOriginalWeighted
 
-                print "        Compiling sample: %15s    Sum of weights: %10i"%(self.name, self.nOriginalWeighted)
-                print "        Lumi weight: %f"%self.lumi_wgt
-                print "        "+"-"*35
+                    print "        Compiling sample: %15s    Sum of weights: %10i"%(self.name, self.nOriginalWeighted)
+                    print "        Lumi weight: %f"%self.lumi_wgt
+                    print "        "+"-"*35
+                else:
+                    print "        Compiling sample: %15s"%(self.name)
+                    print "        "+"-"*35
 
                 for var in self.framework.var_list:
                     if var.isMultiDim:

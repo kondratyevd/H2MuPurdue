@@ -13,6 +13,9 @@ args = parser.parse_args()
 
 p = NTuplePlotter()
 
+p.tree_path = "Events"
+p.has_metadata = False
+
 vbf = p.add_signal("VBF", ROOT.kViolet)
 vbf.get_file(latinos_vbf_2016.name, latinos_vbf_2016.path, latinos_vbf_2016.xSec)
 
