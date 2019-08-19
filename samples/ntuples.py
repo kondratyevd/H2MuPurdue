@@ -31,7 +31,8 @@ latinos_vbf_2016 = SmpNtuple("VBF_2016","VBF 2016", latinos_path+mc2016_path+"*V
 latinos_vh_2016 = SmpNtuple("VH_2016","VH 2016", latinos_path+mc2016_path+"*ZH_H*", False, False, 1, 1)
 latinos_tth_2016 = SmpNtuple("ttH_2016","ttH 2016", latinos_path+mc2016_path+"*ttH*", False, False, 1, 1)
 
-latinos_dy_2016 = SmpNtuple("DY_2016","DY 2016", latinos_path+mc2016_path+"*DYJetsToLL_M-105To160*", False, False, 1, 1)
+latinos_dy105to160_2016 = SmpNtuple("DY105To160_2016","DY105To160 2016", latinos_path+mc2016_path+"*DYJetsToLL_M-105To160*", False, False, 1, 1)
+latinos_dy_2016 = SmpNtuple("DY_2016","DY 2016", latinos_path+mc2016_path+"*DYJetsToLL_M-50*", False, False, 1, 1)
 latinos_top_2016 = SmpNtuple("top_2016","top 2016", latinos_path+mc2016_path+"*TTJets_DiLept*", False, False, 1, 1)
 latinos_vv_2016 = SmpNtuple("VV_2016","VV 2016", latinos_path+mc2016_path+"*WZTo2L2Q*", False, False, 1, 1)
 
