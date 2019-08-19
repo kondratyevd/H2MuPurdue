@@ -47,7 +47,7 @@ latinos_st_t_antitop_2016 = SmpNtuple("ST_t_antitop_2016","ST_t_antitop 2016", l
 latinos_st_tw_top_2016 = SmpNtuple("ST_tW_top_2016","ST_tW_top 2016", latinos_path+mc2016_path+"*ST_tW_top*", False, False, 1, 1)
 latinos_st_tw_antitop_2016 = SmpNtuple("ST_tW_antitop_2016","ST_tW_antitop 2016", latinos_path+mc2016_path+"*ST_tW_antitop*", False, False, 1, 1)
 
-latinos_wzto2l2nu_2016 = SmpNtuple("WZTo2L2Nu_2016","WZTo2L2Nu 2016", latinos_path+mc2016_path+"*WZTo2L2Nu*", False, False, 1, 1)
+latinos_wwto2l2nu_2016 = SmpNtuple("WWTo2L2Nu_2016","WWTo2L2Nu 2016", latinos_path+mc2016_path+"*WWTo2L2Nu*", False, False, 1, 1)
 latinos_wzto3lnu_2016 = SmpNtuple("WZTo3LNu_2016","WZTo3LNu 2016", latinos_path+mc2016_path+"*WZTo3LNu_ext1*", False, False, 1, 1)
 latinos_wzto2l2q_2016 = SmpNtuple("WZTo2L2Q_2016","WZTo2L2Q 2016", latinos_path+mc2016_path+"*WZTo2L2Q*", False, False, 1, 1)
 
