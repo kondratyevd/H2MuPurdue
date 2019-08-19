@@ -70,8 +70,8 @@ selection = "(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 
 p.add_selection(selection)
 
-# p.add_wgt_sf("XSWeight*SFweight2l*GenLepMatch2l")
-p.add_wgt_sf("XSWeight*SFweight2l*GenLepMatch2l*METFilter_MC")
+p.add_wgt_sf("XSWeight")
+# p.add_wgt_sf("XSWeight*SFweight2l*GenLepMatch2l*METFilter_MC")
 p.setLogY() 
 
 
