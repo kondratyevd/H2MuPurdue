@@ -24,7 +24,7 @@ latinos_path = "/mnt/hadoop/store/group/local/hmm/ntuples/"
 mc2016_path = "/2016/MCl2loose2016hmm__MCCorr2016hmm__l2tightOR2016hmm/"
 data2016_path = "/2016/DATAl2loose2016hmm__l2tightOR2016hmm/"
 
-latinos_data_2016 = SmpNtuple("SingleMu_2016","SingleMu_2016", latinos_path+data2016_path, True, True, 1, 4793.961) # fix lumi
+latinos_data_2016 = SmpNtuple("SingleMu_2016","SingleMu_2016", latinos_path+data2016_path, True, True, 1, 35867)
 
 latinos_ggh_2016 = SmpNtuple("ggH_2016","ggH 2016", latinos_path+mc2016_path+"*GluGluH*", False, False, 1, 1)
 latinos_vbf_2016 = SmpNtuple("VBF_2016","VBF 2016", latinos_path+mc2016_path+"*VBFH*", False, False, 1, 1)
