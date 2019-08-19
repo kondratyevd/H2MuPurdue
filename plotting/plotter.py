@@ -566,11 +566,10 @@ class NTuplePlotter(object):
                             self.new_hist.Sumw2()
 
                             tree.Draw(var.name+">>"+hist_name, "(%s)*(%s)"%(self.framework.selection, weights))
-                            print self.lumi_wgt
                             hist_dict[var.name].Add(self.new_hist, self.lumi_wgt)
                             self.framework.style.apply(mcHist = hist_dict[var.name], color = self.source.color, isSignal = self.source.isSignal)
                             dummy.Close()
-                        print self.new_hist.GetSumOfWeights()
+                        # print self.new_hist.GetSumOfWeights()
                         print "            Variable: %15s        Integral = %f"%(var.name, self.new_hist.GetSumOfWeights()*self.lumi_wgt)
                 print "        "+"-"*70
                 tree.Reset()
