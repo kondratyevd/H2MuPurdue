@@ -173,8 +173,8 @@ class NTuplePlotter(object):
                     new_hist.Sumw2()
 
                     selection = self.selection 
-
-                    if "mass_Roch" in var.name:
+                    print selection
+                    if ("mass_Roch" in var.name) or ("mll" in var.name):
                         selection = "(%s)&(muPairs.mass_Roch<120 || muPairs.mass_Roch>130)"%self.selection
     
                     tree.Draw(var.name+">>"+hist_name, selection)
