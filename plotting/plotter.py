@@ -102,17 +102,17 @@ class NTuplePlotter(object):
 
     def set_out_dir(self, path):
         self.out_dir = path
-        # try:
-        #     os.makedirs(path)
-        # except OSError as e:
-        #     if e.errno != errno.EEXIST:
-        #         raise
+        try:
+            os.makedirs(path)
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
 
-        # try:
-        #     os.makedirs(path+"root/")
-        # except OSError as e:
-        #     if e.errno != errno.EEXIST:
-        #         raise    
+        try:
+            os.makedirs(path+"root/")
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise    
 
     def set_lumi(self, lumi):
         self.lumi = lumi
