@@ -50,11 +50,14 @@ latinos_st_tw_antitop_2016 = SmpNtuple("ST_tW_antitop_2016","ST_tW_antitop 2016"
 latinos_wwto2l2nu_2016 = SmpNtuple("WWTo2L2Nu_2016","WWTo2L2Nu 2016", latinos_path+mc2016_path+"*WWTo2L2Nu*", False, False, 1, 1)
 latinos_wzto3lnu_2016 = SmpNtuple("WZTo3LNu_2016","WZTo3LNu 2016", latinos_path+mc2016_path+"*WZTo3LNu_ext1*", False, False, 1, 1)
 latinos_wzto2l2q_2016 = SmpNtuple("WZTo2L2Q_2016","WZTo2L2Q 2016", latinos_path+mc2016_path+"*WZTo2L2Q*", False, False, 1, 1)
-
 latinos_zzto2l2nu_2016 = SmpNtuple("ZZTo2L2Nu_2016","ZZTo2L2Nu 2016", latinos_path+mc2016_path+"*ZZTo2L2Nu_ext1*", False, False, 1, 1)
 latinos_zzto2l2q_2016 = SmpNtuple("ZZTo2L2Q_2016","ZZTo2L2Q 2016", latinos_path+mc2016_path+"*ZZTo2L2Q*", False, False, 1, 1)
 latinos_zzto4l_2016 = SmpNtuple("ZZTo4L_2016","ZZTo4L 2016", latinos_path+mc2016_path+"*ZZTo4L*", False, False, 1, 1)
 
+latinos_zzz_2016 = SmpNtuple("ZZZ_2016","ZZZ 2016", latinos_path+mc2016_path+"*ZZZ*", False, False, 1, 1)
+latinos_wzz_2016 = SmpNtuple("WZZ_2016","WZZ 2016", latinos_path+mc2016_path+"*WZZ*", False, False, 1, 1)
+latinos_wwz_2016 = SmpNtuple("WWZ_2016","WWZ 2016", latinos_path+mc2016_path+"*WWZ*", False, False, 1, 1)
+latinos_www_2016 = SmpNtuple("WWW_2016","WWW 2016", latinos_path+mc2016_path+"*WWW*", False, False, 1, 1)
 
 # UCSD files with trained BDTs
 # Don't care about cross sections here because the event weights are already in the trees
