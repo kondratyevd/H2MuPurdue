@@ -23,8 +23,8 @@ ggh = p.add_signal("ggH", ROOT.kRed)
 ggh.get_file(latinos_ggh_2016.name, latinos_ggh_2016.path+"part0*", 1)
 
 vh = p.add_signal("VH", ROOT.kGreen)
-vh.get_file(latinos_whplus_2016.name, latinos_whplus_2016.path+"part0*", 1)
-vh.get_file(latinos_whminus_2016.name, latinos_whminus_2016.path+"part0*", 1)
+vh.get_file(latinos_wplush_2016.name, latinos_wplush_2016.path+"part0*", 1)
+vh.get_file(latinos_wminush_2016.name, latinos_wminush_2016.path+"part0*", 1)
 vh.get_file(latinos_zh_2016.name, latinos_zh_2016.path+"part0*", 1)
 
 tth = p.add_signal("ttH", ROOT.kBlue)
