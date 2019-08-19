@@ -31,7 +31,8 @@ tth = p.add_signal("ttH", ROOT.kBlue)
 tth.get_file(latinos_tth_2016.name, latinos_tth_2016.path+"part0*", 1)
 
 ttst = p.add_source("t#bar{t} + Single top", ROOT.kYellow)
-ttst.get_file(latinos_top_2016.name, latinos_top_2016.path+"part0*", 1)
+ttst.get_file(latinos_ttto2l2nu_2016.name, latinos_ttto2l2nu_2016.path+"part0*", 1)
+ttst.get_file(latinos_tttosemileptonic_2016.name, latinos_tttosemileptonic_2016.path+"part0*", 1)
 
 dy = p.add_source("Drell-Yan", ROOT.kOrange-3)
 dy.get_file(latinos_dy_2016.name, latinos_dy_2016.path+"part0*", 1)

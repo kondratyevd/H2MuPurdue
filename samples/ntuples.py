@@ -35,7 +35,10 @@ latinos_tth_2016 = SmpNtuple("ttH_2016","ttH 2016", latinos_path+mc2016_path+"*t
 
 latinos_dy105to160_2016 = SmpNtuple("DY105To160_2016","DY105To160 2016", latinos_path+mc2016_path+"*DYJetsToLL_M-105To160*", False, False, 1, 1)
 latinos_dy_2016 = SmpNtuple("DY_2016","DY 2016", latinos_path+mc2016_path+"*DYJetsToLL_M-50*", False, False, 1, 1)
-latinos_top_2016 = SmpNtuple("top_2016","top 2016", latinos_path+mc2016_path+"*TTJets_DiLept*", False, False, 1, 1)
+latinos_ttjets_2016 = SmpNtuple("ttjets_2016","ttjets 2016", latinos_path+mc2016_path+"*TTJets_DiLept*", False, False, 1, 1)
+
+latinos_ttto2l2nu_2016 = SmpNtuple("TTTo2L2Nu_2016","TTTo2L2Nu 2016", latinos_path+mc2016_path+"*TTTo2L2Nu*", False, False, 1, 1)
+latinos_tttosemileptonic_2016 = SmpNtuple("TTToSemiLeptonic_2016","TTToSemiLeptonic 2016", latinos_path+mc2016_path+"*TTToSemiLeptonic*", False, False, 1, 1)
 
 latinos_st_s_2016 = SmpNtuple("ST_s_2016","ST_s 2016", latinos_path+mc2016_path+"*ST_s-channel*", False, False, 1, 1)
 latinos_st_t_top_2016 = SmpNtuple("ST_t_top_2016","ST_t_top 2016", latinos_path+mc2016_path+"*ST_t-channel_top*", False, False, 1, 1)
