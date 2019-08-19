@@ -40,7 +40,7 @@ selection = "1"
 
 p.add_selection(selection)
 
-p.add_wgt_sf("XSWeight*SFweight2l")
+p.add_wgt_sf("XSWeight*SFweight2l*GenLepMatch2l")
 # p.add_wgt_sf("XSWeight*SFweight2l*GenLepMatch2l*METFilter_MC")
 p.setLogY() 
 
