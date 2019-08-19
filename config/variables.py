@@ -111,7 +111,7 @@ variables.append(Variable("pt2omll",    "pt2omll"       ,"pt2omll",            1
 variables.append(Variable("Muon_pt",   "Muon_pt"      ,"Muon_pt",              20, 180, 200, "",         'F', True,          "ptll" ,   0   , False ))
 variables.append(Variable("Muon_eta",   "Muon_eta"      ,"Muon_eta",           48, -2.4, 2.4, "",         'F', True,          "ptll" ,   0   , False ))
 variables.append(Variable("Jet_pt",     "Jet_pt"        ,"Jet_pt",             220, 30, 250, "",         'F', True,          "nJet" ,   0   , False ))
-variables.append(Variable("Jet_eta",    "Jet_eta"       ,"Jet_eta",            47, -4.7, 4.7, "",         'F', False,         "nJet" ,   0   , False ))
+variables.append(Variable("Jet_eta",    "Jet_eta"       ,"Jet_eta",            47, -4.7, 4.7, "",         'F', True,         "nJet" ,   0   , False ))
 variables.append(Variable("detajj",     "detajj"        ,"detajj",             35, 0, 7, "",         'F', False,         "mjj"   ,   0   , False ))
 variables.append(Variable("mjj",        "mjj"           ,"mjj",                100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
 # variables.append(Variable("dphijj",         "dphijj"        ,"dphijj",         100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
