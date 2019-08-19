@@ -63,11 +63,17 @@ p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+files_to_run, lati
   
 p.add_variable("mll", 1)
 p.add_variable("ptll", 1)
-# p.add_variable("Muon_eta", 2)
+p.add_variable("Muon_pt", 2)
+p.add_variable("Muon_eta", 2)
+p.add_variable("Jet_pt", 2)
+p.add_variable("Jet_eta", 2)
+p.add_variable("detajj", 1)
+p.add_variable("MET_pt", 1)
+
 
 p.set_out_dir(args.output_path)
-selection = "(Muon_pt[0]>30)&(Muon_pt[1]>20)"
-# selection = "(mll>110)&(mll<150)&(Muon_pt[0]>30)&(Muon_pt[1]>20)"
+# selection = "(Muon_pt[0]>30)&(Muon_pt[1]>20)"
+selection = "(mll>70)&(mll<110)&(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 
 p.add_selection(selection)
 
