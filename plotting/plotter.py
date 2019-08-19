@@ -173,9 +173,11 @@ class NTuplePlotter(object):
                     new_hist.Sumw2()
 
                     selection = self.selection 
-                    print selection
-                    if ("mass_Roch" in var.name) or ("mll" in var.name):
+
+                    if "mass_Roch" in var.name:
                         selection = "(%s)&(muPairs.mass_Roch<120 || muPairs.mass_Roch>130)"%self.selection
+                    if "mll" in var.name:
+                        selection = "(%s)&(mll<120 || mll>130)"%self.selection
     
                     tree.Draw(var.name+">>"+hist_name, selection)
                     self.data_hist_dict[var.name].Add(new_hist, 1)    # fill histograms
