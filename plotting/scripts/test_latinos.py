@@ -34,11 +34,12 @@ p.add_variable("mll", 1)
 # p.add_variable("Muon_eta", 2)
 
 p.set_out_dir(args.output_path)
-selection = "(mll>110)&(mll<150)"#&(Muon_pt[0]>30)&(Muon_pt[1]>20)"
+selection = "1"
+# selection = "(mll>110)&(mll<150)&(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 
 p.add_selection(selection)
 
-p.add_wgt_sf("XSWeight")
+p.add_wgt_sf("1")
 # p.add_wgt_sf("XSWeight*SFweight2l*GenLepMatch2l*METFilter_MC")
 p.setLogY() 
 
