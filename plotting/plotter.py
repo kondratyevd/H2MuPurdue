@@ -563,7 +563,7 @@ class NTuplePlotter(object):
                             self.new_hist.Sumw2()
 
                             tree.Draw(var.name+">>"+hist_name, "(%s)*(%s)"%(self.framework.selection, weights))
-        
+                            print hist_name+": "+new_hist.GetEntries()
                             hist_dict[var.name].Add(self.new_hist, self.lumi_wgt)
                             self.framework.style.apply(mcHist = hist_dict[var.name], color = self.source.color, isSignal = self.source.isSignal)
                             dummy.Close()
