@@ -39,6 +39,15 @@ ttst.get_file(latinos_st_s_2016.name, latinos_st_s_2016.path+"part0*", 1)
 ttst.get_file(latinos_st_t_antitop_2016.name, latinos_st_t_antitop_2016.path+"part0*", 1)
 ttst.get_file(latinos_st_t_top_2016.name, latinos_st_t_top_2016.path+"part0*", 1)
 
+vv = p.add_source("VV", ROOT.kOrange+3)
+vv.get_file(latinos_wzto2l2nu_2016.name, latinos_wzto2l2nu_2016.path+"part0*", 1)
+vv.get_file(latinos_wzto2l2q_2016.name, latinos_wzto2l2q_2016.path+"part0*", 1)
+vv.get_file(latinos_wzto3lnu_2016.name, latinos_wzto3lnu_2016.path+"part0*", 1)
+vv.get_file(latinos_zzto2l2nu_2016.name, latinos_zzto2l2nu_2016.path+"part0*", 1)
+vv.get_file(latinos_zzto2l2q_2016.name, latinos_zzto2l2q_2016.path+"part0*", 1)
+vv.get_file(latinos_zzto4l_2016.name, latinos_zzto4l_2016.path+"part0*", 1)
+
+
 dy = p.add_source("Drell-Yan", ROOT.kOrange-3)
 dy.get_file(latinos_dy_2016.name, latinos_dy_2016.path+"part0*", 1)
 
