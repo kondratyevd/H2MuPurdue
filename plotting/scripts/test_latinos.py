@@ -63,10 +63,10 @@ p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+files_to_run, lati
   
 # p.add_variable("mll", 1)
 # p.add_variable("ptll", 1)
-p.add_variable("Muon_pt", 2)
+# p.add_variable("Muon_pt", 2)
 # p.add_variable("Muon_eta", 2)
-# p.add_variable("Jet_pt", 2)
-# p.add_variable("Jet_eta", 2)
+p.add_variable("CleanJet_pt", 2)
+p.add_variable("CleanJet_eta", 2)
 # p.add_variable("detajj", 1)
 # p.add_variable("MET_pt", 1)
 
