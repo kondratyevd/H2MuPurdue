@@ -78,8 +78,8 @@ supercut = '   Lepton_pt[0]>26 \
             && Lepton_pt[1]>20 \
             && (nLepton>=2 && (Alt$(Lepton_pt[2],0)<10) || Alt$(Lepton_pdgId[2],13)==13) \
             && abs(Lepton_eta[0])<2.4 && abs(Lepton_eta[1])<2.4 \
-            && (Lepton_pdgId[0]*Lepton_pdgId[1]==-13*13) \
-			'
+            && (Lepton_pdgId[0]*Lepton_pdgId[1]==(-13*13)) \
+            '
 bveto = '(Sum$(CleanJet_pt > 20. && abs(CleanJet_eta)<2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.6321) == 0)'
 selection = '(%s)&(mll>105)&(mll<160)&(%s)'%(supercut, bveto)
 # selection = "(Muon_pt[0]>30)&(Muon_pt[1]>20)"
