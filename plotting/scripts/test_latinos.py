@@ -61,14 +61,21 @@ dy.get_file(latinos_dy_2016.name, latinos_dy_2016.path+files_to_run, 1)
 
 p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+files_to_run, latinos_data_2016.lumi)   
   
-# p.add_variable("mll", 1)
-p.add_variable("ptll", 1)
-# p.add_variable("Muon_pt", 2)
-# p.add_variable("Muon_eta", 2)
-# p.add_variable("CleanJet_pt", 2)
-# p.add_variable("CleanJet_eta", 2)
-# p.add_variable("detajj", 1)
-# p.add_variable("MET_pt", 1)
+p.add_variable("mll")
+p.add_variable("mllErr")
+p.add_variable("yll")
+p.add_variable("cosThetaCS")
+p.add_variable("phiCS")
+p.add_variable("ptll")
+p.add_variable("Muon_pt", 2)
+p.add_variable("Muon_eta", 2)
+p.add_variable("CleanJet_pt", 2)
+p.add_variable("CleanJet_eta", 2)
+p.add_variable("detajj")
+p.add_variable("mjj")
+p.add_variable("zeppjj")
+p.add_variable("nJet")
+p.add_variable("MET_pt")
 
 
 p.set_out_dir(args.output_path)
@@ -81,13 +88,15 @@ supercut = '   Lepton_pt[0]>26 \
             && (Lepton_pdgId[0]*Lepton_pdgId[1]==(-13*13)) \
             '
 bveto = '(Sum$(CleanJet_pt > 20. && abs(CleanJet_eta)<2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.6321) == 0)'
-selection = '(%s)&(mll>105)&(mll<160)&(%s)'%(supercut, bveto)
+
+selection = '(%s)&(mll>70)&(mll<110)&(%s)'%(supercut, bveto) # Z peak
+# selection = '(%s)&(mll>110)&(mll<150)&(%s)'%(supercut, bveto) # fit region
+
 # selection = "(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 # selection = "(mll>70)&(mll<110)&(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 
 p.add_selection(selection)
 
-# p.add_wgt_sf("XSWeight*SFweight2l*GenLepMatch2l")
 p.add_wgt_sf("XSWeight*SFweight2l*GenLepMatch2l*METFilter_MC*%f"%(latinos_data_2016.lumi/1000.))
 p.setLogY() 
 

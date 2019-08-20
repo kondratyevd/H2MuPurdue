@@ -68,7 +68,7 @@ class NTuplePlotter(object):
         self.signal_list.append(src)
         return src
 
-    def add_variable(self, name, nObj):
+    def add_variable(self, name, nObj=1):
         if name not in [v.name for v in variables]:
             sys.exit("\n\nERROR: Variable %s not found in the list.\n"%(name))
         else:
