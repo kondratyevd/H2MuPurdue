@@ -89,8 +89,8 @@ supercut = '   Lepton_pt[0]>26 \
             '
 bveto = '(Sum$(CleanJet_pt > 20. && abs(CleanJet_eta)<2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.6321) == 0)'
 
-selection = '(%s)&(mll>70)&(mll<110)&(%s)'%(supercut, bveto) # Z peak
-# selection = '(%s)&(mll>110)&(mll<150)&(%s)'%(supercut, bveto) # fit region
+# selection = '(%s)&(mll>70)&(mll<110)&(%s)'%(supercut, bveto) # Z peak
+selection = '(%s)&(mll>110)&(mll<150)&(%s)'%(supercut, bveto) # fit region
 
 # selection = "(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 # selection = "(mll>70)&(mll<110)&(Muon_pt[0]>30)&(Muon_pt[1]>20)"

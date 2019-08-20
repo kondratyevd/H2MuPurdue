@@ -102,7 +102,8 @@ variables.append(Variable("weight",         "weight"            ,"weight",     1
 
 variables.append(Variable("ptll"   ,    "ptll"          ,"Dimuon p_{T}",       100, 0, 300, "GeV",      'F', False,         "ptll" ,   0   , False ))
 variables.append(Variable("yll"  ,      "yll"           ,"Dimuon #eta",        100, -10, 10, "",         'F', False,         "ptll" ,   0   , False ))
-variables.append(Variable("mll"   ,     "mll"           ,"Dimuon mass",        80, 70, 110, "GeV",      'F', False,         "ptll" ,   0   , False ))
+# variables.append(Variable("mll"   ,     "mll"           ,"Dimuon mass",        80, 70, 110, "GeV",      'F', False,         "ptll" ,   0   , False ))
+variables.append(Variable("mll"   ,     "mll"           ,"Dimuon mass",        80, 110, 150, "GeV",      'F', False,         "ptll" ,   0   , False ))
 variables.append(Variable("mllErr"   ,  "mllErr"        ,"mllErr",             100, 0, 5, "GeV",         'F', False,         "ptll" ,   0   , False ))
 variables.append(Variable("cosThetaCS", "cosThetaCS"    ,"cosThetaCS",         100, -1, 1, "",         'F', False,         "ptll" ,   0   , False ))
 variables.append(Variable("phiCS",      "phiCS"         ,"phiCS",              100, -3.2, 3.2, "",         'F', False,         "ptll" ,   0   , False ))
