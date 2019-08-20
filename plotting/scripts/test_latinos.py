@@ -61,8 +61,8 @@ dy.get_file(latinos_dy_2016.name, latinos_dy_2016.path+files_to_run, 1)
 
 p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+files_to_run, latinos_data_2016.lumi)   
   
-# p.add_variable("mll", 1)
-p.add_variable("ptll", 1)
+p.add_variable("mll", 1)
+# p.add_variable("ptll", 1)
 # p.add_variable("Muon_pt", 2)
 # p.add_variable("Muon_eta", 2)
 # p.add_variable("CleanJet_pt", 2)
