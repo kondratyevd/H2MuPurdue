@@ -488,6 +488,7 @@ class NTuplePlotter(object):
                     self.hist_dict[var.name].Sumw2()
 
             if self.framework.reweight_zpt and (("Drell-Yan" in self.name) or ("DY" in self.name) or ("dy" in self.name)):
+                print "Z_pT will be reweighted for "+self.name
                 weights = "(%s)*(%s)"%(self.framework.wgt_sf, self.framework.zpt_reweight())
             else:
                 weights = self.framework.wgt_sf
