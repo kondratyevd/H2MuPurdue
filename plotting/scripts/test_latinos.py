@@ -61,8 +61,8 @@ dy.get_file(latinos_dy_2016.name, latinos_dy_2016.path+files_to_run, 1)
 
 p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+files_to_run, latinos_data_2016.lumi)   
   
-p.add_variable("mll", 1)
-# p.add_variable("ptll", 1)
+# p.add_variable("mll", 1)
+p.add_variable("ptll", 1)
 # p.add_variable("Muon_pt", 2)
 # p.add_variable("Muon_eta", 2)
 # p.add_variable("CleanJet_pt", 2)
@@ -72,8 +72,17 @@ p.add_variable("mll", 1)
 
 
 p.set_out_dir(args.output_path)
+
+
+supercut = '   Lepton_pt[0]>26 \
+            && Lepton_pt[1]>20 \
+            && (nLepton>=2 && (Alt$(Lepton_pt[2],0)<10) || Alt$(Lepton_pdgId[2],13)==13) \
+            && abs(Lepton_eta[0])<2.4 && abs(Lepton_eta[1])<2.4 \
+            && (Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) \
+			'
+selection = '(%s)&(mll>105)&(mll<160)&bveto'
 # selection = "(Muon_pt[0]>30)&(Muon_pt[1]>20)"
-selection = "(mll>70)&(mll<110)&(Muon_pt[0]>30)&(Muon_pt[1]>20)"
+# selection = "(mll>70)&(mll<110)&(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 
 p.add_selection(selection)
 
