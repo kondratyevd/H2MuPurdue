@@ -688,7 +688,7 @@ class NTuplePlotter(object):
             lo = hist_min+i*bin_width
             hi = hist_min+(i+1)*bin_width
             expression += "((gen_ptll>%f)&(gen_ptll<%f))*%f + "%(lo,hi,factor)
-        expression += "0)"
+        expression += "(gen_ptll>%f))"%(hist_max)
         # print expression
         return expression
 
