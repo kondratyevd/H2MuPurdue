@@ -80,7 +80,7 @@ supercut = '   Lepton_pt[0]>26 \
             && abs(Lepton_eta[0])<2.4 && abs(Lepton_eta[1])<2.4 \
             && (Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) \
 			'
-selection = '(%s)&(mll>105)&(mll<160)&bveto'
+selection = '(%s)&(mll>105)&(mll<160)&bveto'%supercut
 # selection = "(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 # selection = "(mll>70)&(mll<110)&(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 
