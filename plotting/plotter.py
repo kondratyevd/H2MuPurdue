@@ -22,6 +22,7 @@ class NTuplePlotter(object):
         self.selection = '1'
         self.jet_selection = '1'
         self.wgt_sf = "1"
+        self.reweight_zpt = False
 
         self.var_list =[]
 
@@ -486,8 +487,13 @@ class NTuplePlotter(object):
                     self.hist_dict[var.name] = ROOT.TH1D(self.name+"_"+var.name, self.name, var.nBins, var.min, var.max)
                     self.hist_dict[var.name].Sumw2()
 
+            if self.framework.reweight_zpt and (("Drell-Yan" in self.name) or ("DY" in self.name) or ("dy" in self.name)):
+                weights = "(%s)*(%s)"%(self.framework.wgt_sf, self.framework.zpt_reweight())
+            else:
+                weights = self.framework.wgt_sf
+
             for smp in self.sample_list:
-                smp.get_histos(self.framework.wgt_sf, self.hist_dict)
+                smp.get_histos(weights, self.hist_dict)
 
         class SampleMC(object):
 
@@ -664,6 +670,26 @@ class NTuplePlotter(object):
             pad.SetTopMargin(0)
             pad.SetBottomMargin(0.25)
             pad.Update()
+
+    def zpt_reweight(self):
+        file = ROOT.TFile.Open("$FRAMEWORK_PATH/plotting/data/DY_histo.root")
+        hist = file.Get("DATA2")
+        nBins = hist.GetNbinsX()
+        hist_min = hist.GetBinCenter(hist.FindFirstBinAbove())
+        hist_max = hist.GetBinCenter(hist.FindLastBinAbove()+1)
+        bin_width = float(hist_max-hist_min)/nBins
+        hist_min = hist_min - 0.5*bin_width
+        hist_max = hist_max - 0.5*bin_width
+        # print "nbins: %i, min: %f, max: %f, width: %f"%(nBins, hist_min, hist_max, bin_width)
+        expression = "("
+        for i in range(nBins):
+            factor = hist.GetBinContent(i+1)
+            lo = hist_min+i*bin_width
+            hi = hist_min+(i+1)*bin_width
+            expression += "((gen_ptll>%f)&(gen_ptll<%f))*%f + "%(lo,hi,factor)
+        expression += "0)"
+        # print expression
+        return expression
 
     def ebe_calib(self, tree, new_hist_name, smp_name, var_name, nBins, xmin, xmax, selection, weights):
 
