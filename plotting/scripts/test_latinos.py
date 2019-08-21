@@ -12,7 +12,7 @@ parser.add_argument('--out_path', action='store', dest='output_path', help='Outp
 args = parser.parse_args()
 
 p = NTuplePlotter()
-# p.reweight_zpt = True
+p.reweight_zpt = True
 p.tree_path = "Events"
 p.has_metadata = False
 
