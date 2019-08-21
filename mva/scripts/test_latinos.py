@@ -17,7 +17,7 @@ comment = "latinos test"
 c.add_comment(comment)
 print comment
 
-treePath = 'tree'
+treePath = 'Events'
 
 c.set_tree_path(treePath)
 
