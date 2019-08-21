@@ -172,7 +172,10 @@ class TMVATrainer(object):
 			muon2_pt = tree.FindBranch("Muon_pt").FindLeaf("Muon_pt").GetValue(1)
 			muPair_mass = tree.mll
 			SF = tree.SFweight2l*tree.GenLepMatch2l*tree.METFilter_MC
-		
+			flag = 			((tree.mll>self.framework.massWindow[0])&
+								(tree.mll<self.framework.massWindow[1])&
+								(muon1_pt>26)&
+								(muon2_pt>20))
 		elif "ucsd" in year:
 			pass
 		else:
