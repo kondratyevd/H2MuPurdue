@@ -120,6 +120,7 @@ variables.append(Variable("mjj",        "mjj"           ,"mjj",                1
 # variables.append(Variable("dphijj",         "dphijj"        ,"dphijj",         100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
 # variables.append(Variable("nbjets",         "nbjets"        ,"nbjets",         100, 0, 100, "",         'F', False,         "nJet" ,   0   , False ))
 variables.append(Variable("nJet",       "nJet"          ,"nJet",               8, 0, 8, "",         'F', False,         "nJet" ,   0   , False ))
+variables.append(Variable("nCleanJet",  "nCleanJet"      ,"nCleanJet",         8, 0, 8, "",         'F', False,         "nCleanJet" ,   0   , False ))
 variables.append(Variable("zeppjj",     "zeppjj"        ,"zeppjj",             100, -5, 5, "",         'F', False,         "mjj"   ,   0   , False ))
 # variables.append(Variable("drmj",       "drmj"          ,"drmj",               100, 0, 100, "",         'F', False,         "nJet" ,   0   , False ))
 variables.append(Variable("MET_pt",     "MET_pt"        ,"MET_pt",             50, 0, 150, "",         'F', False,         "MET_pt"   ,   0   , False ))
