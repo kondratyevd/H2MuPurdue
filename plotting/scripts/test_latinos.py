@@ -19,11 +19,11 @@ p.has_metadata = False
 # files_to_run = "*part0*"
 files_to_run = ""
 
-ggh = p.add_signal("ggH", ROOT.kRed)
-ggh.get_file(latinos_ggh_2016.name, latinos_ggh_2016.path+files_to_run, 1)
+# ggh = p.add_signal("ggH", ROOT.kRed)
+# ggh.get_file(latinos_ggh_2016.name, latinos_ggh_2016.path+files_to_run, 1)
 
-# vbf = p.add_signal("VBF", ROOT.kViolet)
-# vbf.get_file(latinos_vbf_2016.name, latinos_vbf_2016.path+files_to_run, 1)
+vbf = p.add_signal("VBF", ROOT.kViolet)
+vbf.get_file(latinos_vbf_2016.name, latinos_vbf_2016.path+files_to_run, 1)
 
 # vh = p.add_signal("VH", ROOT.kGreen)
 # vh.get_file(latinos_wplush_2016.name, latinos_wplush_2016.path+files_to_run, 1)
