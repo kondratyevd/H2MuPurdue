@@ -12,7 +12,7 @@ parser.add_argument('--out_path', action='store', dest='output_path', help='Outp
 args = parser.parse_args()
 
 p = NTuplePlotter()
-p.reweight_zpt = True
+# p.reweight_zpt = True
 p.tree_path = "Events"
 p.has_metadata = False
 
@@ -66,10 +66,10 @@ p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+files_to_run, lati
 # p.add_variable("yll")
 # p.add_variable("cosThetaCS")
 # p.add_variable("phiCS")
-# p.add_variable("ptll")
+p.add_variable("ptll")
 # p.add_variable("Muon_pt", 2)
 # p.add_variable("Muon_eta", 2)
-p.add_variable("CleanJet_pt", 2)
+# p.add_variable("CleanJet_pt", 2)
 # p.add_variable("CleanJet_eta", 2)
 # p.add_variable("detajj")
 # p.add_variable("mjj")
