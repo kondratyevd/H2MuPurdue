@@ -14,7 +14,7 @@ parser.add_argument('--mass_min', action='store', dest='mass_min', help='Mass mi
 parser.add_argument('--mass_max', action='store', dest='mass_max', help='Mass max')
 
 args = parser.parse_args()
-
+print args.zpt
 p = NTuplePlotter()
 p.reweight_zpt = args.zpt
 p.tree_path = "Events"
