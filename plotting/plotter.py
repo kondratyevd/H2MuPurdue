@@ -689,7 +689,7 @@ class NTuplePlotter(object):
             hi = hist_min+(i+1)*bin_width
             expression += "((gen_ptll>%f)&(gen_ptll<%f))*%f + "%(lo,hi,factor)
         expression += "(gen_ptll>%f))"%(hist_max)
-        # print expression
+        print expression
         return expression
 
     def ebe_calib(self, tree, new_hist_name, smp_name, var_name, nBins, xmin, xmax, selection, weights):
