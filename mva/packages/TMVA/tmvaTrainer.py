@@ -107,7 +107,7 @@ class TMVATrainer(object):
 									event.push_back( var.replacement )	
 
 				if "latinos" in self.framework.year:
-					weight = tree.XSweight*SF
+					weight = tree.XSWeight*SF
 				else:
 					weight = tree.PU_wgt*tree.GEN_wgt*SF*file.xSec/file.nOriginalWeighted*40000 # I take lumi=40000 because it doesn't matter as it is applied to all samples
 
