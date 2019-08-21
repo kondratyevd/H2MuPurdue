@@ -171,7 +171,7 @@ class TMVATrainer(object):
 			muon1_pt = tree.FindBranch("Muon_pt").FindLeaf("Muon_pt").GetValue(0)
 			muon2_pt = tree.FindBranch("Muon_pt").FindLeaf("Muon_pt").GetValue(1)
 			muPair_mass = tree.mll
-			SF = tree.SFweight*tree.GenLepMatch*tree.METFilter_MC
+			SF = tree.SFweight2l*tree.GenLepMatch2l*tree.METFilter_MC
 		
 		elif "ucsd" in year:
 			pass
