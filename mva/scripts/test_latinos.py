@@ -43,7 +43,7 @@ c.add_category(c.dy_label, False)
 c.add_file_to_category(latinos_dy_2016.name, latinos_dy_2016.path, latinos_dy_2016.xSec, c.dy_label, False)
 
 c.add_category(c.vbf_label, False)
-c.add_file_to_category(latinos_ttto2l2nu_2016.name, latinos_ttto2l2nu_2016.path, latinos_ttto2l2nu_2016.xSec, c.ttto2l2nu_label, False)
+c.add_file_to_category(latinos_ttto2l2nu_2016.name, latinos_ttto2l2nu_2016.path, latinos_ttto2l2nu_2016.xSec, c.top_label, False)
 
 ##########################################################
 
