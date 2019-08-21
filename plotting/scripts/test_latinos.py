@@ -9,10 +9,14 @@ from samples.ntuples import *
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--out_path', action='store', dest='output_path', help='Output path')
+parser.add_argument('--zpt', action='store', dest='zpt', help='Z pT reweighting')
+parser.add_argument('--mass_min', action='store', dest='mass_min', help='Mass min')
+parser.add_argument('--mass_max', action='store', dest='mass_max', help='Mass max')
+
 args = parser.parse_args()
 
 p = NTuplePlotter()
-p.reweight_zpt = True
+p.reweight_zpt = args.zpt
 p.tree_path = "Events"
 p.has_metadata = False
 
@@ -88,13 +92,10 @@ supercut = '   Lepton_pt[0]>26 \
             && (Lepton_pdgId[0]*Lepton_pdgId[1]==(-13*13)) \
             '
 bveto = '(Sum$(CleanJet_pt > 20. && abs(CleanJet_eta)<2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.6321) == 0)'
-jets = '(CleanJet_pt[0]*(CleanJet_pt[0]>30) && CleanJet_pt[1]*(CleanJet_pt[1]>30) )'
+jets = '((!CleanJet_pt[0] || CleanJet_pt[0]>30) ) && (!CleanJet_pt[1] || CleanJet_pt[1]>30) ))'
 
-selection = '(%s)&(mll>70)&(mll<110)&(%s)&(%s)'%(supercut, bveto, jets) # Z peak
-# selection = '(%s)&(mll>110)&(mll<150)&(%s)'%(supercut, bveto) # fit region
+selection = '(mll>%f)&(mll<%f)&(%s)&(%s)&(%s)'%(args.mass_min, args.mass_max, supercut, bveto, jets) # Z peak
 
-# selection = "(Muon_pt[0]>30)&(Muon_pt[1]>20)"
-# selection = "(mll>70)&(mll<110)&(Muon_pt[0]>30)&(Muon_pt[1]>20)"
 
 p.add_selection(selection)
 
