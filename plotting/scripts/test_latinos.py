@@ -9,18 +9,14 @@ from samples.ntuples import *
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--out_path', action='store', dest='output_path', help='Output path')
-parser.add_argument('--zpt', action='store', dest='zpt', help='Z pT reweighting')
+parser.add_argument('--zpt', action='store_true', dest='zpt', help='Z pT reweighting')
 parser.add_argument('--mass_min', action='store', dest='mass_min', help='Mass min')
 parser.add_argument('--mass_max', action='store', dest='mass_max', help='Mass max')
 
 args = parser.parse_args()
 p = NTuplePlotter()
-if args.zpt is 'false':
-	p.reweight_zpt = False
-	print "Will no reweight ZpT"
-else:
-	p.reweight_zpt = True
-	print "Will reweight ZpT"
+p.reweight_zpt = args.zpt
+print args.zpt
 p.tree_path = "Events"
 p.has_metadata = False
 

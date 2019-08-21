@@ -41,4 +41,8 @@ esac
 
 mkdir -p $PLOTTING_OUT_PATH
 
-python $SCRIPT_PATH --out_path $PLOTTING_OUT_PATH --zpt $ZPT --mass_min $MASS_MIN --mass_max $MASS_MAX
+if $ZPT ; then
+	python $SCRIPT_PATH --out_path $PLOTTING_OUT_PATH --zpt --mass_min $MASS_MIN --mass_max $MASS_MAX
+else
+	python $SCRIPT_PATH --out_path $PLOTTING_OUT_PATH --mass_min $MASS_MIN --mass_max $MASS_MAX
+fi
