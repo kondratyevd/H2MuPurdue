@@ -17,8 +17,10 @@ args = parser.parse_args()
 p = NTuplePlotter()
 if args.zpt is 'false':
 	p.reweight_zpt = False
+	print "Will no reweight ZpT"
 else:
 	p.reweight_zpt = True
+	print "Will reweight ZpT"
 p.tree_path = "Events"
 p.has_metadata = False
 
