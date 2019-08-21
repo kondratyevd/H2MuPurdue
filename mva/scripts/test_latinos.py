@@ -32,19 +32,24 @@ c.vbf_label = "VBF"
 
 ##################### Input samples #######################
 
+# for Keras
+# c.add_category(c.ggh_label, True)
+# c.add_file_to_category(latinos_ggh_2016.name, latinos_ggh_2016.path, latinos_ggh_2016.xSec, c.ggh_label, False)
 
-c.add_category(c.ggh_label, True)
-c.add_file_to_category(latinos_ggh_2016.name, latinos_ggh_2016.path, latinos_ggh_2016.xSec, c.ggh_label, False)
+# c.add_category(c.vbf_label, True)
+# c.add_file_to_category(latinos_vbf_2016.name, latinos_vbf_2016.path, latinos_vbf_2016.xSec, c.vbf_label, False)
 
-c.add_category(c.vbf_label, True)
-c.add_file_to_category(latinos_vbf_2016.name, latinos_vbf_2016.path, latinos_vbf_2016.xSec, c.vbf_label, False)
+# c.add_category(c.dy_label, False)
+# c.add_file_to_category(latinos_dy_2016.name, latinos_dy_2016.path, latinos_dy_2016.xSec, c.dy_label, False)
 
-c.add_category(c.dy_label, False)
-c.add_file_to_category(latinos_dy_2016.name, latinos_dy_2016.path, latinos_dy_2016.xSec, c.dy_label, False)
+# c.add_category(c.vbf_label, False)
+# c.add_file_to_category(latinos_ttto2l2nu_2016.name, latinos_ttto2l2nu_2016.path, latinos_ttto2l2nu_2016.xSec, c.top_label, False)
 
-c.add_category(c.vbf_label, False)
-c.add_file_to_category(latinos_ttto2l2nu_2016.name, latinos_ttto2l2nu_2016.path, latinos_ttto2l2nu_2016.xSec, c.top_label, False)
-
+# for TMVA
+c.add_signal_file(latinos_ggh_2016.name, latinos_ggh_2016.path, latinos_ggh_2016.xSec, False)
+c.add_signal_file(latinos_vbf_2016.name, latinos_vbf_2016.path, latinos_vbf_2016.xSec, False)
+c.add_background_file(latinos_dy_2016.name, latinos_dy_2016.path, latinos_dy_2016.xSec, False)
+c.add_background_file(latinos_ttto2l2nu_2016.name, latinos_ttto2l2nu_2016.path, latinos_ttto2l2nu_2016.xSec, False)
 ##########################################################
 
 
