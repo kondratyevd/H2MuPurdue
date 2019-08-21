@@ -59,14 +59,8 @@ class TMVATrainer(object):
 				tree.GetEntry(i)
 
 				flag, SF = self.eventInfo(tree, self.framework.year)
-				GEN_HT = tree.FindLeaf("LHT_HT").GetValue()
-				HT_flag = True
-				# if ('ZJets_MG' in file.name) and ('HT' not in file.name):
-				# 	if GEN_HT>70:
-				# 		HT_flag = False
 
-
-				if (flag and HT_flag):
+				if (flag):
 					for var in self.framework.variable_list:
 						if 'muons.pt[0]/muPairs.pt' in var.name:
 							event.push_back( tree.FindBranch("muons.pt").FindLeaf("pt").GetValue(0)/tree.FindBranch('muPairs.mass').FindLeaf('mass').GetValue() )
