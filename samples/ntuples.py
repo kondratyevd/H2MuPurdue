@@ -27,7 +27,7 @@ data2016_path = "/2016/DATAl2loose2016hmm__l2tightOR2016hmm/"
 latinos_data_2016 = SmpNtuple("SingleMu_2016","SingleMu_2016", latinos_path+data2016_path, True, True, 1, 35867)
 
 latinos_ggh_2016 = SmpNtuple("ggH_2016","ggH 2016", latinos_path+mc2016_path+"*GluGluHToMuMu_M125_CP5_*", False, False, 1, 1)
-latinos_vbf_2016 = SmpNtuple("VBF_2016","VBF 2016", latinos_path+mc2016_path+"*VBFHToMuMu_M125_CP5_*", False, False, 1, 1)
+latinos_vbf_2016 = SmpNtuple("VBF_2016","VBF 2016", latinos_path+mc2016_path+"*VBFHToMuMu_M125_CP5__*", False, False, 1, 1)
 latinos_wplush_2016 = SmpNtuple("WplusH_2016","WplusH 2016", latinos_path+mc2016_path+"*WPlusH_HToMuMu_M125_CP5_*", False, False, 1, 1)
 latinos_wminush_2016 = SmpNtuple("WminusH_2016","WminusH 2016", latinos_path+mc2016_path+"*WMinusH_HToMuMu_M125_CP5_*", False, False, 1, 1)
 latinos_zh_2016 = SmpNtuple("ZH_2016","ZH 2016", latinos_path+mc2016_path+"*ZH_HToMuMu_M125_CP5_*", False, False, 1, 1)
