@@ -88,7 +88,7 @@ supercut = '   Lepton_pt[0]>26 \
             && (Lepton_pdgId[0]*Lepton_pdgId[1]==(-13*13)) \
             '
 bveto = '(Sum$(CleanJet_pt > 20. && abs(CleanJet_eta)<2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.6321) == 0)'
-jets = '((!CleanJet_pt[0] || CleanJet_pt[0]>30) )&&((!CleanJet_pt[1] || CleanJet_pt[1]>30) )'
+jets = '(CleanJet_pt[0]*(CleanJet_pt[0]>30) && CleanJet_pt[1]*(CleanJet_pt[1]>30) )'
 
 selection = '(%s)&(mll>70)&(mll<110)&(%s)&(%s)'%(supercut, bveto, jets) # Z peak
 # selection = '(%s)&(mll>110)&(mll<150)&(%s)'%(supercut, bveto) # fit region
