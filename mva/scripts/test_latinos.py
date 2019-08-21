@@ -76,8 +76,11 @@ c.add_spectator('METFilter_MC')
 
 c.weigh_by_event(True)
 
-c.add_package("Keras")
-c.add_method("model_50_D2_25_D2_25_D2") # Dropout 0.2
+c.add_package("TMVA")
+c.add_method("BDTG_UCSD") # Dropout 0.2
+
+# c.add_package("Keras")
+# c.add_method("model_50_D2_25_D2_25_D2") # Dropout 0.2
 
 c.train_methods()
 
