@@ -26,16 +26,16 @@ data2016_path = "/2016/DATAl2loose2016hmm__l2tightOR2016hmm/"
 
 latinos_data_2016 = SmpNtuple("SingleMu_2016","SingleMu_2016", latinos_path+data2016_path, True, True, 1, 35867)
 
-latinos_ggh_2016 = SmpNtuple("ggH_2016","ggH 2016", latinos_path+mc2016_path+"*GluGluH*", False, False, 1, 1)
-latinos_vbf_2016 = SmpNtuple("VBF_2016","VBF 2016", latinos_path+mc2016_path+"*VBFH*", False, False, 1, 1)
-latinos_wplush_2016 = SmpNtuple("WplusH_2016","WplusH 2016", latinos_path+mc2016_path+"*WPlusH*", False, False, 1, 1)
-latinos_wminush_2016 = SmpNtuple("WminusH_2016","WminusH 2016", latinos_path+mc2016_path+"*WMinusH*", False, False, 1, 1)
-latinos_zh_2016 = SmpNtuple("ZH_2016","ZH 2016", latinos_path+mc2016_path+"*ZH_H*", False, False, 1, 1)
-latinos_tth_2016 = SmpNtuple("ttH_2016","ttH 2016", latinos_path+mc2016_path+"*ttH*", False, False, 1, 1)
+latinos_ggh_2016 = SmpNtuple("ggH_2016","ggH 2016", latinos_path+mc2016_path+"*GluGluHToMuMu_M125_CP5_*", False, False, 1, 1)
+latinos_vbf_2016 = SmpNtuple("VBF_2016","VBF 2016", latinos_path+mc2016_path+"*VBFHToMuMu_M125_CP5_*", False, False, 1, 1)
+latinos_wplush_2016 = SmpNtuple("WplusH_2016","WplusH 2016", latinos_path+mc2016_path+"*WPlusH_HToMuMu_M125_CP5_*", False, False, 1, 1)
+latinos_wminush_2016 = SmpNtuple("WminusH_2016","WminusH 2016", latinos_path+mc2016_path+"*WMinusH_HToMuMu_M125_CP5_*", False, False, 1, 1)
+latinos_zh_2016 = SmpNtuple("ZH_2016","ZH 2016", latinos_path+mc2016_path+"*ZH_HToMuMu_M125_CP5_*", False, False, 1, 1)
+latinos_tth_2016 = SmpNtuple("ttH_2016","ttH 2016", latinos_path+mc2016_path+"*ttHToMuMu_M125_CP5_*", False, False, 1, 1)
 
 latinos_dy105to160_2016 = SmpNtuple("DY105To160_2016","DY105To160 2016", latinos_path+mc2016_path+"*DYJetsToLL_M-105To160*", False, False, 1, 1)
 latinos_dy_2016 = SmpNtuple("DY_2016","DY 2016", latinos_path+mc2016_path+"*DYJetsToLL_M-50*", False, False, 1, 1)
-latinos_ttjets_2016 = SmpNtuple("ttjets_2016","ttjets 2016", latinos_path+mc2016_path+"*TTJets_DiLept*", False, False, 1, 1)
+latinos_ttjets_2016 = SmpNtuple("ttjets_2016","ttjets 2016", latinos_path+mc2016_path+"*TTJets_DiLept_ext1*", False, False, 1, 1)
 
 latinos_ttto2l2nu_2016 = SmpNtuple("TTTo2L2Nu_2016","TTTo2L2Nu 2016", latinos_path+mc2016_path+"*TTTo2L2Nu*", False, False, 1, 1)
 latinos_tttosemileptonic_2016 = SmpNtuple("TTToSemiLeptonic_2016","TTToSemiLeptonic 2016", latinos_path+mc2016_path+"*TTToSemiLeptonic*", False, False, 1, 1)
