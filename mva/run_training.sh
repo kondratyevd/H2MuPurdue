@@ -14,6 +14,13 @@ case $1 in
 		rm -rf $OUTPUT_DIR
 		;;
 
+	0.1)
+		echo 'Running option 0'
+		python $FRAMEWORK_PATH/mva/scripts/test_latinos.py --out_path $OUTPUT_DIR
+		echo "Deleting output dir... (test run)"
+		rm -rf $OUTPUT_DIR
+		;;
+
 	1)
 		echo 'Running option 1'
 		python $FRAMEWORK_PATH/mva/scripts/test_hammer.py --out_path $OUTPUT_DIR
