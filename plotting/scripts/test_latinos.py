@@ -60,7 +60,10 @@ ttst.get_file(latinos_st_t_antitop_2016.name, latinos_st_t_antitop_2016.path+fil
 ttst.get_file(latinos_st_t_top_2016.name, latinos_st_t_top_2016.path+files_to_run, 1)
 
 dy = p.add_source("Drell-Yan", ROOT.kOrange-3)
-dy.get_file(latinos_dy_2016.name, latinos_dy_2016.path+files_to_run, 1)
+if (args.mass_min<110):
+	dy.get_file(latinos_dy_2016.name, latinos_dy_2016.path+files_to_run, 1)
+else:
+	dy.get_file(latinos_dy105to160_2016.name, latinos_dy105to160_2016.path+files_to_run, 1)
 
 p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+files_to_run, latinos_data_2016.lumi)   
   

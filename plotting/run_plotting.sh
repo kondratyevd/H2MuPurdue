@@ -31,8 +31,8 @@ case $1 in
 		echo 'Running option 1.1: fit region, ZpT reweighting'
 		PLOTTING_OUT_PATH=$FRAMEWORK_PATH/plotting/plots/test_latinos_fitreg_corr/ 
 		ZPT=true
-		MASS_MIN=70
-		MASS_MAX=110
+		MASS_MIN=110
+		MASS_MAX=150
 		;;
 	*)
 		echo 'Wrong option ' $1		
