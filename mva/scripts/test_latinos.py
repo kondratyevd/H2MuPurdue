@@ -46,10 +46,10 @@ c.vbf_label = "VBF"
 # c.add_file_to_category(latinos_ttto2l2nu_2016.name, latinos_ttto2l2nu_2016.path, latinos_ttto2l2nu_2016.xSec, c.top_label, False)
 
 # for TMVA
-c.add_signal_file(latinos_ggh_2016.name, latinos_ggh_2016.path, latinos_ggh_2016.xSec, False)
-c.add_signal_file(latinos_vbf_2016.name, latinos_vbf_2016.path, latinos_vbf_2016.xSec, False)
-c.add_background_file(latinos_dy_2016.name, latinos_dy_2016.path, latinos_dy_2016.xSec, False)
-c.add_background_file(latinos_ttto2l2nu_2016.name, latinos_ttto2l2nu_2016.path, latinos_ttto2l2nu_2016.xSec, False)
+c.add_signal_file(latinos_ggh_2016.name, latinos_ggh_2016.path+"*part0*", latinos_ggh_2016.xSec, False)
+c.add_signal_file(latinos_vbf_2016.name, latinos_vbf_2016.path+"*part0*", latinos_vbf_2016.xSec, False)
+c.add_background_file(latinos_dy_2016.name, latinos_dy_2016.path+"*part0*", latinos_dy_2016.xSec, False)
+c.add_background_file(latinos_ttto2l2nu_2016.name, latinos_ttto2l2nu_2016.path+"*part0*", latinos_ttto2l2nu_2016.xSec, False)
 ##########################################################
 
 
