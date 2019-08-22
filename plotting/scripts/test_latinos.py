@@ -80,7 +80,8 @@ p.add_variable("CleanJet_eta", 2)
 p.add_variable("detajj")
 p.add_variable("mjj")
 p.add_variable("zeppjj")
-p.add_variable("nCleanJet")
+p.add_variable("njet")
+p.add_variable("nbjet")
 p.add_variable("MET_pt")
 
 
