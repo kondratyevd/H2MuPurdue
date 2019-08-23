@@ -60,10 +60,12 @@ ttst.get_file(latinos_st_t_antitop_2016.name, latinos_st_t_antitop_2016.path+fil
 ttst.get_file(latinos_st_t_top_2016.name, latinos_st_t_top_2016.path+files_to_run, 1)
 
 dy = p.add_source("Drell-Yan", ROOT.kOrange-3)
-if (args.mass_min<110):
+if ("Z" in args.output_path):
 	dy.get_file(latinos_dy_2016.name, latinos_dy_2016.path+files_to_run, 1)
+	print "Use M-50 sample"
 else:
 	dy.get_file(latinos_dy105to160_2016.name, latinos_dy105to160_2016.path+files_to_run, 1)
+	print "Use M-105to160 sample"
 
 p.add_data_dir(latinos_data_2016.name, latinos_data_2016.path+files_to_run, latinos_data_2016.lumi)   
   
@@ -83,6 +85,13 @@ p.add_variable("zeppjj")
 p.add_variable("njet")
 p.add_variable("nbjet")
 p.add_variable("MET_pt")
+
+p.add_variable("detajj*(njet>=2)")
+p.add_variable("mjj*(njet>=2)")
+p.add_variable("zeppjj*(njet>=2)")
+
+
+
 
 
 p.set_out_dir(args.output_path)

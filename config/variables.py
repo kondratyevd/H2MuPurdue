@@ -120,8 +120,8 @@ variables.append(Variable("mjj",        "mjj"           ,"mjj",                1
 # variables.append(Variable("dphijj",         "dphijj"        ,"dphijj",         100, 0, 100, "",         'F', False,         "mjj"   ,   0   , False ))
 # variables.append(Variable("nbjets",         "nbjets"        ,"nbjets",         100, 0, 100, "",         'F', False,         "nJet" ,   0   , False ))
 variables.append(Variable("nJet",       "nJet"          ,"nJet",               8, 0, 8, "",         'F', False,         "njet" ,   0   , False ))
-variables.append(Variable("nbjet",         "nbjet"        ,"nbjet",         100, 0, 100, "",         'F', False,         "njet" ,   0   , False ))
-variables.append(Variable("njet",          "njet"         ,"njet",          100, 0, 100, "",         'F', False,         "njet" ,   0   , False ))
+variables.append(Variable("nbjet",         "nbjet"        ,"nbjet",         8, 0, 8, "",         'F', False,         "njet" ,   0   , False ))
+variables.append(Variable("njet",          "njet"         ,"njet",          8, 0, 8, "",         'F', False,         "njet" ,   0   , False ))
 
 variables.append(Variable("nCleanJet",  "nCleanJet"      ,"nCleanJet",         8, 0, 8, "",         'F', False,         "njet" ,   0   , False ))
 variables.append(Variable("zeppjj",     "zeppjj"        ,"zeppjj",             100, -5, 5, "",         'F', False,         "mjj"   ,   0   , False ))
@@ -132,4 +132,7 @@ variables.append(Variable("SFweight",   "SFweight"      ,"SFweight",           1
 variables.append(Variable("GenLepMatch","GenLepMatch"   ,"GenLepMatch",        100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
 variables.append(Variable("METFilter_MC","METFilter_MC" ,"METFilter_MC",       100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
     
-    
+variables.append(Variable("detajj*(njet>=2)",     "detajj*(njet>=2)"        ,"detajj*(njet>=2)",             35, 0, 7, "",         'F', False,         "mjj"   ,   0   , False ))
+variables.append(Variable("mjj*(njet>=2)",        "mjj*(njet>=2)"           ,"mjj*(njet>=2)",                100, 0, 500, "",         'F', False,         "mjj"   ,   0   , False ))
+variables.append(Variable("zeppjj*(njet>=2)",     "zeppjj*(njet>=2)"        ,"zeppjj*(njet>=2)",             100, -5, 5, "",         'F', False,         "mjj"   ,   0   , False ))
+     
