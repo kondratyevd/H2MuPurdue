@@ -673,7 +673,7 @@ class NTuplePlotter(object):
             pad.Update()
 
     def zpt_reweight(self):
-        file = ROOT.TFile.Open("$FRAMEWORK_PATH/plotting/data/DY_histo_21_08_2019.root")
+        file = ROOT.TFile.Open("$FRAMEWORK_PATH/plotting/data/DY_histo.root")
         hist = file.Get("DATA2")
         nBins = hist.GetNbinsX()
         hist_min = hist.GetBinCenter(hist.FindFirstBinAbove())
@@ -687,7 +687,7 @@ class NTuplePlotter(object):
             factor = hist.GetBinContent(i+1)
             lo = hist_min+i*bin_width
             hi = hist_min+(i+1)*bin_width
-            expression += "((gen_ptll>%f)&(gen_ptll<%f))*%f + "%(lo,hi,factor)
+            expression += "((gen_ptll>%f)&(gen_ptll<=%f))*%f + "%(lo,hi,factor)
         expression += "(gen_ptll>%f))"%(hist_max)
         print expression
         return expression
