@@ -42,7 +42,7 @@ c.add_file_to_category(latinos_ggh_2016.name, latinos_ggh_2016.path, latinos_ggh
 ###  ------   Caltech variables   ------ ###
 c.add_variable("njet") # replace with softjet5 later 
 c.add_variable("yll") # replace with drll
-c.add_variable("detall") 
+c.add_variable("yll") # replace with detall
 c.add_variable("mjj")
 c.add_variable("ptjj")
 c.add_variable("etajj")
