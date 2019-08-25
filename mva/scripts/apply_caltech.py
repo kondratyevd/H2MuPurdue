@@ -71,8 +71,10 @@ c.add_variable("mll")
 # c.add_spectator('hmass')
 # c.add_spectator('weight')
 
-c.weigh_by_event(True)
+# c.weigh_by_event(True)
 
+
+c.add_package("Keras")
 c.apply_methods()
 
 print "Application done: "
