@@ -61,6 +61,11 @@ case $1 in
 		python $FRAMEWORK_PATH/mva/scripts/dnn_sigloss_multi.py --out_path $OUTPUT_DIR
 		;;
 
+	7)
+		echo 'Running option 7: Evaluating Caltech DNN'
+		python $FRAMEWORK_PATH/mva/scripts/apply_caltech.py --out_path $OUTPUT_DIR
+		;;
+
 	*)
 		echo 'Wrong option ' $1		
 		echo "Deleting output dir... (test run)"

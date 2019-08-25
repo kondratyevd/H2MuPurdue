@@ -53,6 +53,9 @@ class Framework(object):
 
         self.ebe_weights = False
 
+        self.trained_model_path = ''
+        self.standartization_path = ''
+
     class File(object):
         def __init__(self, source, name, path, xSec, isDir, hasMetadata, isData=False, repeat=1):
             self.source = source
