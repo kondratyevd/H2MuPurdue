@@ -73,7 +73,7 @@ c.add_variable("mll")
 
 c.weigh_by_event(True)
 
-c.apply_models()
+c.apply_methods()
 
 print "Application done: "
 print comment
