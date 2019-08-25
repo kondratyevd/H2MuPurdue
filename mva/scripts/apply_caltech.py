@@ -41,7 +41,7 @@ c.add_file_to_category(latinos_ggh_2016.name, latinos_ggh_2016.path, latinos_ggh
 
 ###  ------   Caltech variables   ------ ###
 c.add_variable("njet") # replace with softjet5 later 
-c.add_variable("drll")
+c.add_variable("yll") # replace with drll
 c.add_variable("detall") 
 c.add_variable("mjj")
 c.add_variable("ptjj")
@@ -56,7 +56,7 @@ c.add_variable("drlj") #min dr(mu,j)
 c.add_variable("drlj") #replace with maxdrlj
 c.add_variable("drlj") #replace with mindrllj
 c.add_variable("drlj") #replace with maxdrllj
-c.add_variable("dphill")
+c.add_variable("yll") #replace with dphill
 c.add_variable("CleanJet_pt", 2)
 c.add_variable("CleanJet_eta", 2)
 c.add_variable("Jet_qgl", 2) # replace with CleanJet_qgl
