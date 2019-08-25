@@ -24,9 +24,9 @@ c.set_tree_path(treePath)
 c.set_year("caltech")
 # c.massWindow = [120,130]
 
-
-c.trained_model_path =   '$FRAMEWORK_PATH/mva/data/DNN27vars_sig_vbf_bkg_dyvbf_dy105To160_ewk105To160_split_60_40_mod10_190820.h5'
-c.standartization_path = '$FRAMEWORK_PATH/mva/data/DNN27vars_sig_vbf_bkg_dyvbf_dy105To160_ewk105To160_split_60_40_mod10_190820.npy'
+fwk_path = os.environ['FRAMEWORK_PATH']
+c.trained_model_path =   fwk_path+'/mva/data/DNN27vars_sig_vbf_bkg_dyvbf_dy105To160_ewk105To160_split_60_40_mod10_190820.h5'
+c.standartization_path = fwk_path+'/mva/data/DNN27vars_sig_vbf_bkg_dyvbf_dy105To160_ewk105To160_split_60_40_mod10_190820.npy'
 
 ##################### Input samples #######################
 
