@@ -44,7 +44,7 @@ class KerasApplicator(object):
                     label_list = self.framework.variable_list
 
                     for var in label_list:
-                        print "Adding variable:", var.name
+                        # print "Adding variable:", var.name
                         up_var = uproot_tree[var.name].array()
                         if var.isMultiDim:                        
                             # splitting the multidimensional input variables so each column corresponds to a one-dimensional variable
