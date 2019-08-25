@@ -66,7 +66,7 @@ class KerasApplicator(object):
         return self.df    
 
     def apply_models(self):
-        dnn_vars = dnn_variables(m1,m2,j1,j2,nsoft,j1_qgl,j2_qgl)
+        # dnn_vars = dnn_variables(m1,m2,j1,j2,nsoft,j1_qgl,j2_qgl)
         # varlist_order = ['softJet5', 'dRmm','dEtamm','M_jj','pt_jj','eta_jj','phi_jj','M_mmjj','eta_mmjj','phi_mmjj','dEta_jj','Zep','dRmin_mj', 'dRmax_mj'
         #                    ,'dRmin_mmj','dRmax_mmj','dPhimm','leadingJet_pt','subleadingJet_pt',
         #                        'leadingJet_eta','subleadingJet_eta','leadingJet_qgl','subleadingJet_qgl','cthetaCS','Higgs_pt','Higgs_eta','Higgs_mass']
@@ -80,7 +80,7 @@ class KerasApplicator(object):
         dnn_vars_df/=dnn_std
 
         m_caltech = load_model(self.framework.trained_model_path)
-        caltech_dnn_score=m_caltech.predict(dnn_vars_arr).ravel()
+        caltech_dnn_score=m_caltech.predict(dnn_vars_df)
         print caltech_dnn_score
         return caltech_dnn_score
 
