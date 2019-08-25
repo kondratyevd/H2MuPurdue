@@ -52,7 +52,7 @@ c.add_variable('etajj') #replace with etalljj
 c.add_variable("phijj") #replace with philljj
 c.add_variable("detajj")
 c.add_variable("zeppjj")
-c.add_variable("drlj") #min dr(µ,j)
+c.add_variable("drlj") #min dr(mu,j)
 c.add_variable("drlj") #replace with maxdrlj
 c.add_variable("drlj") #replace with mindrllj
 c.add_variable("drlj") #replace with maxdrllj
