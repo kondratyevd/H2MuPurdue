@@ -45,11 +45,11 @@ c.add_variable("yll") # replace with drll
 c.add_variable("yll") # replace with detall
 c.add_variable("mjj")
 c.add_variable("mjj") # replace with ptjj
-c.add_variable("etajj")
-c.add_variable("phijj")
+c.add_variable("detajj") #replace with etajj
+c.add_variable("phill") # replace with phijj
 c.add_variable('mjj') # replace with mlljj
-c.add_variable('etajj') #replace with etalljj
-c.add_variable("phijj") #replace with philljj
+c.add_variable('detajj') #replace with etalljj
+c.add_variable("phill") #replace with philljj
 c.add_variable("detajj")
 c.add_variable("zeppjj")
 c.add_variable("drlj") #min dr(mu,j)
