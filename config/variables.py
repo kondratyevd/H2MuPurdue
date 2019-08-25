@@ -125,7 +125,7 @@ variables.append(Variable("njet",          "njet"         ,"njet",          8, 0
 
 variables.append(Variable("nCleanJet",  "nCleanJet"      ,"nCleanJet",         8, 0, 8, "",         'F', False,         "njet" ,   0   , False ))
 variables.append(Variable("zeppjj",     "zeppjj"        ,"zeppjj",             100, -5, 5, "",         'F', False,         "mjj"   ,   0   , False ))
-# variables.append(Variable("drmj",       "drmj"          ,"drmj",               100, 0, 100, "",         'F', False,         "nJet" ,   0   , False ))
+variables.append(Variable("drlj",       "drlj"          ,"drlj",               100, 0, 7, "",         'F', False,         "nJet" ,   0   , False ))
 variables.append(Variable("MET_pt",     "MET_pt"        ,"MET_pt",             50, 0, 150, "",         'F', False,         "MET_pt"   ,   0   , False ))
 variables.append(Variable("XSWeight",   "XSWeight"      ,"XSWeight",           100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
 variables.append(Variable("SFweight",   "SFweight"      ,"SFweight",           100, 0, 100, "",         'F', False,         "ptll" ,   0   , False ))
@@ -135,4 +135,3 @@ variables.append(Variable("METFilter_MC","METFilter_MC" ,"METFilter_MC",       1
 variables.append(Variable("detajj*(njet>=2)",     "detajj*(njet>=2)"        ,"detajj*(njet>=2)",             35, 0, 7, "",         'F', False,         "mjj"   ,   0   , False ))
 variables.append(Variable("mjj*(njet>=2)",        "mjj*(njet>=2)"           ,"mjj*(njet>=2)",                100, 0, 500, "",         'F', False,         "mjj"   ,   0   , False ))
 variables.append(Variable("zeppjj*(njet>=2)",     "zeppjj*(njet>=2)"        ,"zeppjj*(njet>=2)",             100, -5, 5, "",         'F', False,         "mjj"   ,   0   , False ))
-     
