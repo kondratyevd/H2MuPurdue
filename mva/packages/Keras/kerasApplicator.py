@@ -70,9 +70,9 @@ class KerasApplicator(object):
         # varlist_order = ['softJet5', 'dRmm','dEtamm','M_jj','pt_jj','eta_jj','phi_jj','M_mmjj','eta_mmjj','phi_mmjj','dEta_jj','Zep','dRmin_mj', 'dRmax_mj'
         #                    ,'dRmin_mmj','dRmax_mmj','dPhimm','leadingJet_pt','subleadingJet_pt',
         #                        'leadingJet_eta','subleadingJet_eta','leadingJet_qgl','subleadingJet_qgl','cthetaCS','Higgs_pt','Higgs_eta','Higgs_mass']
-        # dnn_vars_arr = np.vstack([dnn_vars[k] for k in varlist_order]).T
+        # dnn_vars_arr = numpy.vstack([dnn_vars[k] for k in varlist_order]).T
         dnn_vars_df = self.df.values
-        model_STDwt = np.load(self.framework.standartization_path)
+        model_STDwt = numpy.load(self.framework.standartization_path)
         dnn_mean = model_STDwt[0,:]
         dnn_std = model_STDwt[1,:]
 
