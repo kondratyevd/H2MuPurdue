@@ -3,6 +3,7 @@ matplotlib.use('Agg')
 import ROOT
 import os, sys, errno
 import math
+import glob
 from array import array
 import pandas
 import numpy
@@ -35,31 +36,32 @@ class KerasApplicator(object):
 
 
     def convert_to_pandas(self):
-        for file in self.framework.files + self.framework.data_files:
-            with uproot.open(file.path) as f: 
-                uproot_tree = f[self.framework.treePath]
-                single_file_df = pandas.DataFrame()
-                label_list = self.framework.variable_list
+        for files in self.framework.files + self.framework.data_files:
+            for file in glob.glob(files):
+                with uproot.open(file.path) as f: 
+                    uproot_tree = f[self.framework.treePath]
+                    single_file_df = pandas.DataFrame()
+                    label_list = self.framework.variable_list
 
-                for var in label_list:
-                    print "Adding variable:", var.name
-                    up_var = uproot_tree[var.name].array()
-                    if var.isMultiDim:                        
-                        # splitting the multidimensional input variables so each column corresponds to a one-dimensional variable
-                        # Only <itemsAdded> objects are kept
-                        single_var_df = pandas.DataFrame(data = up_var.tolist())
-                        single_var_df.drop(single_var_df.columns[var.itemsAdded:],axis=1,inplace=True)
-                        single_var_df.columns = [var.name+"[%i]"%i for i in range(var.itemsAdded)]
-                        if var in self.framework.spectator_list:
-                            self.spect_labels.extend(single_var_df.columns)
-                        single_file_df = pandas.concat([single_file_df, single_var_df], axis=1)
-                        single_file_df.fillna(var.replacement, axis=0, inplace=True) # if there are not enough jets        
-                    else:
-                        single_file_df[var.name] = up_var
-                        if var in self.framework.spectator_list:
-                            self.spect_labels.append(var.name)
+                    for var in label_list:
+                        print "Adding variable:", var.name
+                        up_var = uproot_tree[var.name].array()
+                        if var.isMultiDim:                        
+                            # splitting the multidimensional input variables so each column corresponds to a one-dimensional variable
+                            # Only <itemsAdded> objects are kept
+                            single_var_df = pandas.DataFrame(data = up_var.tolist())
+                            single_var_df.drop(single_var_df.columns[var.itemsAdded:],axis=1,inplace=True)
+                            single_var_df.columns = [var.name+"[%i]"%i for i in range(var.itemsAdded)]
+                            if var in self.framework.spectator_list:
+                                self.spect_labels.extend(single_var_df.columns)
+                            single_file_df = pandas.concat([single_file_df, single_var_df], axis=1)
+                            single_file_df.fillna(var.replacement, axis=0, inplace=True) # if there are not enough jets        
+                        else:
+                            single_file_df[var.name] = up_var
+                            if var in self.framework.spectator_list:
+                                self.spect_labels.append(var.name)
 
-                    self.df = pandas.concat([self.df,single_file_df])
+                        self.df = pandas.concat([self.df,single_file_df])
         
         return self.df    
 
