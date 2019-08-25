@@ -113,6 +113,8 @@ variables.append(Variable("Muon_pt",   "Muon_pt"      ,"Muon_pt",              1
 variables.append(Variable("Muon_eta",   "Muon_eta"      ,"Muon_eta",           48, -2.4, 2.4, "",         'F', True,          "ptll" ,   0   , False ))
 variables.append(Variable("Jet_pt",     "Jet_pt"        ,"Jet_pt",             220, 30, 250, "",         'F', True,          "njet" ,   0   , False ))
 variables.append(Variable("Jet_eta",    "Jet_eta"       ,"Jet_eta",            47, -4.7, 4.7, "",         'F', True,         "njet" ,   0   , False ))
+variables.append(Variable("Jet_qgl",    "Jet_qgl"       ,"Jet_qgl",            100, 0, 1, "",         'F', True,         "njet" ,   0   , False ))
+
 variables.append(Variable("CleanJet_pt", "CleanJet_pt"  ,"CleanJet_pt",        220, 30, 250, "",         'F', True,          "njet" ,   0   , False ))
 variables.append(Variable("CleanJet_eta", "CleanJet_eta" ,"CleanJet_eta",      47, -4.7, 4.7, "",         'F', True,         "njet" ,   0   , False ))
 variables.append(Variable("detajj",     "detajj"        ,"detajj",             35, 0, 7, "",         'F', False,         "mjj"   ,   0   , False ))
