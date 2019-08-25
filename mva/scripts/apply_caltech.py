@@ -44,7 +44,7 @@ c.add_variable("njet") # replace with softjet5 later
 c.add_variable("yll") # replace with drll
 c.add_variable("yll") # replace with detall
 c.add_variable("mjj")
-c.add_variable("ptjj")
+c.add_variable("mjj") # replace with ptjj
 c.add_variable("etajj")
 c.add_variable("phijj")
 c.add_variable('mjj') # replace with mlljj
