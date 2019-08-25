@@ -37,8 +37,8 @@ class KerasApplicator(object):
 
     def convert_to_pandas(self):
         for files in self.framework.files + self.framework.data_files:
-            for file in glob.glob(files):
-                with uproot.open(file.path) as f: 
+            for file in glob.glob(files.path):
+                with uproot.open(file) as f: 
                     uproot_tree = f[self.framework.treePath]
                     single_file_df = pandas.DataFrame()
                     label_list = self.framework.variable_list
